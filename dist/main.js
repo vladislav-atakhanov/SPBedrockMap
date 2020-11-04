@@ -21,6 +21,10 @@ const
 	roads = document.getElementsByClassName('road')
 
 let selectedCity = 0;
+for (let i = 0; i < citiesInfo.length; i++)
+{
+	if (citiesInfo[i] == document.getElementById("hubInfo")) {selectedCity = i}
+}
 for (let i = 0; i < cities.length; i++)
 {
 
@@ -91,18 +95,15 @@ map.wrapper.onpointerdown = function(e)
 	let shiftY = e.pageY - map.y;
 
 	map.wrapper.style.cursor = "move"
-	console.log("pointer down")
 
 	map.wrapper.onpointermove = function(e)
 	{
-		console.log("pointer move")
 		map.x = e.pageX - shiftX
 		map.y = e.pageY - shiftY
 		updateMap()
 	}
 	map.wrapper.onpointerup = () =>
 	{
-		console.log("pointer Up")
 		map.wrapper.onpointermove = null;
 		map.wrapper.onpointerup = null;
 		map.wrapper.style.cursor = "default"

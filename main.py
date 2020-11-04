@@ -20,7 +20,7 @@ for file in files:
 		cities_block += get_road(data["branch"], data["nether"]["x"], data["nether"]["z"])
 
 	# Information about city
-	cities_info +=  f'<div class="city_info"' + (' style="opacity:1"' if file == "hub.json" else "") + '>'
+	cities_info +=  f'<div class="city_info"' + (' style="opacity:1; z-index: 1" id="hubInfo"' if file == "hub.json" else "") + '>'
 
 	# Pictures
 	if "pictures" in data:
