@@ -1,0 +1,10 @@
+{
+	"name": "Селемент",
+	"mayor": "Flovar1",
+
+	"branch": "green",
+	"nether": {
+		"x": "-200",
+		"z": "-20"
+	}
+}

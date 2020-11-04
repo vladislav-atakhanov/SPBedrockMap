@@ -1,0 +1,15 @@
+{
+	"name": "Громорог",
+	"mayor": "pelmentop1gg",
+
+	"branch": "red",
+	"nether": {
+		"x": "570",
+		"z": "720"
+	},
+	"overworld": {
+		"x": "4790",
+		"y": "70",
+		"z": "5710"
+	}
+}

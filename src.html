@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Карта СПБедрок</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div id="mapWrapper">
+		<div id="map">
+			<div class="branch branch--x" data-w="2000"></div>
+			<div class="branch branch--y" data-w="1440"></div>
+			<div class="city hub" title="Хаб" data-x="0" data-z="0"></div>
+
+			<cities_block>
+		</div>
+	</div>
+	<div class="info info_block">
+		<div class="city_info" style="opacity: 1; display: block;">
+			<h2>Хаб</h2>
+			<p>Владелец: </p>
+			<div>
+				<h3>Координаты</h3>
+				<p>Ад - 0 0</p>
+			</div>
+		</div>
+
+		<cities_info>
+	</div>
+	<button id="infoCloseBtn" class="info_block">&times;</button>
+	<script src="main.js"></script>
+</body>
+</html>

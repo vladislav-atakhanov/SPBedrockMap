@@ -1,0 +1,15 @@
+{
+	"name": "Коноха",
+	"mayor": "Naruto Minecrafter",
+
+	"branch": "blue",
+	"nether": {
+		"x": "800",
+		"z": "10"
+	},
+	"overworld": {
+		"x": "6500",
+		"y": "70",
+		"z": "75"
+	}
+}
