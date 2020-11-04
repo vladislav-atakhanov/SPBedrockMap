@@ -1,0 +1,331 @@
+:root {
+	font-size: 8px;
+	--bg-color: #fff;
+	--text-color: #000;
+	--red: #f00;
+	--green: #0f0;
+	--blue: #00f;
+	--yellow: #ee0;
+
+	--info-padding: 10px;
+}
+@media (min-width: 768px) {
+	:root {
+		--info-padding: 20px;
+	}
+}
+@media (min-width: 992px) {
+	:root {
+		--info-padding: 30px;
+	}
+}
+
+body {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-family: sans-serif;
+	line-height: 1.5;
+}
+* {
+	box-sizing: border-box;
+}
+h2 {
+	margin: 0;
+}
+#mapWrapper {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#map {
+	min-height: 100%;
+	min-width: 100%;
+	position: relative;
+}
+.city {
+	--size: 3rem;
+	display: block;
+	padding: 0;
+	width: var(--size);
+	height: var(--size);
+
+	position: absolute;
+
+	margin-left: calc(var(--size) / -2);
+	margin-top: calc(var(--size) / -2);
+	
+	box-shadow: inset 0px 0px 0px 1rem currentColor;
+	border-radius: 50%;
+	border: none;
+
+	outline: none;
+	cursor: pointer;
+	transition: all 0.5s ease;
+
+	background-color: var(--bg-color);
+}
+.city.red {color: var(--red)}
+.city.green {color: var(--green)}
+.city.yellow {color: var(--yellow)}
+.city.blue {color: var(--blue)}
+.city:hover {
+	transform: scale(1.1);
+}
+.city:active {
+	transform: scale(0.9);
+}
+.city.selected {
+	background-color: currentColor;
+	transform: scale(1.25);
+	opacity: 0.75;
+}
+.hub.selected {
+	background-color: var(--bg-color);
+	transform: scale(1.5);
+}
+.hub {
+	--size: 6rem;
+}
+
+.info {
+	position: fixed;
+	padding: var(--info-padding);
+	background-color: #fff;
+	border-radius: var(--info-padding);
+
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	transform: translateY(90vh);
+	transition: transform 0.5s ease;
+
+	box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.3);
+
+	overflow: hidden;
+}
+@media (min-width: 768px) {
+	.info {
+		width: 40vw;
+		transform: translateX(-35vw);
+	}
+}
+@media (min-width: 722px) {
+	.info {
+		width: 25vw;
+		transform: translateX(-20vw);
+	}
+}
+
+
+.info .image {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+
+	min-width: 100%;
+	padding-top: 56.25%;
+	overflow: hidden;
+	border-radius: var(--info-padding);
+
+	transition: 0.5s opacity linear;
+}
+.info .text {
+	transition: margin-top 0.25s;
+}
+.info.c .image {
+	opacity: 1;
+}
+.info.c .text {
+	margin-top: 65%;
+}
+.coords h3, .coords p {
+	margin: 5px 0;
+}
+
+
+@media (min-width: 768px) {
+	.info .image {
+		opacity: 1;
+	}
+	.info .text {
+		margin-top: 65%;
+	}
+}
+
+.info_block.b {
+	transform: translateY(45vh)!important;
+}
+.info_block.c {
+	transform: translateY(0)!important;
+}
+@media (min-width: 768px) {
+	.info_block.b, .info_block.c {
+		transform: translateX(0vw)!important;
+	}
+}
+@media (min-width: 922px) {
+	.info_block.b, .info_block.c {
+		transform: translateX(0vw)!important;
+	}
+}
+
+#infoCloseBtn {
+	position: fixed;
+	right: var(--info-padding);
+	top: calc(var(--info-padding) - 0.3em);
+	font-size: 36px;
+	color: var(--text-color);
+	opacity: 0;
+	transition: all 0.5s ease;
+	padding: 0;
+	margin: 0;
+	display: block;
+	outline: none;
+	background-color: transparent;
+	transform: translateY(90vh);
+	border: none;
+	overflow: hidden;
+
+	width: 1.2em;
+	height: 1.2em;
+	border-radius: 1.5em;
+}
+#infoCloseBtn:hover {
+	background-color: rgba(0,0,0,0.1);
+}
+#infoCloseBtn.b, #infoCloseBtn.c {
+	opacity: 0.5;
+}
+@media (min-width: 768px) {
+	#infoCloseBtn {
+		transform: translateX(-35vw);
+		left: calc(40vw - 1.2em - var(--info-padding) / 2);
+	}
+}
+@media (min-width: 768px) {
+	#infoCloseBtn {
+		left: calc(25vw - 1.2em - var(--info-padding) / 2);
+	}
+}
+
+.city_info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	height: 100%;
+	width: 100%;
+	padding: inherit;
+}
+
+.branch {
+	position: absolute;
+	height: 1rem;
+	z-index: -1;
+	border-radius: 0.5rem;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+.branch--y {
+	background: linear-gradient(90deg, var(--yellow) 50%, var(--red) 50%);
+	transform: translate(-50%, -50%) rotate(90deg);
+}
+.road {
+	position: absolute;
+	border-radius: 0.5rem;
+	top: 50%;
+	left: 50%;
+	z-index: -1;
+}
+.road.red {
+	background-color: var(--red);
+	height: 1rem;
+	margin-top: -0.5rem;
+}
+.road.yellow {
+	background-color: var(--yellow);
+	height: 1rem;
+	margin-top: -0.5rem;
+}
+.road.blue {
+	background-color: var(--blue);
+	width: 1rem;
+	margin-left: -0.5rem;
+}
+.road.green {
+	background-color: var(--green);
+	width: 1rem;
+	margin-left: -0.5rem;
+}
+
+.branch--x {
+	background: linear-gradient(90deg, var(--green) 50%, var(--blue) 50%);
+}
+span {
+	font-weight: bold;
+	padding: 3px;
+	border-radius: 3px;
+	color: var(--bg-color);
+}
+span.red {background-color: var(--red);}
+span.green {background-color: var(--green);}
+span.blue {background-color: var(--blue);}
+span.yellow {background-color: var(--yellow);}
+
+span.gray {
+	background-color: #eee;
+	color: #000;
+}
+.title p {
+	padding: 0;
+	margin-top: 0.5em;
+	margin-bottom: 0;
+}
+.coords {
+	margin-top: 2em;
+}
+#defaultBtn {
+	position: fixed;
+	padding: 10px;
+	width: 50px;
+	height: 50px;
+	top: var(--info-padding);
+	right: var(--info-padding);
+	color: var(--text-color);
+	background-color: transparent;
+	border: none;
+	opacity: 0.5;
+}
+#defaultBtn svg {
+	fill: currentColor;
+}
+#scaleRange {
+	position: fixed;
+	top: 50%;
+	right: var(--info-padding);
+	transform-origin: right;
+	transform: rotate(-90deg);
+}
+
+.background {
+	position: absolute;
+	height: 100%;
+	width: calc(100% + var(--info-padding) * 2);
+	z-index: -1;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.background img {
+	width: 100%;
+}
+.description {
+	margin-top: 40px;
+}

@@ -8,23 +8,18 @@
 <body>
 	<div id="mapWrapper">
 		<div id="map">
-			<div class="branch branch--x" data-w="2000"></div>
-			<div class="branch branch--y" data-w="1440"></div>
-			<div class="city hub" title="Хаб" data-x="0" data-z="0"></div>
-
+			<div class="branch branch--x" data-w="5000"></div>
+			<div class="branch branch--y" data-w="5000"></div>
 			<cities_block>
 		</div>
 	</div>
+	<input type="range" id="scaleRange" value="1" min="0.2" max="3" oninput="changeScale()" step="0.1">
+	<button id="defaultBtn" onclick="toDefault()">
+		<svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" fill="#000">
+		<path d="m408.97 142.69c-40.86-40.86-95.188-63.363-152.97-63.363h-31.717l50.907-51.032-28.364-28.294-99.146 99.389 97.852 99.488 28.563-28.093-50.551-51.396h32.456c97.198 0 176.28 79.076 176.28 176.28s-79.077 176.28-176.28 176.28-176.28-79.077-176.28-176.28v-20.031l-40.062 4e-3v20.031c0 57.786 22.503 112.11 63.364 152.97 40.86 40.861 95.188 63.364 152.97 63.364s112.11-22.503 152.97-63.364c40.861-40.861 63.364-95.188 63.364-152.97s-22.503-112.11-63.364-152.97z"/>
+		</svg>
+	</button>
 	<div class="info info_block">
-		<div class="city_info" style="opacity: 1; display: block;">
-			<h2>Хаб</h2>
-			<p>Владелец: </p>
-			<div>
-				<h3>Координаты</h3>
-				<p>Ад - 0 0</p>
-			</div>
-		</div>
-
 		<cities_info>
 	</div>
 	<button id="infoCloseBtn" class="info_block">&times;</button>
