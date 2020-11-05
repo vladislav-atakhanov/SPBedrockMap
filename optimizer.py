@@ -21,3 +21,4 @@ def optimize(file_name, from_, to_, sizes):
 
 	for size in sizes:
 		resize_and_save(img, size, ratio, path)
+		print(f"    + {size}.img")

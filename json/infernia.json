@@ -1,0 +1,17 @@
+{
+	"name": "Инферния",
+	"mayor": "YouRICK469",
+
+	"branch": "red",
+	"nether": {
+		"x": "-215",
+		"z": "490"
+	},
+
+	"overworld": {
+		"x": " -1749",
+		"y": "70",
+		"z": "3814"
+	},
+	"residents": ["YouRICK469 - мэр", "Illia Nek", "Udavvv", "ShuRick404", "Holymamory228", "JORICK404", "Iron166", "Jazha3496", "D1ssa6610", "FnordyVOO4KO", "Sonne282", "Matvey game144"]
+}

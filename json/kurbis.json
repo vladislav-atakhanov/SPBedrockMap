@@ -1,0 +1,10 @@
+{
+	"name": "Кюрбис",
+	"mayor": "dobifor",
+
+	"branch": "green",
+	"nether": {
+		"x": "-350",
+		"z": "20"
+	}
+}

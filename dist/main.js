@@ -42,7 +42,8 @@ for (let i = 0; i < cities.length; i++)
 		citiesInfo[i].style.opacity = "1"
 		citiesInfo[i].style.zIndex = "1"
 
-		updateInfo(1)
+		if (selectedCity == i) {updateInfo(1, "+")}
+		if (selectedCity != i) {updateInfo(1, "=")}
 		selectedCity = i
 	}
 }
@@ -87,7 +88,9 @@ info.closeBtn.onclick = function(e)
 	updateInfo(0)
 }
 
-// Drag-n-drop
+// Input handler
+let fingers = []
+let prevDiff = 0
 map.wrapper.onpointerdown = function(e)
 {
 
@@ -96,17 +99,50 @@ map.wrapper.onpointerdown = function(e)
 
 	map.wrapper.style.cursor = "move"
 
+	fingers.push(e)
+
 	map.wrapper.onpointermove = function(e)
 	{
-		map.x = e.pageX - shiftX
-		map.y = e.pageY - shiftY
-		updateMap()
+		for (let i = 0; i < fingers.length; i++)
+		{
+			if (e.pointerId === fingers[i].pointerId) {fingers[i] = e}
+		}
+
+		// Swipe
+		if (fingers.length == 1)
+		{
+			map.x = e.pageX - shiftX
+			map.y = e.pageY - shiftY
+			updateMap()
+		}
+		// Zoom
+		if (fingers.length == 2)
+		{
+			const curDiff = Math.abs(
+				fingers[0].clientY - fingers[1].clientY
+			)
+			if (prevDiff > 0) {
+				map.scale += (curDiff - prevDiff) / 10
+			}
+			if (map.scale < 0.25) {map.scale = 0.25}
+			if (map.scale > 3) {map.scale = 3}
+			prevDiff = curDiff;
+			updateMap()
+		}
 	}
-	map.wrapper.onpointerup = () =>
+	map.wrapper.onpointerup = map.wrapper.onpointerenter = function(e)
 	{
-		map.wrapper.onpointermove = null;
-		map.wrapper.onpointerup = null;
+		for (let i = 0; i < fingers.length; i++)
+		{
+			if (e.pointerId === fingers[i].pointerId) {fingers.splice(i, 1)}
+		}
 		map.wrapper.style.cursor = "default"
+		if (fingers.length < 1)
+		{
+			map.wrapper.onpointermove = null;
+			map.wrapper.onpointerup = null;
+			prevDiff = 0
+		}
 	}
 }
 
@@ -129,14 +165,15 @@ function toDefault(e)
 	updateMap()
 }
 
-function updateInfo(n)
+function updateInfo(n, mode="=")
 {
 	const classes = ["a", "b", "c"]
 	info.el.classList.remove(classes[info.currentState])
 	info.closeBtn.classList.remove(classes[info.currentState])
 
-	if (n == 0) {info.currentState = 0}
-	else {info.currentState += n}
+	if (mode == "=") {info.currentState = n}
+	if (mode == "+") {info.currentState += n}
+
 	if (info.currentState < 0) {info.currentState = 0}
 	if (info.currentState >= classes.length) {info.currentState = classes.length - 1}
 
@@ -172,5 +209,5 @@ document.onkeydown = function(e)
 
 info.el.onclick = function(e)
 {
-	updateInfo(1)
+	updateInfo(1, "+")
 }
