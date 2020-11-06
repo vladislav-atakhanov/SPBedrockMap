@@ -1,11 +1,11 @@
 {
-	"name": "Старкиллер",
+	"name": "Starkiller",
 	"mayor": "LodIk12",
 
 	"branch": "green",
 	"nether": {
 		"x": "-300",
-		"z": "20"
+		"z": "-20"
 	},
 	"description": "Тематика - звёздные войны"
 }

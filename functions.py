@@ -18,18 +18,18 @@ def is_image_optimized(img, file, sizes):
 	return True
 
 def get_city(name, branch, x, z, type, id):
-	r = f'<button id="{id}" class="city '
+	r = f'<button id="{id}" class="dot '
 	if type == "city":
-		r += branch
+		r += "dot--" + branch
 	else:
-		r += type
+		r += "dot--" + type
 		if type == "end":
-			r += " " + branch
+			r += " dot--" + branch
 	r += f'" title="{name}" data-x="{x}" data-z="{z}" tabindex="-1"></button>'
 	return r
 
-def get_road(branch, x, z):
-	return f'<div class="road {branch}" data-x="{x}" data-z="{z}"></div>'
+def get_road(branch, x, z, type):
+	return f'<div class="road {branch} road--{type}" data-x="{x}" data-z="{z}"></div>'
 
 def _get_picture(img, file, name, className="background"):
 

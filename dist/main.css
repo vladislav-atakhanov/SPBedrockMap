@@ -1,5 +1,5 @@
-:root {
-	font-size: 8px;
+html {
+	font-size: 16px;
 	--bg-color: #fff;
 	--text-color: #000;
 	--red: #f00;
@@ -8,6 +8,24 @@
 	--yellow: #ee0;
 
 	--info-padding: 10px;
+}
+html.theme-in-transition,
+html.theme-in-transition *,
+html.theme-in-transition *:before,
+html.theme-in-transition *:after {
+    transition: all 0.5s  linear!important;
+    transition-delay: 0 linear!important;
+}
+html.dark {
+	--bg-color: #000;
+	--text-color: #ddd;
+	--red: #f00;
+	--green: #0f0;
+	--blue: #00f;
+	--yellow: #ee0;
+}
+html.dark body {
+	/*font-size: 18px;*/
 }
 @media (min-width: 768px) {
 	:root {
@@ -34,6 +52,13 @@ body {
 	font-size: 16px;
 	font-family: 'Roboto Mono', monospace;
 	line-height: 1.5;
+	color: var(--text-color)
+}
+html.dark .btn {
+	opacity: 0.75;
+}
+html.dark .btn:hover {
+	opacity: 1;
 }
 * {
 	box-sizing: border-box;
@@ -52,13 +77,14 @@ button {
 	width: 100%;
 	overflow: hidden;
 	touch-action: none;
+	background-color: var(--bg-color);
 }
 #map {
 	min-height: 100%;
 	min-width: 100%;
 	position: relative;
 }
-.city {
+.dot {
 	--size: 3rem;
 	display: block;
 	padding: 0;
@@ -77,40 +103,84 @@ button {
 	outline: none;
 	cursor: pointer;
 	transition: all 0.5s ease;
+	z-index: 2;
 
 	background-color: var(--bg-color);
+	overflow: hidden;
 }
-.end {
-	--size: 2rem;
-}
-.city.court {
+.dot.court {
 	--size: 4rem;
 }
-.city.red {color: var(--red)}
-.city.green {color: var(--green)}
-.city.yellow {color: var(--yellow)}
-.city.blue {color: var(--blue)}
-.city:hover {
+.dot--red {color: var(--red)}
+.dot--green {color: var(--green)}
+.dot--yellow {color: var(--yellow)}
+.dot--blue {color: var(--blue)}
+.dot:hover {
 	transform: scale(1.1);
 }
-.city:active {
+.dot:active {
 	transform: scale(0.9);
 }
-.city.selected {
+.dot.selected {
 	background-color: currentColor;
 	transform: scale(1.5);
 }
-.hub.selected {
+#hub.selected {
 	transform: scale(1.1);
 }
-.hub {
+#hub {
 	--size: 6rem;
+	color: var(--text-color);
+}
+.dot--end {
+	--size: 2rem;
+
+	background: #88C35A;
+	box-shadow: inset 0px 0px 0.4rem 0.2rem #102C31;
+}
+.dot--end:before {
+	content: '';
+	position: absolute;
+	width: 0.4rem;
+	height: 1rem;
+
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+
+	background: #1B2B10;
+	box-shadow: inset 0px 0px 0.1rem 0.1rem #1E4835;
+	border-radius: 50%;
+
+	animation: eye 5s ease infinite;
+}
+.dot--end.selected {
+	box-shadow: inset 0px 0px 0.4rem 0.2rem #000;
+}
+.dot--end.selected:before {
+	box-shadow: none;
+	background-color: #1b1b1b1;
+}
+@keyframes eye {
+	45% {
+		transform: translate(-50%, -50%);
+	}
+	49% {
+		transform: translate(-50%, -50%) scaleY(0);
+	}
+	51% {
+		transform: translate(-50%, -50%) scaleY(0);
+	}
+	55% {
+		transform: translate(-50%, -50%);
+	}
 }
 
 .info {
 	position: fixed;
 	padding: var(--info-padding);
-	background-color: #fff;
+	background-color: var(--bg-color);
 	border-radius: var(--info-padding);
 
 	bottom: 0;
@@ -119,8 +189,11 @@ button {
 	transform: translateY(80vh);
 	transition: transform 0.5s ease;
 
-	box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.3);
+	box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.3);
 	overflow: hidden;
+}
+html.dark .info {
+	box-shadow: 0px 0px 0px 2px rgba(255,255,255,0.3);
 }
 @media (min-width: 768px) {
 	.info {
@@ -213,7 +286,7 @@ button {
 	margin: 0;
 	display: block;
 	outline: none;
-	background-color: transparent;
+	background-color: var(--bg-color);
 	transform: translateY(90vh);
 	border: none;
 	overflow: hidden;
@@ -227,7 +300,6 @@ button {
 }
 #infoCloseBtn.b, #infoCloseBtn.c {
 	opacity: 0.75;
-	background-color: #fff;
 }
 .arrow {
 	position: absolute;
@@ -251,7 +323,7 @@ button {
 	content: '';
 	width: 1em;
 	height: 0.2em;
-	background-color: #ccc;
+	background-color: #aaa;
 	display: block;
 	border-radius: 0.1em;
 }
@@ -260,48 +332,48 @@ button {
 	margin-top: 0.2em;
 	margin-left: -0.1em;
 	transform: rotate(-45deg);
-	animation: arrowBefore 5s ease infinite;
+	animation: arrowBefore 1.5s ease infinite;
 }
 .arrow:after {
 	transform-origin: bottom right;
 	margin-top: -0.2em;
 	margin-right: -0.1em;
 	transform: rotate(45deg);
-	animation: arrowAfter 5s ease infinite;
+	animation: arrowAfter 1.5s ease infinite;
 }
 
 @keyframes arrowBefore {
-	0% {
+	32% {
 		transform: rotate(-45deg);
 		margin-left: -0.1em;
 	}
-	25% {
-		transform: rotate(0deg);
-		margin-left: 0;
+	48% {
+		transform: rotate(-30deg);
+		margin-left: -0.4em;
 	}
-	50% {
-		transform: rotate(0deg);
-		margin-left: 0;
+	52% {
+		transform: rotate(-30deg);
+		margin-left: -0.4em;
 	}
-	100% {
+	68% {
 		transform: rotate(-45deg);
 		margin-left: -0.1em;
 	}
 }
 @keyframes arrowAfter {
-	0% {
+	32% {
 		transform: rotate(45deg);
 		margin-right: -0.1em;
 	}
-	25% {
-		transform: rotate(0deg);
-		margin-right: 0;
+	48% {
+		transform: rotate(30deg);
+		margin-right: -0.4em;
 	}
-	50% {
-		transform: rotate(0deg);
-		margin-right: 0;
+	52% {
+		transform: rotate(30deg);
+		margin-right: -0.4em;
 	}
-	100% {
+	68% {
 		transform: rotate(45deg);
 		margin-right: -0.1em;
 	}
@@ -324,7 +396,7 @@ button {
 	}
 }
 
-.city_info {
+.dot__info {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -335,21 +407,21 @@ button {
 	padding: inherit;
 	overflow-y: hidden;
 }
-.info.c .city_info {
+.info.c .dot__info {
 	overflow-y: scroll;
 }
-.city_info::-webkit-scrollbar {
+.dot__info::-webkit-scrollbar {
 	width: 0;
 }
 @media (min-width: 768px) {
-	.info_block.b .city_info {
+	.info_block.b .dot__info {
 		overflow-y: scroll;
 	}
 }
 .branch {
 	position: absolute;
 	height: 1rem;
-	z-index: -1;
+	z-index: 1;
 	border-radius: 0.5rem;
 	left: 50%;
 	top: 50%;
@@ -386,6 +458,10 @@ button {
 	width: 1rem;
 	margin-left: -0.5rem;
 }
+.road--end {
+	opacity: 0.75;
+	box-shadow: inset 0px 0px 0px 0.25rem var(--bg-color);
+}
 
 .branch--x {
 	background: linear-gradient(90deg, var(--green) 50%, var(--blue) 50%);
@@ -394,12 +470,12 @@ span {
 	font-weight: bold;
 	padding: 3px;
 	border-radius: 3px;
-	color: var(--bg-color);
+	color: #fff;
 }
 span.red {background-color: var(--red);}
-span.green {background-color: var(--green);}
+span.green {background-color: var(--green); color: #000}
 span.blue {background-color: var(--blue);}
-span.yellow {background-color: var(--yellow);}
+span.yellow {background-color: var(--yellow); color: #000}
 
 span.gray {
 	background-color: #eee;
@@ -424,14 +500,35 @@ span.gray {
 	background-color: transparent;
 	border: none;
 	opacity: 0.5;
-	transition: 0.25s opacity ease;
+	transition: 0.25s all ease;
 	cursor: pointer;
 }
 .btn:hover {
+	transform: scale(1.1);
 	opacity: 1;
 }
 #defaultBtn svg {
 	fill: currentColor;
+}
+#themeBtn {
+	top: calc(60px + var(--info-padding));
+	width: 60px;
+	height: 60px;
+}
+#themeBtn g {
+	transition: 0.5s all;
+}
+#themeBtn .sun {
+	opacity: 0;
+}
+#themeBtn .moon {
+	opacity: 1;
+}
+html.dark #themeBtn .sun {
+	opacity: 1;
+}
+html.dark #themeBtn .moon {
+	opacity: 0;
 }
 #courtBtn {
 	left: var(--info-padding);
