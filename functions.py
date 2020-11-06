@@ -17,15 +17,15 @@ def is_image_optimized(img, file, sizes):
 
 	return True
 
-def get_city(name, branch, x, z, type):
-	r = '<button class="city '
+def get_city(name, branch, x, z, type, id):
+	r = f'<button id="{id}" class="city '
 	if type == "city":
 		r += branch
 	else:
 		r += type
 		if type == "end":
 			r += " " + branch
-	r += f'" title="{name}" data-x="{x}" data-z="{z}"></button>'
+	r += f'" title="{name}" data-x="{x}" data-z="{z}" tabindex="-1"></button>'
 	return r
 
 def get_road(branch, x, z):
@@ -45,11 +45,11 @@ def _get_picture(img, file, name, className="background"):
 	img = str(img).split('.')[0]
 	return f'<picture class="{className}"><source srcset="pictures/{file}/{img}/400.webp 400w, pictures/{file}/{img}/800.webp 800w, pictures/{file}/{img}/1200.webp 1200w" type="image/webp"> <img src="pictures/{file}/{img}/400.jpg" alt="{name}" srcset="pictures/{file}/{img}/400.jpg 400w, pictures/{file}/{img}/800.jpg 800w, pictures/{file}/{img}/1200.jpg 1200w"> </picture>'
 
-def get_pictures(pictures, file, name):
+def get_pictures(file, name):
 	r = '<div class="image">'
-	for pic in pictures:
+	for pic in os.listdir(path=f"./json/{file}"):
 		r += _get_picture(pic, file, name)
-	r += '</div>'
+	r += '</div><div class="text">'
 	return r
 
 def get_title(name, mayor, type):

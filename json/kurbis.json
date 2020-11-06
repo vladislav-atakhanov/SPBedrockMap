@@ -6,5 +6,6 @@
 	"nether": {
 		"x": "-350",
 		"z": "20"
-	}
+	},
+	"pictures": "true"
 }

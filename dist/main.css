@@ -32,7 +32,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-size: 16px;
-	font-family: sans-serif;
+	font-family: 'Roboto Mono', monospace;
 	line-height: 1.5;
 }
 * {
@@ -40,6 +40,12 @@ body {
 }
 h2 {
 	margin: 0;
+}
+a {
+	color: inherit;
+}
+button {
+	cursor: pointer;
 }
 #mapWrapper {
 	height: 100%;
@@ -76,6 +82,9 @@ h2 {
 }
 .end {
 	--size: 2rem;
+}
+.city.court {
+	--size: 4rem;
 }
 .city.red {color: var(--red)}
 .city.green {color: var(--green)}
@@ -195,7 +204,7 @@ h2 {
 #infoCloseBtn {
 	position: fixed;
 	right: var(--info-padding);
-	top: calc(var(--info-padding) - 0.3em);
+	top: calc(var(--info-padding) / 2);
 	font-size: 36px;
 	color: var(--text-color);
 	opacity: 0;
@@ -214,11 +223,90 @@ h2 {
 	border-radius: 1.5em;
 }
 #infoCloseBtn:hover {
-	background-color: rgba(0,0,0,0.1);
+	opacity: 0.1;
 }
 #infoCloseBtn.b, #infoCloseBtn.c {
-	opacity: 0.5;
+	opacity: 0.75;
+	background-color: #fff;
 }
+.arrow {
+	position: absolute;
+	top: var(--info-padding);
+	z-index: 10;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 1.25em;
+	display: none;
+}
+.info_block.b .arrow {
+	display: block;
+}
+@media (min-width: 768px) {
+	.info_block.b .arrow {
+		display: none;
+	}
+}
+.arrow:before,
+.arrow:after {
+	content: '';
+	width: 1em;
+	height: 0.2em;
+	background-color: #ccc;
+	display: block;
+	border-radius: 0.1em;
+}
+.arrow:before {
+	transform-origin: bottom left;
+	margin-top: 0.2em;
+	margin-left: -0.1em;
+	transform: rotate(-45deg);
+	animation: arrowBefore 5s ease infinite;
+}
+.arrow:after {
+	transform-origin: bottom right;
+	margin-top: -0.2em;
+	margin-right: -0.1em;
+	transform: rotate(45deg);
+	animation: arrowAfter 5s ease infinite;
+}
+
+@keyframes arrowBefore {
+	0% {
+		transform: rotate(-45deg);
+		margin-left: -0.1em;
+	}
+	25% {
+		transform: rotate(0deg);
+		margin-left: 0;
+	}
+	50% {
+		transform: rotate(0deg);
+		margin-left: 0;
+	}
+	100% {
+		transform: rotate(-45deg);
+		margin-left: -0.1em;
+	}
+}
+@keyframes arrowAfter {
+	0% {
+		transform: rotate(45deg);
+		margin-right: -0.1em;
+	}
+	25% {
+		transform: rotate(0deg);
+		margin-right: 0;
+	}
+	50% {
+		transform: rotate(0deg);
+		margin-right: 0;
+	}
+	100% {
+		transform: rotate(45deg);
+		margin-right: -0.1em;
+	}
+}
+
 @media (min-width: 768px) {
 	#infoCloseBtn {
 		transform: translateX(-35vw);
@@ -325,7 +413,7 @@ span.gray {
 .coords {
 	margin-top: 2em;
 }
-#defaultBtn {
+.btn {
 	position: fixed;
 	padding: 10px;
 	width: 50px;
@@ -336,14 +424,29 @@ span.gray {
 	background-color: transparent;
 	border: none;
 	opacity: 0.5;
+	transition: 0.25s opacity ease;
+	cursor: pointer;
+}
+.btn:hover {
+	opacity: 1;
 }
 #defaultBtn svg {
 	fill: currentColor;
 }
+#courtBtn {
+	left: var(--info-padding);
+	width: 60px;
+	height: 60px;
+}
+@media (min-width: 768px) {
+	#courtBtn {
+		left: calc(var(--info-padding) + 5vw);
+	}
+}
 #scaleRange {
 	position: fixed;
 	top: calc(var(--info-padding) + 25px);
-	right: calc(var(--info-padding) + 100px);
+	right: calc(var(--info-padding) + 60px + 5vw);
 	transform: translateY(-50%);
 }
 
@@ -351,14 +454,24 @@ span.gray {
 	position: absolute;
 	height: 100%;
 	width: calc(100% + var(--info-padding) * 2);
-	z-index: -1;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	transition: transform 0.25s;
 }
 .background img {
 	width: 100%;
 }
+.background:hover {
+	transform: translate(-50%, -50%) scale(1.5);
+}
 .description {
 	margin-top: 40px;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	right: var(--info-padding);
+	color: #808080;
 }

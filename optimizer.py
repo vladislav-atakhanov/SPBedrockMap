@@ -3,6 +3,7 @@ import os, shutil
 
 def resize_and_save(img, width, ratio, path):
 	img_resized = img.resize((width, round(width / ratio)))
+	# print(path + str(width))
 	img_resized.convert("RGB").save(path + str(width) + ".jpg", "jpeg")
 	img_resized.convert("RGB").save(path + str(width) + ".webp", "webp")
 
@@ -21,4 +22,4 @@ def optimize(file_name, from_, to_, sizes):
 
 	for size in sizes:
 		resize_and_save(img, size, ratio, path)
-		print(f"    + {size}.img")
+		print(f"    + {str(file_name).split('.')[0]}/{size}")

@@ -93,13 +93,18 @@ let fingers = []
 let prevDiff = 0
 map.wrapper.onpointerdown = function(e)
 {
-
-	let shiftX = e.pageX - map.x;
-	let shiftY = e.pageY - map.y;
-
-	map.wrapper.style.cursor = "move"
-
 	fingers.push(e)
+
+	let shiftX = 0
+	let shiftY = 0
+
+	if (fingers.length == 1)
+	{
+		shiftX = e.pageX - map.x;
+		shiftY = e.pageY - map.y;
+
+		map.wrapper.style.cursor = "move"
+	}
 
 	map.wrapper.onpointermove = function(e)
 	{
@@ -210,4 +215,16 @@ document.onkeydown = function(e)
 info.el.onclick = function(e)
 {
 	updateInfo(1, "+")
+}
+const court = ""
+const courtEl = ""
+if (court != "") {
+	courtEl = document.getElementById(court)
+	infernia.classList.add("court")
+	infernia.style.color = "#80f"
+}
+function showCourt() {
+	if (court != "") {
+		courtEl.click()
+	}
 }

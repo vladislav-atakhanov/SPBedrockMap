@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Генератор .json для SPBedrokMap</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Roboto Mono', monospace;
+			font-size: 16px;
+			min-height: 100vh;
+		}
+		a {
+			color: inherit;
+		}
+		button {
+			font-family: inherit;
+		}
+		* {
+			box-sizing: border-box;
+		}
+		h1 {
+			margin: 0;
+		}
+		.title {
+			padding: 20px 0;
+		}
+		.title a {
+			color: #808080;
+		}
+		input[type="text"],
+		input[type="number"],
+		textarea {
+			padding: 5px 10px;
+			border-radius: 20px;
+			outline: none;
+			border-style: solid;
+			border-width: 2px;
+			border-color: #ccc;
+			font-family: 'Roboto Mono', monospace;
+		}
+		fieldset {
+			border-radius: 20px;
+			outline: none;
+			border-style: solid;
+			border-width: 2px;
+			border-color: #ccc;
+			transition: border-color 0.25s ease;
+		}
+		.optional {
+			border-color: #ccc;
+		}
+		input[type="text"]:focus,
+		input[type="number"]:focus,
+		textarea:focus {
+			border-color: #88c;
+		}
+		input[type="radio"] {
+			cursor: pointer;
+		}
+		input[type="number"] {
+			margin-left: 10px;
+			width: 7.5em;
+		}
+		input[type="text"] {
+			display: block;
+			margin-top: 5px;
+		}
+		label {
+			display: block;
+			padding: 5px;
+			margin: 10px 0;
+			cursor: pointer;
+		}
+		textarea {
+			display: block;
+			width: 100%;
+			height: 100%;
+			padding: 20px;
+		}
+		.text {
+			padding: 0;
+			position: relative;
+			border: none;
+			outline: none;
+		}
+		.text legend {
+			position: absolute;
+			top: 0;
+			left: 20px;
+			transform: translateY(-50%);
+			background-color: #fff;
+			padding: 0 5px;
+		}
+		.container {
+			min-height: 100%;
+			width: 95%;
+			margin: 0 auto;
+			padding: 20px 0;
+		}
+		#form {
+			display: grid;
+			grid-template-columns: 1fr;
+			align-items: center;
+			justify-content: center;
+			grid-gap: 20px;
+		}
+		#btn {
+			display: block;
+			margin: 0 auto;
+			margin-top: 20px;
+			min-width: 250px;
+			padding: 10px 20px;
+			border-radius: 50px;
+			outline: none;
+			border-style: solid;
+			border-width: 2px;
+			border-color: #ccc;
+			background-color: transparent;
+			cursor: pointer;
+			transition: all 0.25s;
+			font-weight: bold;
+		}
+		#btn:hover {
+			background-color: #44f;
+			border-color: #44f;
+			color: #fff;
+			transform: scale(1.1)
+		}
+		#btn:active {
+			transform: scale(1)
+		}
+		.branch {
+			margin-top: 10px;
+		}
+		@media (min-width: 768px) {
+			.container {
+				width: 90%;
+			}
+			#form {
+				grid-template-columns: repeat(2, 1fr);
+				grid-gap: 30px;
+			}
+		}
+		@media (min-width: 1024px) {
+			.container {
+				width: 80%;
+			}
+			#form {
+				grid-template-columns: repeat(3, 1fr);
+				grid-gap: 40px;
+			}
+		}
+
+		.group {
+			padding: 0.5em 0;
+		}
+		.group input, .vissualy-hidden {
+			position: absolute !important;
+			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+			clip: rect(1px, 1px, 1px, 1px);
+			padding:0 !important;
+			border:0 !important;
+			height: 1px !important; 
+			width: 1px !important; 
+			overflow: hidden;
+		}
+		.group label {
+			position: relative;
+			display: inline-block;
+			height: 1em;
+			width: 1em;
+			padding: 0;
+			margin: 0;
+			margin-right: 0.2em;
+		}
+		.group span {
+			position: absolute;
+			width: 1em;
+			height: 1em;
+			background-color: #ccc;
+			left: 0;
+			top: 0;
+			border-radius: 0.5em;
+			opacity: 0.75;
+			transition: 0.25s all;
+		}
+		.group span:hover {
+			transform: scale(1.1);
+		}
+		.group input:focus + span {
+			transform: scale(1.5);
+		}
+		.group input:checked + span {
+			opacity: 1;
+			transform: scale(1.5);
+			border-radius: 3px;
+		}
+		.group .red {background-color: #f00}
+		.group .green {background-color: #0f0}
+		.group .blue {background-color: #00f}
+		.group .yellow {background-color: #ee0}
+
+
+		span.gray {
+			font-weight: bold;
+			border-radius: 3px;
+			color: #000;
+			background-color: #ccc;
+		}
+		span.redText {
+			font-weight: bold;
+			border-radius: 3px;
+			color: #f00;
+		}
+		.help {
+			padding: 20px 0;
+		}
+		.help__item {
+			padding: 10px 0;
+		}
+		.help__item p {
+			margin: 0;
+		}
+
+		.error {
+			animation-name: error;
+			animation-duration: 0.25s;
+			animation-iteration-count: 1;
+			animation-timing-function: linear;
+			animation-fill-mode: forwards;
+		}
+		@keyframes error {
+			0% {
+				border-color: #ccc;
+				transform: none; 
+			}
+			25% {
+				transform: rotate(10deg); 
+			}
+			75% {
+				transform: rotate(-10deg); 
+			}
+			100% {
+				border-color: #c88;
+				transform: none; 
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<h1>Генератор .json для SPBedrokMap</h1>
+			<a href="../">Вернуться к карте</a>
+		</div>
+		<div id="form">
+			<div>
+				<fieldset id="type">
+					<label onclick="changeType('city')">
+						Город
+						<input type="radio" value="city" name="type" checked>
+					</label>
+					<label onclick="changeType('end')">
+						Портал в энд
+						<input type="radio" value="end" name="type">
+					</label>
+				</fieldset>
+				<fieldset class="branch" id="branch">
+					<legend>Цвет ветки</legend>
+					<div class="group">
+						<label>
+							<input name="branch" type="radio" value="red" area-label="Красный">
+							<span class="red"></span>
+						</label>
+						<label>
+							<input name="branch" type="radio" value="green" area-label="Зеленый">
+							<span class="green"></span>
+						</label>
+						<label>
+							<input name="branch" type="radio" value="blue" area-label="Синий">
+							<span class="blue"></span>
+						</label>
+						<label>
+							<input name="branch" type="radio" value="yellow" area-label="Желтый">
+							<span class="yellow"></span>
+						</label>
+					</div>
+				</fieldset>
+			</div>
+
+			<fieldset>
+				<label id="name">
+					<span>Название города</span> <input type="text" placeholder="Vice">
+				</label>
+				<label id="mayor">
+					<span>Мэр города</span> <input type="text" placeholder="City">
+				</label>
+			</fieldset>
+
+			<fieldset class="coords">
+				<legend>Координаты в аду</legend>
+				<label>
+					x <input type="number" id="netherX" placeholder="-100">
+				</label>
+				<label>
+					y <input type="number" id="netherY" value="68">
+				</label>
+				<label>
+					z <input type="number" id="netherZ" placeholder="-2000">
+				</label>
+			</fieldset>
+
+			<fieldset class="coords optional" id="overworld">
+				<legend>Координаты в обычном мире</legend>
+				<label>
+					x <input type="number" id="overworldX">
+				</label>
+				<label>
+					y <input type="number" value="68" id="overworldY">
+				</label>
+				<label>
+					z <input type="number" id="overworldZ">
+				</label>
+			</fieldset>
+
+			<fieldset class="text optional">
+				<legend><span class="redText">*</span> Описание</legend>
+				<textarea cols="30" rows="10" id="description" placeholder="Пока города нет и, наверное, не будет"></textarea>
+			</fieldset>
+			<fieldset class="optional">
+				<legend>Скриншоты</legend>
+				<label>Есть <input type="checkbox" id="pictures"></label>
+			</fieldset>
+
+			<fieldset class="text optional">
+				<legend><span class="redText">*</span> Жители (<span class="gray">, </span>)</legend>
+				<textarea cols="30" rows="10" id="residents" placeholder="eloh1mZ - мэр, Vlad - зам. мэра, KTOTO, C kemto, ауф"></textarea>
+			</fieldset>
+		</div>
+		
+		<button onclick="copy()" id="btn">Сгенерировать и копировать</button>
+
+		<div class="help">
+			<div class="help__item">
+				<p><span class="redText">*</span> - поддерживаются html-тэги (&lt;b&gt;, &lt;br&gt; и др.)</p>
+				<p><b>Знаки координат <span class="redText"><u>имеют значение</u></span></b></p>
+			</div>
+			<div class="help__item">
+				<p>Если портал находится в сторону от хп и нужно повернуть от него	указывать координату ответвления от главной хп и координату ответвления к порталу</p>
+				<p>Например, мой портал находися на "-450 -250", а хп начинается с "-500" - я укажу "-500 -250"</p>
+			</div>
+			<div class="help_item">
+				<a href="../">Вернуться к карте</a>
+			</div>
+		</div>
+	</div>
+	<script>
+		function copy()
+		{
+			let erron = false
+			const inputs = {
+				type: getInputByName("type"),
+				branch: getInputByName("branch"),
+				name: getInputInElementById("name"),
+				mayor: getInputInElementById("mayor"),
+
+				netherX: document.getElementById("netherX"),
+				netherY: document.getElementById("netherY"),
+				netherZ: document.getElementById("netherZ"),
+
+				overworldX: document.getElementById("overworldX"),
+				overworldY: document.getElementById("overworldY"),
+				overworldZ: document.getElementById("overworldZ"),
+
+				description: document.getElementById("description"),
+				residents: document.getElementById("residents"),
+				pictures: document.getElementById("pictures")
+			}
+
+			let error = false
+
+			for (let prop in inputs) {
+				const el = inputs[prop]
+				if (
+					(el != inputs.description && el != inputs.residents &&
+					el != inputs.overworldX && el != inputs.overworldY && el != inputs.overworldZ) &&
+					!(inputs.type.value == "end" && (el == inputs.mayor || el == inputs.name))
+				)
+				{
+					if (showError(el, (el.value == undefined || el.value == ""))) { error = true }
+				}
+			}
+
+			if (!error)
+			{
+				let result = "{\n"
+
+				if (inputs.type.value != "city") {result += `"type": "${inputs.type.value}",\n`}
+				result += `    "name": "${inputs.name.value}",\n`
+				result += `    "mayor": "${inputs.mayor.value}",\n`
+				result += `    "branch": "${inputs.branch.value}",\n`
+
+				result += `    "nether": {\n`
+				result += `        "x": "${inputs.netherX.value}",\n`
+				if (inputs.netherY.value != "68") {result += `        "y": "${inputs.netherY.value}",\n`}
+				result += `        "z": "${inputs.netherZ.value}"\n`
+				result += `    },\n`
+
+				if (inputs.overworldX.value != "" && inputs.overworldY.value != "" && inputs.overworldZ.value != "") {
+					result += `    "overworld": {\n`
+					result += `        "x": "${inputs.overworldX.value}",\n`
+					result += `        "y": "${inputs.overworldY.value}",\n`
+					result += `        "z": "${inputs.overworldZ.value}"\n`
+					result += `    },\n`
+				}
+
+				if (inputs.description.value != "")
+				{
+					result += `    "description": "${inputs.description.value.replace(/\n/g, "<br>")}",\n`
+				}
+				if (inputs.residents.value != "")
+				{
+					result += '    "residents": ['
+					res = inputs.residents.value.split(", ")
+					for (var i = 0; i < res.length; i++) {
+						result += `"${res[i]}"`
+						if (i < res.length - 1) {result += ", "}
+					}
+					result += "],\n"
+				}
+				if (inputs.pictures.checked) {
+					result += `    "pictures": "true",\n`
+				}
+				result += "}"
+				result = result.replace(",\n}", "\n}")
+
+				console.log(result)
+
+				const copyText = document.createElement("textarea")
+				copyText.className = "vissualy-hidden"
+				copyText.value = result
+				document.body.appendChild(copyText)
+				copyText.select()
+				copyText.setSelectionRange(0, 99999)
+				document.execCommand("copy")
+				copyText.remove()
+
+				const btn = document.getElementById('btn')
+				const text = btn.innerText
+				btn.innerText = "Скопировано в буфер обмена"
+				setTimeout(function() {btn.innerText = text}, 2000)
+			}
+		}
+		function changeType(txt)
+		{
+			if (txt == "city")
+			{
+				document.getElementById("name").style.display = "block"
+				document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Мэр города"
+			}
+			else if (txt == "end")
+			{
+				document.getElementById("name").style.display = "none"
+				document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Владелец портала"
+			}
+		}
+
+		function getInputInElementById(id) {
+			return document.getElementById(id).getElementsByTagName("input")[0]
+		}
+		function showError(el, condition) {
+			if (condition) {
+				el.classList.add("error")
+			}
+			else {
+				el.classList.remove("error")
+			}
+			return condition
+		}
+		function getInputByName(name) {
+			const radios = document.getElementsByName(name);
+			for (let i = 0; i < radios.length; i++) {
+				if (radios[i].checked) {
+					return radios[i]
+				}
+			}
+			return document.getElementById(name)
+		}
+	</script>
+</body>
+</html>

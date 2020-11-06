@@ -31,7 +31,7 @@ for file in files:
 
 
 	# City & road to city
-	cities_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type)
+	cities_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, file.replace(".json", ""))
 	
 	if type != "hub":
 		cities_block += get_road(data["branch"], data["nether"]["x"], data["nether"]["z"])
@@ -42,8 +42,7 @@ for file in files:
 
 	# Pictures
 	if "pictures" in data:
-		cities_info += get_pictures(data["pictures"], file.replace(".json", ""), data["name"])
-		cities_info += '<div class="text">'
+		cities_info += get_pictures(file.replace(".json", ""), data["name"])
 
 	# Title
 	cities_info += get_title(data["name"], data["mayor"], type=type)
@@ -67,7 +66,7 @@ for file in files:
 	if "pictures" in data:
 		cities_info += "</div>"
 
-	cities_info += "</div>\n"
+	cities_info += '</div>\n'
 
 with open("src.html", "r", encoding='utf-8') as f:
 	src = f.read()
