@@ -104,11 +104,15 @@ button {
 	z-index: 2;
 
 	background-color: currentColor;
+	color: var(--bg-color);
+	font-weight: bold;
+	font-size: 2rem;
+	line-height: 3rem;
+	text-align: center;
 	overflow: hidden;
 }
 .dot:before {
 	position: absolute;
-	content: '';
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -119,9 +123,16 @@ button {
 	border-radius: 50%;
 	transition: all 0.25s;
 }
+.dot--icon {
+	background-color: transparent;
+	border-radius: 0;
+}
+/*.dot--icon:before {
+	content: none;
+}
 .dot.selected:before {
 	background-color: currentColor;
-}
+}*/
 .dot:hover {
 	transform: scale(1.1);
 }
@@ -131,16 +142,24 @@ button {
 .dot.court {
 	--size: 4rem;
 }
-.dot--red {color: var(--red)}
-.dot--green {color: var(--green)}
-.dot--yellow {color: var(--yellow)}
-.dot--blue {color: var(--blue)}
+.dot--red {background-color: var(--red)}
+.dot--green {background-color: var(--green); color: #000;}
+.dot--yellow {background-color: var(--yellow); color: #000;}
+.dot--blue {background-color: var(--blue)}
 .dot.selected {
-	background-color: currentColor;
 	transform: scale(1.5);
+}
+.dot--icon.selected {
+	background-color: transparent;
+}
+.dot__icon {
+	max-width: 100%;
 }
 #hub.selected {
 	transform: scale(1.1);
+}
+#hub:before {
+	content: '';
 }
 #hub {
 	--size: 6rem;
@@ -153,42 +172,14 @@ button {
 	background-color: #88C35A;
 }
 .dot--end:before {
+	content: '';
 	width: 0.4rem;
 	height: 1rem;
 	background-color: #1B2B10;
 }
-/*.dot--end:after {
-	content: '';
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	width: 2.5rem;
-	height: 25rem;
-	background-color: #88C35A;
-	border-radius: 50%;
-}*/
-.dot--end.selected {
-	background-color: currentColor;
-}
 .dot--end.selected:before {
-	background-color: var(--text-color);
+	background-color: #000;
 }
-/*@keyframes eye {
-	45% {
-		transform: translate(-50%, -50%);
-	}
-	49% {
-		transform: translate(-50%, -50%) scaleY(0);
-	}
-	51% {
-		transform: translate(-50%, -50%) scaleY(0);
-	}
-	55% {
-		transform: translate(-50%, -50%);
-	}
-}*/
-
 .info {
 	position: fixed;
 	padding: var(--info-padding);
@@ -227,7 +218,7 @@ html.dark .info {
 }
 
 
-.info .image {
+.info__image {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -237,16 +228,19 @@ html.dark .info {
 	padding-top: 56.25%;
 	overflow: hidden;
 	border-radius: var(--info-padding);
-
+	z-index: -1;
+}
+.info__image picture {
+	opacity: 0;
 	transition: 0.5s opacity linear;
 }
-.info .text {
-	transition: margin-top 0.25s;
+.info__text {
+	transition: margin-top 0.5s;
 }
-.info.c .image {
+.info.c .info__image {
 	opacity: 1;
 }
-.info.c .text {
+.info.c .info__text {
 	margin-top: 65%;
 }
 .info h3, .coords p {
@@ -261,10 +255,10 @@ html.dark .info {
 }
 
 @media (min-width: 768px) {
-	.info .image {
+	.info__image {
 		opacity: 1;
 	}
-	.info .text {
+	.info__text {
 		margin-top: 65%;
 	}
 }
@@ -338,54 +332,65 @@ html.dark .info {
 	background-color: #aaa;
 	display: block;
 	border-radius: 0.1em;
+	animation-duration: 2s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
 }
 .arrow:before {
 	transform-origin: bottom left;
 	margin-top: 0.2em;
 	margin-left: -0.1em;
 	transform: rotate(-45deg);
-	animation: arrowBefore 1.5s ease infinite;
+	animation-name: arrowBefore;
 }
 .arrow:after {
 	transform-origin: bottom right;
 	margin-top: -0.2em;
 	margin-right: -0.1em;
 	transform: rotate(45deg);
-	animation: arrowAfter 1.5s ease infinite;
+	animation-name: arrowAfter;
 }
 
 @keyframes arrowBefore {
-	32% {
+	30% {
 		transform: rotate(-45deg);
 		margin-left: -0.1em;
 	}
-	48% {
+	40% {
 		transform: rotate(-30deg);
 		margin-left: -0.4em;
 	}
-	52% {
+	50% {
+		transform: rotate(-45deg);
+		margin-left: -0.1em;
+	}
+	60% {
 		transform: rotate(-30deg);
 		margin-left: -0.4em;
 	}
-	68% {
+	70% {
 		transform: rotate(-45deg);
 		margin-left: -0.1em;
 	}
 }
 @keyframes arrowAfter {
-	32% {
+	30% {
 		transform: rotate(45deg);
 		margin-right: -0.1em;
 	}
-	48% {
+	40% {
 		transform: rotate(30deg);
 		margin-right: -0.4em;
 	}
-	52% {
+	50% {
+		transform: rotate(45deg);
+		margin-right: -0.1em;
+	}
+	60% {
 		transform: rotate(30deg);
 		margin-right: -0.4em;
 	}
-	68% {
+	70% {
 		transform: rotate(45deg);
 		margin-right: -0.1em;
 	}
@@ -451,22 +456,22 @@ html.dark .info {
 	left: 50%;
 	z-index: -1;
 }
-.road.red {
+.road--red {
 	background-color: var(--red);
 	height: var(--size);
 	margin-top: calc(var(--size) / -2);
 }
-.road.yellow {
+.road--yellow {
 	background-color: var(--yellow);
 	height: var(--size);
 	margin-top: calc(var(--size) / -2);
 }
-.road.blue {
+.road--blue {
 	background-color: var(--blue);
 	width: var(--size);
 	margin-left: calc(var(--size) / -2);
 }
-.road.green {
+.road--green {
 	background-color: var(--green);
 	width: var(--size);
 	margin-left: calc(var(--size) / -2);
@@ -526,8 +531,6 @@ span.gray {
 }
 #themeBtn {
 	top: calc(60px + var(--info-padding));
-	width: 60px;
-	height: 60px;
 }
 #themeBtn g {
 	transition: 0.5s all;
@@ -537,6 +540,14 @@ span.gray {
 }
 #themeBtn .moon {
 	opacity: 1;
+}
+#addCity {
+	text-decoration: none;
+	font-size: 40px;
+	line-height: 50px;
+	top: calc(120px + var(--info-padding));
+	padding: 0;
+	text-align: center;
 }
 html.dark #themeBtn .sun {
 	opacity: 1;
@@ -572,9 +583,6 @@ html.dark #themeBtn .moon {
 }
 .background img {
 	width: 100%;
-}
-.background:hover {
-	transform: translate(-50%, -50%) scale(1.5);
 }
 .description {
 	margin-top: 40px;

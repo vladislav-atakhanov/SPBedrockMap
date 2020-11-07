@@ -1,5 +1,6 @@
 import json
 import os
+from shutil import copyfile
 from functions import *
 
 dots_info = ""
@@ -29,9 +30,16 @@ for file in files:
 		if "name" not in data:
 			data["name"] = "Портал в энд"
 
+	id = file.replace(".json", "")
 
 	# Dot & roads to dot
-	dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, file.replace(".json", ""))
+	if "icon" in data:
+		if f'icon.{data["icon"]}' not in os.listdir(path=f"./dist/pictures/{id}/"):
+			print(f'    +icon.{data["icon"]}')
+			copyfile(f'./json/{id}/icon.{data["icon"]}', f'./dist/pictures/{id}/icon.{data["icon"]}')
+		dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, data["icon"])
+	else:
+		dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id)
 	if type != "hub":
 		dots_block += get_road(data["branch"], data["nether"]["x"], data["nether"]["z"], type)
 	if "subbranch" in data:
@@ -43,7 +51,7 @@ for file in files:
 
 	# Pictures
 	if "pictures" in data:
-		dots_info += get_pictures(file.replace(".json", ""), data["name"])
+		dots_info += get_pictures(id, data["name"])
 
 	# Title
 	dots_info += get_title(data["name"], data["mayor"], type=type)

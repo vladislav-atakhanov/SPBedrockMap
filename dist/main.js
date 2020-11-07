@@ -14,6 +14,7 @@ const
 	{
 		el: document.getElementsByClassName('info')[0],
 		closeBtn: document.getElementById('infoCloseBtn'),
+		images: document.getElementsByClassName('info__image'),
 		currentState: 0
 	},
 
@@ -22,10 +23,9 @@ const
 	html = document.documentElement;
 
 let darkTheme = localStorage.getItem("darkTheme")
-if (darkTheme == "true") {
-	html.classList.add("dark")
-}
-function switchTheme() {
+if (darkTheme == "true") {html.classList.add("dark")}
+function switchTheme()
+{
 	html.classList.toggle("dark")
 	html.classList.add("theme-in-transition")
 	setTimeout(function() {html.classList.remove("theme-in-transition")}, 500)
@@ -67,7 +67,7 @@ for (let i = 0; i < branches.length; i++)
 
 for (let i = 0; i < roads.length; i++)
 {
-	if (roads[i].classList.contains("red") || roads[i].classList.contains("yellow"))
+	if (roads[i].classList.contains("road--red") || roads[i].classList.contains("road--yellow"))
 	{
 		roads[i].style.width = `${Math.abs(roads[i].getAttribute("data-x")) / 20}rem`
 		roads[i].style.top = `calc(${roads[i].getAttribute("data-z") / 20}rem + 50%)`
@@ -76,7 +76,7 @@ for (let i = 0; i < roads.length; i++)
 			roads[i].style.left = `calc(${roads[i].getAttribute("data-x") / 20}rem + 50%)`
 		}
 	}
-	else if (roads[i].classList.contains("green") || roads[i].classList.contains("blue"))
+	else if (roads[i].classList.contains("road--green") || roads[i].classList.contains("road--blue"))
 	{
 		roads[i].style.height = `${Math.abs(roads[i].getAttribute("data-z")) / 20}rem`
 		roads[i].style.left = `calc(${roads[i].getAttribute("data-x") / 20}rem + 50%)`
@@ -96,10 +96,7 @@ function changeScale(e)
 }
 updateMap()
 
-info.closeBtn.onclick = function(e)
-{
-	updateInfo(0)
-}
+info.closeBtn.onclick = function(e) {updateInfo(0)}
 
 // Input handler
 let fingers = []
@@ -132,7 +129,8 @@ map.wrapper.onpointerdown = function(e)
 			const curDiff = Math.abs(
 				fingers[0].clientY - fingers[1].clientY
 			)
-			if (prevDiff > 0) {
+			if (prevDiff > 0)
+			{
 				map.scale += (curDiff - prevDiff) / 10
 			}
 			if (map.scale < 0.1) {map.scale = 0.1}
@@ -220,19 +218,34 @@ document.onkeydown = function(e)
 	setTimeout(function() {map.el.style.transition = "transform 0s linear"}, 250)
 }
 
-info.el.onclick = function(e)
-{
-	updateInfo(1, "+")
-}
+info.el.onclick = function(e) {updateInfo(1, "+")}
 const court = ""
 const courtEl = ""
-if (court != "") {
+if (court != "")
+{
 	courtEl = document.getElementById(court)
 	infernia.classList.add("court")
 	infernia.style.color = "#80f"
 }
-function showCourt() {
-	if (court != "") {
-		courtEl.click()
+function showCourt()
+{
+	if (court != "") {courtEl.click()}
+}
+
+for (let i = 0; i < info.images.length; i++)
+{
+	info.images[i].children[0].style.opacity = "1"
+}
+function next(el) {
+	const ch = el.children
+	for (let i = 0; i < ch.length; i++)
+	{
+		if (ch[i].style.opacity == "1") {
+			ch[i].style.opacity = "0"
+			ch[i].style.zIndex = "0"
+			ch[(i+1) % ch.length].style.opacity = "1"
+			ch[(i+1) % ch.length].style.zIndex = "1"
+			break
+		}
 	}
 }

@@ -1,10 +1,9 @@
 const html = document.documentElement
 
 let darkTheme = localStorage.getItem("darkTheme")
-if (darkTheme == "true") {
-	html.classList.add("dark")
-}
-function switchTheme() {
+if (darkTheme == "true") {html.classList.add("dark")}
+function switchTheme()
+{
 	html.classList.toggle("dark")
 	html.classList.add("theme-in-transition")
 	setTimeout(function() {html.classList.remove("theme-in-transition")}, 500)
@@ -15,7 +14,8 @@ function switchTheme() {
 function copy()
 {
 	let erron = false
-	const inputs = {
+	const inputs =
+	{
 		type: getInputByName("type"),
 		branch: getInputByName("branch"),
 		subbranch: document.getElementById("subbranch"),
@@ -37,7 +37,8 @@ function copy()
 
 	let error = false
 
-	for (let prop in inputs) {
+	for (let prop in inputs)
+	{
 		const el = inputs[prop]
 		if (
 			(el != inputs.description && el != inputs.residents &&
@@ -58,14 +59,17 @@ function copy()
 		if (inputs.mayor.value != "") {result += `    "mayor": "${inputs.mayor.value}",\n`}
 
 		result += `    "branch": "${inputs.branch.value}",\n`
-		if (inputs.subbranch.checked) {
+		if (inputs.subbranch.checked)
+		{
 			let color = ""
 
-			if (inputs.branch.value == "red" || inputs.branch.value == "yellow") {
+			if (inputs.branch.value == "red" || inputs.branch.value == "yellow")
+			{
 				if (inputs.netherX.value > 0) {color = "blue"}
 				if (inputs.netherX.value < 0) {color = "green"}
 			}
-			else {
+			else
+			{
 				if (inputs.netherZ.value > 0) {color = "red"}
 				if (inputs.netherZ.value < 0) {color = "yellow"}
 			}
@@ -79,7 +83,8 @@ function copy()
 		result += `        "z": "${inputs.netherZ.value}"\n`
 		result += `    },\n`
 
-		if (inputs.overworldX.value != "" && inputs.overworldY.value != "" && inputs.overworldZ.value != "") {
+		if (inputs.overworldX.value != "" && inputs.overworldY.value != "" && inputs.overworldZ.value != "")
+		{
 			result += `    "overworld": {\n`
 			result += `        "x": "${inputs.overworldX.value}",\n`
 			result += `        "y": "${inputs.overworldY.value}",\n`
@@ -94,16 +99,16 @@ function copy()
 		if (inputs.residents.value != "")
 		{
 			result += '    "residents": ['
-			res = inputs.residents.value.split(", ")
-			for (var i = 0; i < res.length; i++) {
+			res = inputs.residents.value.split(",")
+			for (var i = 0; i < res.length; i++)
+			{
+				if (res[i] == "") {continue}
 				result += `"${res[i]}"`
 				if (i < res.length - 1) {result += ", "}
 			}
 			result += "],\n"
 		}
-		if (inputs.pictures.checked) {
-			result += `    "pictures": "true",\n`
-		}
+		if (inputs.pictures.checked) {result += `    "pictures": "true",\n`}
 		result += "}"
 		result = result.replace(",\n}", "\n}")
 
@@ -119,7 +124,7 @@ function copy()
 		const btn = document.getElementById('btn')
 		const text = btn.innerText
 		btn.innerText = "Скопировано в буфер обмена"
-		setTimeout(function() {btn.innerText = text}, 2000)
+		setTimeout(function() {btn.innerText = text}, 5000)
 	}
 }
 function changeType(txt)
@@ -138,25 +143,26 @@ function changeType(txt)
 	}
 }
 
-function getInputInElementById(id) {
+function getInputInElementById(id)
+{
 	return document.getElementById(id).getElementsByTagName("input")[0]
 }
-function getInputByName(name) {
+function getInputByName(name)
+{
 	const radios = document.getElementsByName(name);
-	for (let i = 0; i < radios.length; i++) {
-		if (radios[i].checked) {
-			return radios[i]
-		}
+	for (let i = 0; i < radios.length; i++)
+	{
+		if (radios[i].checked) {return radios[i]}
 	}
 	return document.getElementById(name)
 }
-function showError(el, condition) {
-	if (condition) {
+function showError(el, condition)
+{
+	if (condition)
+	{
 		window.scrollTo({top: el.scrollTop, behavior: "smooth"})
 		el.classList.add("error")
 	}
-	else {
-		el.classList.remove("error")
-	}
+	else {el.classList.remove("error")}
 	return condition
 }
