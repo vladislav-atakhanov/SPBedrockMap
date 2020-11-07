@@ -34,8 +34,8 @@
 			<a href="../">Вернуться к карте</a>
 		</div>
 		<div id="form">
-			<div>
-				<fieldset id="type">
+			<fieldset>
+				<div id="type">
 					<label onclick="changeType('city')">
 						Город
 						<input type="radio" value="city" name="type" checked>
@@ -44,20 +44,20 @@
 						Портал в энд
 						<input type="radio" value="end" name="type">
 					</label>
-				</fieldset>
-				<fieldset class="optional">
-					<legend>Скриншоты</legend>
-					<label>Есть <input type="checkbox" id="pictures"></label>
-				</fieldset>
-			</div>
+					<label onclick="changeType('base')">
+						База
+						<input type="radio" value="base" name="type">
+					</label>
+				</div>
 
-			<fieldset id="title">
-				<label id="name">
-					<span>Название города</span> <input type="text" placeholder="Vice">
-				</label>
-				<label id="mayor">
-					<span>Мэр города</span> <input type="text" placeholder="City">
-				</label>
+				<div id="title">
+					<label id="name">
+						<span>Название города</span> <input type="text" placeholder="Vice City">
+					</label>
+					<label id="mayor">
+						<span>Мэр города</span> <input type="text" placeholder="eloh1mZ">
+					</label>
+				</div>
 			</fieldset>
 
 			<div>
@@ -81,7 +81,8 @@
 							<span class="yellow"></span>
 						</label>
 					</div>
-					<label>Дорога с другой ветки<input type="checkbox" id="subbranch"></label>
+					<label>Дорога с другой ветки <input type="checkbox" id="subbranch"></label>
+					<label>Скриншоты <input type="checkbox" id="pictures"></label>
 				</fieldset>
 			</div>
 
@@ -116,7 +117,7 @@
 				<textarea cols="30" rows="10" id="description" placeholder="Пока города нет и, наверное, не будет"></textarea>
 			</fieldset>
 
-			<fieldset class="text optional">
+			<fieldset class="text optional residents">
 				<legend><span class="redText">*</span> Жители (<span class="gray">через запятую</span>)</legend>
 				<textarea cols="30" rows="10" id="residents" placeholder="eloh1mZ - мэр,Vlad - зам. мэра,KTOTO,C kemto,ауф"></textarea>
 			</fieldset>

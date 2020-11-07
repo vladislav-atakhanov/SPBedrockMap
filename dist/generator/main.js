@@ -43,7 +43,8 @@ function copy()
 		if (
 			(el != inputs.description && el != inputs.residents &&
 			el != inputs.overworldX && el != inputs.overworldY && el != inputs.overworldZ && el != inputs.subbranch) &&
-			!(inputs.type.value == "end" && (el == inputs.mayor || el == inputs.name))
+			!(inputs.type.value == "end" && (el == inputs.mayor || el == inputs.name)) &&
+			!(inputs.type.value == "base" && (el == inputs.name))
 		)
 		{
 			if (showError(el, (el.value == undefined || el.value == ""))) { error = true }
@@ -55,7 +56,7 @@ function copy()
 		let result = "{\n"
 
 		if (inputs.type.value != "city") {result += `    "type": "${inputs.type.value}",\n`}
-		if (inputs.name.value != "") {result += `    "name": "${inputs.name.value}",\n`}
+		if (inputs.type.value == "city" && inputs.name.value != "") {result += `    "name": "${inputs.name.value}",\n`}
 		if (inputs.mayor.value != "") {result += `    "mayor": "${inputs.mayor.value}",\n`}
 
 		result += `    "branch": "${inputs.branch.value}",\n`
@@ -132,14 +133,21 @@ function changeType(txt)
 	if (txt == "city")
 	{
 		document.getElementById("name").style.display = "block"
+		document.getElementsByClassName("residents")[0].style.display = "block"
 		document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Мэр города"
 		document.getElementById("title").classList.remove("optional")
 	}
-	else if (txt == "end")
+	else if (txt == "end" || txt == "base")
 	{
 		document.getElementById("name").style.display = "none"
-		document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Владелец портала"
-		document.getElementById("title").classList.add("optional")
+		document.getElementsByClassName("residents")[0].style.display = "none"
+		document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Владелец"
+		if (txt == "end") {
+			document.getElementById("title").classList.add("optional")
+		}
+		else {
+			document.getElementById("title").classList.remove("optional")
+		}
 	}
 }
 

@@ -27,8 +27,9 @@ for file in files:
 	if type == "end":
 		if "mayor" not in data:
 			data["mayor"] = ""
-		if "name" not in data:
-			data["name"] = "Портал в энд"
+		data["name"] = "Портал в энд"
+	elif type == "base":
+		data["name"] = "База"
 
 	id = file.replace(".json", "")
 

@@ -248,7 +248,7 @@ span.redText {
 	animation-iteration-count: 1;
 	animation-timing-function: linear;
 	animation-fill-mode: forwards;
-	animation-delay: 0.3s;
+	animation-delay: 0.5s;
 }
 @keyframes error {
 	0% {

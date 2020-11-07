@@ -127,12 +127,6 @@ button {
 	background-color: transparent;
 	border-radius: 0;
 }
-/*.dot--icon:before {
-	content: none;
-}
-.dot.selected:before {
-	background-color: currentColor;
-}*/
 .dot:hover {
 	transform: scale(1.1);
 }
@@ -171,6 +165,9 @@ button {
 	box-shadow: none;
 	background-color: #88C35A;
 }
+.dot--base {
+	--size: 2rem;
+}
 .dot--end:before {
 	content: '';
 	width: 0.4rem;
@@ -189,7 +186,7 @@ button {
 	bottom: 0;
 	height: 100%;
 	width: 100%;
-	transform: translateY(80vh);
+	transform: translateY(100vh);
 	transition: transform 0.5s ease;
 
 	box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.3);
@@ -201,19 +198,19 @@ html.dark .info {
 @media (min-width: 768px) {
 	.info {
 		width: 40vw;
-		transform: translateX(-35vw);
+		transform: translateX(-41vw);
 	}
 }
 @media (min-width: 992px) {
 	.info {
 		width: 30vw;
-		transform: translateX(-25vw);
+		transform: translateX(-31vw);
 	}
 }
 @media (min-width: 1024px) {
 	.info {
 		width: 25vw;
-		transform: translateX(-20vw);
+		transform: translateX(-26vw);
 	}
 }
 
@@ -280,26 +277,43 @@ html.dark .info {
 	}
 }
 
-#infoCloseBtn {
+#infoCloseBtn, #infoOpenBtn {
 	position: fixed;
-	right: var(--info-padding);
-	top: calc(var(--info-padding) / 2);
-	font-size: 36px;
 	color: var(--text-color);
-	opacity: 0;
 	transition: all 0.5s ease;
 	padding: 0;
 	margin: 0;
 	display: block;
 	outline: none;
-	background-color: var(--bg-color);
-	transform: translateY(90vh);
 	border: none;
 	overflow: hidden;
 
 	width: 1.2em;
 	height: 1.2em;
 	border-radius: 1.5em;
+}
+#infoOpenBtn {
+	border: 3px solid var(--text-color);
+	background-color: transparent;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	width: 3em;
+	height: 3em;
+	bottom: -0.8rem;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: opacity 0.5s ease;
+}
+#infoOpenBtn.b, #infoOpenBtn.c {
+	opacity: 0;
+}
+#infoCloseBtn {
+	transform: translateY(90vh);
+	right: var(--info-padding);
+	top: calc(var(--info-padding) / 2);
+	background-color: var(--bg-color);
+	font-size: 36px;
+	opacity: 0;
 }
 #infoCloseBtn:hover {
 	opacity: 0.1;
@@ -315,6 +329,12 @@ html.dark .info {
 	transform: translateX(-50%);
 	font-size: 1.25em;
 	display: none;
+	color: #ccc;
+}
+.arrow--right {
+	display: block;
+	color: inherit;
+	transform: translate(-50%, 50%);
 }
 .info_block.b .arrow {
 	display: block;
@@ -329,7 +349,7 @@ html.dark .info {
 	content: '';
 	width: 1em;
 	height: 0.2em;
-	background-color: #aaa;
+	background-color: currentColor;
 	display: block;
 	border-radius: 0.1em;
 	animation-duration: 2s;
@@ -400,6 +420,18 @@ html.dark .info {
 	#infoCloseBtn {
 		transform: translateX(-35vw);
 		left: calc(40vw - 1.2em - var(--info-padding) / 2);
+	}
+	#infoOpenBtn {
+		left: -0.8em;
+		top: 25%;
+		transform: none;
+		border-top-left-radius: 0;
+		border-bottom-right-radius: 1.5em;
+	}
+	#infoOpenBtn .arrow {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(90deg);
 	}
 }
 @media (min-width: 992px) {
@@ -476,12 +508,10 @@ html.dark .info {
 	width: var(--size);
 	margin-left: calc(var(--size) / -2);
 }
-.road--end {
-	--size: 0.5rem; 
+.road--end, .road--base {
+	--size: 0.5rem;
 	opacity: 0.75;
-	/*box-shadow: inset 0px 0px 0px 0.25rem var(--bg-color);*/
 }
-
 .branch--x {
 	background: linear-gradient(90deg, var(--green) 50%, var(--blue) 50%);
 }

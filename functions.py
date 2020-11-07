@@ -23,7 +23,7 @@ def get_city(name, branch, x, z, type, id, icon=""):
 		r += "dot--" + branch
 	else:
 		r += "dot--" + type
-		if type == "end":
+		if type != "hub":
 			r += " dot--" + branch
 
 	if icon != "":
@@ -65,7 +65,7 @@ def get_title(name, mayor, type):
 		return f'<div class="title"><h2>{name}</h2><p>Мэр: <b>{mayor}</b></p></div>'
 	if type == "hub":
 		return f'<div class="title"><h2>{name}</h2><p><b>{mayor}</b></p></div>'
-	if type == "end":
+	else:
 		if mayor == "":
 			return f'<div class="title"><h2>{name}</h2></div>'
 		else:

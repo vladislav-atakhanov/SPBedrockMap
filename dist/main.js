@@ -14,6 +14,7 @@ const
 	{
 		el: document.getElementsByClassName('info')[0],
 		closeBtn: document.getElementById('infoCloseBtn'),
+		openBtn: document.getElementById('infoOpenBtn'),
 		images: document.getElementsByClassName('info__image'),
 		currentState: 0
 	},
@@ -96,8 +97,6 @@ function changeScale(e)
 }
 updateMap()
 
-info.closeBtn.onclick = function(e) {updateInfo(0)}
-
 // Input handler
 let fingers = []
 let prevDiff = 0
@@ -165,7 +164,8 @@ map.wrapper.onmousewheel = function(e)
 	if (map.scale > 2) {map.scale = 2}
 	updateMap()
 }
-const defaultBtn = document.getElementById('defaultBtn')
+
+// toDefault
 function toDefault(e)
 {
 	map.scale = (window.innerWidht >= 768) ? 1 : 0.5
@@ -181,6 +181,8 @@ function updateInfo(n, mode="=")
 	const classes = ["a", "b", "c"]
 	info.el.classList.remove(classes[info.currentState])
 	info.closeBtn.classList.remove(classes[info.currentState])
+	info.openBtn.classList.remove(classes[info.currentState])
+
 
 	if (mode == "=") {info.currentState = n}
 	if (mode == "+") {info.currentState += n}
@@ -190,6 +192,7 @@ function updateInfo(n, mode="=")
 
 	info.el.classList.add(classes[info.currentState])
 	info.closeBtn.classList.add(classes[info.currentState])
+	info.openBtn.classList.add(classes[info.currentState])
 }
 
 function updateMap()
