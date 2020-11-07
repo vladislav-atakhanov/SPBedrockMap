@@ -6,12 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="main.css">
+	<link rel="icon" href="./pictures/favicon.png">
 </head>
 <body>
 	<div id="mapWrapper">
 		<div id="map">
-			<div class="branch branch--x" data-w="5000"></div>
-			<div class="branch branch--y" data-w="5000"></div>
+			<div class="branch branch--x" data-w="6000"></div>
+			<div class="branch branch--z" data-w="5000"></div>
 			<dots_block>
 		</div>
 	</div>
@@ -26,6 +27,7 @@
 		<path d="m408.97 142.69c-40.86-40.86-95.188-63.363-152.97-63.363h-31.717l50.907-51.032-28.364-28.294-99.146 99.389 97.852 99.488 28.563-28.093-50.551-51.396h32.456c97.198 0 176.28 79.076 176.28 176.28s-79.077 176.28-176.28 176.28-176.28-79.077-176.28-176.28v-20.031l-40.062 4e-3v20.031c0 57.786 22.503 112.11 63.364 152.97 40.86 40.861 95.188 63.364 152.97 63.364s112.11-22.503 152.97-63.364c40.861-40.861 63.364-95.188 63.364-152.97s-22.503-112.11-63.364-152.97z"/>
 		</svg>
 	</button>
+	<a href="generator/" class="btn" id="addCity">+</a>
 	<button id="themeBtn" class="btn" onclick="switchTheme()">
 		<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 		<g class="moon">
@@ -51,9 +53,9 @@
 	</div>
 	<footer>
 		<a href="https://github.com/eloh1mZ">eloh1mZ</a>
-		<a href="generator/">Добавить в свой город</a>
 	</footer>
-	<button id="infoCloseBtn" class="info_block">&times;</button>
+	<button id="infoCloseBtn" onclick="updateInfo(0)" class="info_block">&times;</button>
+	<button id="infoOpenBtn" onclick="updateInfo(1)" class="info_block"><div class="arrow arrow--right"></div></button>
 	<script src="main.js"></script>
 </body>
 </html>

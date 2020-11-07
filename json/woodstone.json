@@ -1,0 +1,15 @@
+{
+    "name": "Woodstone",
+    "mayor": "Zoombie06545",
+    "branch": "blue",
+    "nether": {
+        "x": "242",
+        "z": "-38"
+    },
+    "overworld": {
+        "x": "1916",
+        "y": "67",
+        "z": "-294"
+    },
+    "residents": ["Zoombie06545 - мэр", "SosuBoby"]
+}
