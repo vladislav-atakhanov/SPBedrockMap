@@ -95,8 +95,6 @@ button {
 
 	margin-left: calc(var(--size) / -2);
 	margin-top: calc(var(--size) / -2);
-	
-	box-shadow: inset 0px 0px 0px 1rem currentColor;
 	border-radius: 50%;
 	border: none;
 
@@ -105,8 +103,30 @@ button {
 	transition: all 0.5s ease;
 	z-index: 2;
 
-	background-color: var(--bg-color);
+	background-color: currentColor;
 	overflow: hidden;
+}
+.dot:before {
+	position: absolute;
+	content: '';
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	width: calc(var(--size) - 2rem);
+	height: calc(var(--size) - 2rem);
+	background-color: var(--bg-color);
+	border-radius: 50%;
+	transition: all 0.25s;
+}
+.dot.selected:before {
+	background-color: currentColor;
+}
+.dot:hover {
+	transform: scale(1.1);
+}
+.dot:active {
+	transform: scale(0.9);
 }
 .dot.court {
 	--size: 4rem;
@@ -115,12 +135,6 @@ button {
 .dot--green {color: var(--green)}
 .dot--yellow {color: var(--yellow)}
 .dot--blue {color: var(--blue)}
-.dot:hover {
-	transform: scale(1.1);
-}
-.dot:active {
-	transform: scale(0.9);
-}
 .dot.selected {
 	background-color: currentColor;
 	transform: scale(1.5);
@@ -135,34 +149,32 @@ button {
 .dot--end {
 	--size: 2rem;
 
-	background: #88C35A;
-	box-shadow: inset 0px 0px 0.4rem 0.2rem #102C31;
+	box-shadow: none;
+	background-color: #88C35A;
 }
 .dot--end:before {
-	content: '';
-	position: absolute;
 	width: 0.4rem;
 	height: 1rem;
-
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 1;
-
-	background: #1B2B10;
-	box-shadow: inset 0px 0px 0.1rem 0.1rem #1E4835;
-	border-radius: 50%;
-
-	animation: eye 5s ease infinite;
+	background-color: #1B2B10;
 }
+/*.dot--end:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 2.5rem;
+	height: 25rem;
+	background-color: #88C35A;
+	border-radius: 50%;
+}*/
 .dot--end.selected {
-	box-shadow: inset 0px 0px 0.4rem 0.2rem #000;
+	background-color: currentColor;
 }
 .dot--end.selected:before {
-	box-shadow: none;
-	background-color: #1b1b1b1;
+	background-color: var(--text-color);
 }
-@keyframes eye {
+/*@keyframes eye {
 	45% {
 		transform: translate(-50%, -50%);
 	}
@@ -175,7 +187,7 @@ button {
 	55% {
 		transform: translate(-50%, -50%);
 	}
-}
+}*/
 
 .info {
 	position: fixed;
@@ -427,11 +439,12 @@ html.dark .info {
 	top: 50%;
 	transform: translate(-50%, -50%);
 }
-.branch--y {
+.branch--z {
 	background: linear-gradient(90deg, var(--yellow) 50%, var(--red) 50%);
 	transform: translate(-50%, -50%) rotate(90deg);
 }
 .road {
+	--size: 1rem;
 	position: absolute;
 	border-radius: 0.5rem;
 	top: 50%;
@@ -440,27 +453,28 @@ html.dark .info {
 }
 .road.red {
 	background-color: var(--red);
-	height: 1rem;
-	margin-top: -0.5rem;
+	height: var(--size);
+	margin-top: calc(var(--size) / -2);
 }
 .road.yellow {
 	background-color: var(--yellow);
-	height: 1rem;
-	margin-top: -0.5rem;
+	height: var(--size);
+	margin-top: calc(var(--size) / -2);
 }
 .road.blue {
 	background-color: var(--blue);
-	width: 1rem;
-	margin-left: -0.5rem;
+	width: var(--size);
+	margin-left: calc(var(--size) / -2);
 }
 .road.green {
 	background-color: var(--green);
-	width: 1rem;
-	margin-left: -0.5rem;
+	width: var(--size);
+	margin-left: calc(var(--size) / -2);
 }
 .road--end {
+	--size: 0.5rem; 
 	opacity: 0.75;
-	box-shadow: inset 0px 0px 0px 0.25rem var(--bg-color);
+	/*box-shadow: inset 0px 0px 0px 0.25rem var(--bg-color);*/
 }
 
 .branch--x {
