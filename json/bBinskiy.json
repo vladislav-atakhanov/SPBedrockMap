@@ -1,0 +1,15 @@
+{
+    "type": "base",
+    "mayor": "Binskiy",
+    "branch": "green",
+    "nether": {
+        "x": "-872",
+        "z": "-46"
+    },
+    "overworld": {
+        "x": "-6996",
+        "y": "63",
+        "z": "-396"
+    },
+    "description": "Арт зона, и также база Бинского"
+}

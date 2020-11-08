@@ -31,6 +31,13 @@ for file in files:
 	elif type == "base":
 		data["name"] = "База"
 
+	if type == "other":
+		if "bar" in data["name"].lower() or "бар" in data["name"].lower():
+			type = "bar"
+		elif "game" in data["name"].lower() or "игра" in data["name"].lower():
+			type = "game"
+		elif "cafe" in data["name"].lower() or "кафе" in data["name"].lower():
+			type = "cafe"
 	id = file.replace(".json", "")
 
 	# Dot & roads to dot

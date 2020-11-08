@@ -103,8 +103,9 @@ let prevDiff = 0
 map.wrapper.onpointerdown = function(e)
 {
 	fingers.push(e)
-	let shiftX = e.pageX - map.x;
-	let shiftY = e.pageY - map.y;
+	let isNotZoom = true;
+	let shiftX = e.pageX - map.x
+	let shiftY = e.pageY - map.y
 
 	map.wrapper.style.cursor = "move"
 
@@ -116,30 +117,29 @@ map.wrapper.onpointerdown = function(e)
 		}
 
 		// Swipe
-		if (fingers.length == 1)
+		if (fingers.length == 1 && isNotZoom)
 		{
 			map.x = e.pageX - shiftX
 			map.y = e.pageY - shiftY
-			updateMap()
 		}
 		// Zoom
-		if (fingers.length == 2)
+		else if (fingers.length == 2)
 		{
+			isNotZoom = false
 			const curDiff = Math.abs(
 				fingers[0].clientY - fingers[1].clientY
 			)
 			if (prevDiff > 0)
 			{
-				map.scale += (curDiff - prevDiff) / 10
+				map.scale += (curDiff - prevDiff) / 100
 			}
-			if (map.scale < 0.1) {map.scale = 0.1}
-			if (map.scale > 2) {map.scale = 2}
 			prevDiff = curDiff;
-			updateMap()
 		}
+		updateMap()
 	}
-	map.wrapper.onpointerup = map.wrapper.onpointerenter = function(e)
-	{
+	map.wrapper.onpointerup = pointerUp
+	map.wrapper.onpointerenter = pointerUp
+	function pointerUp(e) {
 		for (let i = 0; i < fingers.length; i++)
 		{
 			if (e.pointerId === fingers[i].pointerId) {fingers.splice(i, 1)}
@@ -160,15 +160,13 @@ map.wrapper.onmousewheel = function(e)
 	map.el.style.transition = "none"
 	let delta = e.deltaY || e.detail || e.wheelDelta
 	map.scale += (delta < 0) ? 0.05 : -0.05
-	if (map.scale < 0.1) {map.scale = 0.1}
-	if (map.scale > 2) {map.scale = 2}
 	updateMap()
 }
 
 // toDefault
 function toDefault(e)
 {
-	map.scale = (window.innerWidht >= 768) ? 1 : 0.5
+	map.scale = (window.innerWidth >= 768) ? 1 : 0.5
 	map.x = 0
 	map.y = 0
 	map.el.style.transition = "transform 0.25s linear"
@@ -197,7 +195,15 @@ function updateInfo(n, mode="=")
 
 function updateMap()
 {
-	map.el.style.transform = `translate(${map.x}px, ${map.y}px) scale(${map.scale})`
+	if (map.scale > 2) {map.scale = 2}
+	if (map.scale < 0.1) {map.scale = 0.1}
+
+	const 
+		k = 1 / map.scale,
+		x = map.x * k,
+		y = map.y * k 
+	map.el.style.transformOrigin = `calc(50% - ${x}px) calc(50% - ${y}px)`
+	map.el.style.transform = `translate(${x}px, ${y}px) scale(${map.scale})`
 	scaleRange.value = map.scale
 }
 
@@ -213,12 +219,9 @@ document.onkeydown = function(e)
 	if (e.keyCode == 107 || e.keyCode == 187) {map.scale += 0.1}
 	if (e.keyCode == 109 || e.keyCode == 189) {map.scale -= 0.1}
 
-	if (map.scale < 0.1) {map.scale = 0.1}
-	if (map.scale > 2) {map.scale = 2}
-
-	map.el.style.transition = "transform 0.25s linear"
+	map.el.style.transition = "all 0.25s linear"
 	updateMap()
-	setTimeout(function() {map.el.style.transition = "transform 0s linear"}, 250)
+	setTimeout(function() {map.el.style.transition = "all 0s linear"}, 250)
 }
 
 info.el.onclick = function(e) {updateInfo(1, "+")}

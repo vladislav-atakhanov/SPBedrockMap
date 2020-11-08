@@ -56,8 +56,8 @@ function copy()
 		let result = "{\n"
 
 		if (inputs.type.value != "city") {result += `    "type": "${inputs.type.value}",\n`}
-		if (inputs.type.value == "city" && inputs.name.value != "") {result += `    "name": "${inputs.name.value}",\n`}
-		if (inputs.mayor.value != "") {result += `    "mayor": "${inputs.mayor.value}",\n`}
+		if (inputs.type.value != "end" && inputs.type.value != "base" && inputs.name.value != "") {result += `    "name": "${inputs.name.value.replace(/"([^"]*)"/g, '«$1»')}",\n`}
+		if (inputs.mayor.value != "") {result += `    "mayor": "${inputs.mayor.value.replace(/"([^"]*)"/g, '«$1»')}",\n`}
 
 		result += `    "branch": "${inputs.branch.value}",\n`
 		if (inputs.subbranch.checked)
@@ -95,7 +95,7 @@ function copy()
 
 		if (inputs.description.value != "")
 		{
-			result += `    "description": "${inputs.description.value.replace(/\n/g, "<br>")}",\n`
+			result += `    "description": "${inputs.description.value.replace(/\n/g, "<br>").replace(/"([^"]*)"/g, '«$1»')}",\n`
 		}
 		if (inputs.residents.value != "")
 		{
@@ -104,7 +104,7 @@ function copy()
 			for (var i = 0; i < res.length; i++)
 			{
 				if (res[i] == "") {continue}
-				result += `"${res[i]}"`
+				result += `"${res[i].replace(/"([^"]*)"/g, '«$1»')}"`
 				if (i < res.length - 1) {result += ", "}
 			}
 			result += "],\n"
@@ -130,12 +130,21 @@ function copy()
 }
 function changeType(txt)
 {
-	if (txt == "city")
+	if (txt == "city" || txt == "other")
 	{
 		document.getElementById("name").style.display = "block"
 		document.getElementsByClassName("residents")[0].style.display = "block"
 		document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Мэр города"
 		document.getElementById("title").classList.remove("optional")
+		if (txt == "other") {
+			document.getElementsByClassName("residents")[0].style.display = "none"
+			document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Владелец"
+			document.getElementById("name").getElementsByTagName("span")[0].innerText = "Название заведения"
+		}
+		else {
+			document.getElementById("name").getElementsByTagName("span")[0].innerText = "Название города"
+			document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Мэр"
+		}
 	}
 	else if (txt == "end" || txt == "base")
 	{

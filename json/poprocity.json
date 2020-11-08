@@ -1,0 +1,14 @@
+{
+    "name": "POPROCITY",
+    "mayor": "poproshaika80 - koteika_poletela",
+    "branch": "yellow",
+    "nether": {
+        "x": "77",
+        "z": "-999"
+    },
+    "overworld": {
+        "x": "620",
+        "y": "65",
+        "z": "-8000"
+    }
+}

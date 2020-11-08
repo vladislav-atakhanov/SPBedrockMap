@@ -69,6 +69,9 @@ h2 {
 a {
 	color: inherit;
 }
+img {
+	display: block;
+}
 button {
 	cursor: pointer;
 }
@@ -123,10 +126,6 @@ button {
 	border-radius: 50%;
 	transition: all 0.25s;
 }
-.dot--icon {
-	background-color: transparent;
-	border-radius: 0;
-}
 .dot:hover {
 	transform: scale(1.1);
 }
@@ -176,6 +175,25 @@ button {
 }
 .dot--end.selected:before {
 	background-color: #000;
+}
+.dot--icon {
+	background-color: transparent;
+	border-radius: 0;
+}
+.dot--icon.selected {
+	background-color: transparent;
+}
+.dot__icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+}
+
+.dot--bar, .dot--game, .dot--cafe {
+	--size: 2rem;
+	overflow: visible;
 }
 .info {
 	position: fixed;
@@ -314,12 +332,14 @@ html.dark .info {
 	background-color: var(--bg-color);
 	font-size: 36px;
 	opacity: 0;
+	z-index: -1;
 }
 #infoCloseBtn:hover {
 	opacity: 0.1;
 }
 #infoCloseBtn.b, #infoCloseBtn.c {
 	opacity: 0.75;
+	z-index: 1;
 }
 .arrow {
 	position: absolute;
@@ -605,7 +625,7 @@ html.dark #themeBtn .moon {
 .background {
 	position: absolute;
 	height: 100%;
-	width: calc(100% + var(--info-padding) * 2);
+	width: 100%;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
