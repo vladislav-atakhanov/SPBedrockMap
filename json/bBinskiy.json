@@ -1,0 +1,14 @@
+{
+    "type": "base",
+    "mayor": "Binskiy",
+    "branch": "green",
+    "nether": {
+        "x": "-877",
+        "z": "-48"
+    },
+    "overworld": {
+        "x": "-7008",
+        "y": "63",
+        "z": "-391"
+    }
+}
