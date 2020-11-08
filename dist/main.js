@@ -25,7 +25,6 @@ const
 
 let darkTheme = localStorage.getItem("darkTheme")
 if (darkTheme == "true") {html.classList.add("dark")}
-
 function switchTheme()
 {
 	html.classList.toggle("dark")

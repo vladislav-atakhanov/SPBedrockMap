@@ -38,7 +38,6 @@ for file in files:
 			type = "game"
 		elif "cafe" in data["name"].lower() or "кафе" in data["name"].lower():
 			type = "cafe"
-
 	id = file.replace(".json", "")
 
 	# Dot & roads to dot

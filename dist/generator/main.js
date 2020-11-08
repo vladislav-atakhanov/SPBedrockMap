@@ -134,6 +134,7 @@ function changeType(txt)
 	{
 		document.getElementById("name").style.display = "block"
 		document.getElementsByClassName("residents")[0].style.display = "block"
+		document.getElementById("mayor").getElementsByTagName("span")[0].innerText = "Мэр города"
 		document.getElementById("title").classList.remove("optional")
 		if (txt == "other") {
 			document.getElementsByClassName("residents")[0].style.display = "none"

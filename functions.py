@@ -40,8 +40,6 @@ def get_city(name, branch, x, z, type, id, icon=""):
 			r += f'<img class="dot__icon" src="pictures/game.svg">'
 		elif type == "cafe":
 			r += f'<img class="dot__icon" src="pictures/cafe.svg">'
-
-
 	r += '</button>'
 	return r
 
