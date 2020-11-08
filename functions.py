@@ -26,13 +26,22 @@ def get_city(name, branch, x, z, type, id, icon=""):
 		if type != "hub":
 			r += " dot--" + branch
 
-	if icon != "":
+	if icon != "" or type == "bar" or type == "game" or type == "cafe":
 		r += " dot--icon"
 	r += f'" title="{name}" data-x="{x}" data-z="{z}" tabindex="-1">'
 	if icon != "":
 		r += f'<img class="dot__icon" src="pictures/{id}/icon.{icon}">'
 	else:
-		r += name[0].upper() if type == "city" else ""
+		if type == "city":
+			r += name[0].upper()
+		elif type == "bar":
+			r += f'<img class="dot__icon" src="pictures/bar.svg">'
+		elif type == "game":
+			r += f'<img class="dot__icon" src="pictures/game.svg">'
+		elif type == "cafe":
+			r += f'<img class="dot__icon" src="pictures/cafe.svg">'
+
+
 	r += '</button>'
 	return r
 
@@ -66,10 +75,7 @@ def get_title(name, mayor, type):
 	if type == "hub":
 		return f'<div class="title"><h2>{name}</h2><p><b>{mayor}</b></p></div>'
 	else:
-		if mayor == "":
-			return f'<div class="title"><h2>{name}</h2></div>'
-		else:
-			return f'<div class="title"><h2>{name}</h2><p>Принадлежит <b>{mayor}</b></p></div>'
+		return f'<div class="title"><h2>{name}</h2><p>Владелец <b>{mayor}</b></p></div>'
 
 def get_description(text):
 	return f'<p class="description">{text}</p>'

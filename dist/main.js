@@ -25,6 +25,7 @@ const
 
 let darkTheme = localStorage.getItem("darkTheme")
 if (darkTheme == "true") {html.classList.add("dark")}
+
 function switchTheme()
 {
 	html.classList.toggle("dark")
@@ -103,6 +104,7 @@ let prevDiff = 0
 map.wrapper.onpointerdown = function(e)
 {
 	fingers.push(e)
+	let isNotZoom = true;
 	let shiftX = e.pageX - map.x
 	let shiftY = e.pageY - map.y
 
@@ -116,7 +118,7 @@ map.wrapper.onpointerdown = function(e)
 		}
 
 		// Swipe
-		if (fingers.length == 1)
+		if (fingers.length == 1 && isNotZoom)
 		{
 			map.x = e.pageX - shiftX
 			map.y = e.pageY - shiftY
@@ -124,6 +126,7 @@ map.wrapper.onpointerdown = function(e)
 		// Zoom
 		else if (fingers.length == 2)
 		{
+			isNotZoom = false
 			const curDiff = Math.abs(
 				fingers[0].clientY - fingers[1].clientY
 			)
@@ -195,8 +198,13 @@ function updateMap()
 {
 	if (map.scale > 2) {map.scale = 2}
 	if (map.scale < 0.1) {map.scale = 0.1}
-	map.el.style.transformOrigin = `calc(50% - ${map.x}px) calc(50% - ${map.y}px)`
-	map.el.style.transform = `translate(${map.x}px, ${map.y}px) scale(${map.scale})`
+
+	const 
+		k = 1 / map.scale,
+		x = map.x * k,
+		y = map.y * k 
+	map.el.style.transformOrigin = `calc(50% - ${x}px) calc(50% - ${y}px)`
+	map.el.style.transform = `translate(${x}px, ${y}px) scale(${map.scale})`
 	scaleRange.value = map.scale
 }
 

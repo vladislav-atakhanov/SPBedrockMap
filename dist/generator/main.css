@@ -92,6 +92,10 @@ label {
 	margin: 10px 0;
 	cursor: pointer;
 }
+#type label {
+	margin: 0;
+	padding: 0;
+} 
 textarea {
 	display: block;
 	width: 100%;
