@@ -91,10 +91,11 @@ label {
 	padding: 5px;
 	margin: 10px 0;
 	cursor: pointer;
+	position: relative;
 }
 #type label {
 	margin: 0;
-	padding: 0;
+	padding: 2px 0;
 } 
 textarea {
 	display: block;
@@ -189,7 +190,6 @@ textarea {
 	overflow: hidden;
 }
 .group label {
-	position: relative;
 	display: inline-block;
 	height: 1em;
 	width: 1em;
@@ -197,32 +197,88 @@ textarea {
 	margin: 0;
 	margin-right: 0.2em;
 }
-.group span {
+.radio, .checkbox {
 	position: absolute;
 	width: 1em;
 	height: 1em;
 	background-color: var(--gray);
-	left: 0;
-	top: 0;
+	margin-left: 3em;
+	top: calc(50% - 0.5em);
 	border-radius: 0.5em;
 	opacity: 0.75;
 	transition: 0.25s all;
+	overflow: hidden;
 }
-.group span:hover {
+.radio:hover {
 	transform: scale(1.1);
 }
-.group input:focus + span {
+input:focus + .radio {
 	transform: scale(1.5);
 }
-.group input:checked + span {
+.radio:before, .checkbox:before {
+	content: "";
+	transition: opacity 0.25s ease;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	height: 50%;
+	border-radius: 50%;
+	background-color: var(--text-color);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+input:checked + .radio:before {
+	opacity: 1;
+}
+.checkbox {
+	overflow: visible;
+}
+.checkbox:before {
+	top: 0;
+	left: -0.2em;
+	transform: translate(0.3em, 0.3em) rotate(45deg);
+	height: 0.3em;
+	width: 0.4em;
+	border-radius: 0;
+	border-top-left-radius: 0.2em;
+	border-bottom-left-radius: 0.2em;
+	transition: all 0.25s ease;
+	opacity: 0;
+}
+.checkbox:after {
+	content: "";
+	transition: all 0.25s ease;
+	position: absolute;
+	top: 0;
+	opacity: 0;
+	left: 0;
+	background-color: var(--text-color);
+	height: 0.3em;
+	width: 0.9em;
+	border-radius: 0.2rem;
+	border-top-left-radius: 0;
+	transform: translate(0.3em, 0.3em) rotate(-45deg);
+}
+input:checked + .checkbox:before,
+input:checked + .checkbox:after {
+	opacity: 1;
+}
+.group .radio {
+	margin: 0;
+}
+.group .radio:before {
+	content: none;
+}
+.group input:checked + .radio {
 	opacity: 1;
 	transform: scale(1.5);
 	border-radius: 3px;
 }
-.group .red {background-color: #f00}
-.group .green {background-color: #0f0}
-.group .blue {background-color: #00f}
-.group .yellow {background-color: #ee0}
+.radio--red {background-color: #f00}
+.radio--green {background-color: #0f0}
+.radio--blue {background-color: #00f}
+.radio--yellow {background-color: #ee0}
 
 
 span.gray {

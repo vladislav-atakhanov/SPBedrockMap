@@ -38,19 +38,23 @@
 				<div id="type">
 					<label onclick="changeType('city')">
 						Город
-						<input type="radio" value="city" name="type" checked>
+						<input type="radio" value="city" name="type" class="vissualy-hidden" checked>
+						<span class="radio"></span>
 					</label>
 					<label onclick="changeType('end')">
 						Портал в энд
-						<input type="radio" value="end" name="type">
+						<input type="radio" value="end" name="type" class="vissualy-hidden">
+						<span class="radio"></span>
 					</label>
 					<label onclick="changeType('base')">
 						База
-						<input type="radio" value="base" name="type">
+						<input type="radio" value="base" name="type" class="vissualy-hidden">
+						<span class="radio"></span>
 					</label>
 					<label onclick="changeType('other')">
 						Другое
-						<input type="radio" value="other" name="type">
+						<input type="radio" value="other" name="type" class="vissualy-hidden">
+						<span class="radio"></span>
 					</label>
 				</div>
 
@@ -70,23 +74,31 @@
 					<div class="group">
 						<label>
 							<input name="branch" type="radio" value="red" area-label="Красный">
-							<span class="red"></span>
+							<span class="radio radio--red"></span>
 						</label>
 						<label>
 							<input name="branch" type="radio" value="green" area-label="Зеленый">
-							<span class="green"></span>
+							<span class="radio radio--green"></span>
 						</label>
 						<label>
 							<input name="branch" type="radio" value="blue" area-label="Синий">
-							<span class="blue"></span>
+							<span class="radio radio--blue"></span>
 						</label>
 						<label>
 							<input name="branch" type="radio" value="yellow" area-label="Желтый">
-							<span class="yellow"></span>
+							<span class="radio radio--yellow"></span>
 						</label>
 					</div>
-					<label>Дорога с другой ветки <input type="checkbox" id="subbranch"></label>
-					<label>Скриншоты <input type="checkbox" id="pictures"></label>
+					<label>
+						Дорога с другой ветки
+						<input type="checkbox" class="vissualy-hidden" id="subbranch">
+						<span class="checkbox"></span>
+					</label>
+					<label>
+						Скриншоты
+						<input type="checkbox" class="vissualy-hidden" id="pictures">
+						<span class="checkbox"></span>
+					</label>
 				</fieldset>
 			</div>
 
@@ -150,14 +162,15 @@
 			</div>
 			<div class="help__item">
 				<p>Если портал находится в сторону от хп и нужно повернуть от хп, то указывать координату ответвления от главной хп и координату ответвления к порталу.</p>
-				<p>Например, мой портал находися на "-450 -250", а хп начинается с "-500" - я укажу "-500 -250".</p>
+				<p>Например, мой портал находися на «-450 -250», а хп начинается с «-500» - я укажу «-500 -250».</p>
 			</div>
 			<div class="help__item">
 				<p>После копирования(копируется автоматически), Вы должны скинуть скопированный текст мне.</p>
 				<p>Поставив галочку со скриншотами, Вы должны также скинуть мне эти скриншоты. Соотношение сторон скриншота <span class="redText"><u>16:9</u></span></p>
 			</div>
 			<div class="help__item">
-				<p>Все кавычки-палочки "", заменяются на ковычки-ёлочки «»</p>
+				<p>Все кавычки-палочки "" заменяются на ковычки-ёлочки «»</p>
+				<p>Для ускорения добавления иконки для точки, после доната напишите мне в лс</p>
 			</div>
 			<div class="help_item">
 				<a href="../">Вернуться к карте</a>
