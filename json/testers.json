@@ -1,0 +1,17 @@
+{
+    "name": "<u>Город тестеров<br>карты</u>",
+    "mayor": "eloh1mZ",
+    "branch": "green",
+    "nether": {
+        "x": "-3126",
+        "z": "100"
+    },
+    "overworld": {
+        "x": "-25011",
+        "y": "65",
+        "z": "819"
+    },
+    "description": "Набор <span class='red'>открыт</span>",
+    "residents": ["<span class='blue'><a href='https://vk.com/eloh1mz'>eloh1mZ</a></span>", "<span class='red' style='background-color: var(--text-color); color: var(--bg-color)'>Teotechnic</span>"],
+    "icon": "svg"
+}

@@ -19,27 +19,26 @@ def is_image_optimized(img, file, sizes):
 
 def get_city(name, branch, x, z, type, id, icon=""):
 	r = f'<button id="{id}" class="dot '
-	if type == "city":
-		r += "dot--" + branch
-	else:
-		r += "dot--" + type
-		if type != "hub":
-			r += " dot--" + branch
+	r += "dot--" + type
+	if type != "hub":
+		r += " dot--" + branch
+	if type != "hub" and type != "city" and type != "base":
+		icon = type
 
-	if icon != "" or type == "bar" or type == "game" or type == "cafe":
+	if icon != "":
 		r += " dot--icon"
 	r += f'" title="{name}" data-x="{x}" data-z="{z}" tabindex="-1">'
-	if icon != "":
-		r += f'<img class="dot__icon" src="pictures/{id}/icon.{icon}">'
-	else:
-		if type == "city":
-			r += name[0].upper()
-		elif type == "bar":
-			r += f'<img class="dot__icon" src="pictures/bar.svg">'
-		elif type == "game":
-			r += f'<img class="dot__icon" src="pictures/game.svg">'
-		elif type == "cafe":
-			r += f'<img class="dot__icon" src="pictures/cafe.svg">'
+	if icon != "" and type == "city":
+		r += f'<img class="dot__icon" src="pictures/{id}/icon.{icon}" alt="name">'
+	elif type == "city":
+		r += name[0].upper()
+	elif type != "base" and type != "hub":
+		r += f'<img class="dot__icon" src="pictures/{type}.'
+		if type == "end":
+			r += f'png" alt="{name}">'
+		else:
+			r += f'svg" alt="{name}">'
+
 	r += '</button>'
 	return r
 
@@ -57,23 +56,34 @@ def _get_picture(img, file, name, className="background"):
 		optimize(img, f"./json/{file}/", f"./dist/pictures/{file}/", sizes)
 
 	img = str(img).split('.')[0]
-	return f'<picture class="{className}"><source srcset="pictures/{file}/{img}/400.webp 400w, pictures/{file}/{img}/800.webp 800w, pictures/{file}/{img}/1200.webp 1200w" type="image/webp"> <img src="pictures/{file}/{img}/400.jpg" alt="{name}" srcset="pictures/{file}/{img}/400.jpg 400w, pictures/{file}/{img}/800.jpg 800w, pictures/{file}/{img}/1200.jpg 1200w"> </picture>'
+	return f'<picture class="{className}"><source srcset="pictures/{file}/{img}/400.webp 400w, pictures/{file}/{img}/800.webp 800w, pictures/{file}/{img}/1200.webp 1200w" type="image/webp"><img src="pictures/{file}/{img}/400.jpg" alt="{name}" srcset="pictures/{file}/{img}/400.jpg 400w, pictures/{file}/{img}/800.jpg 800w, pictures/{file}/{img}/1200.jpg 1200w" data-src="pictures/{file}/{img}/400.jpg"> </picture>'
 
 def get_pictures(file, name):
+
+	content = ""
+
 	r = '<div class="info__image" onclick="next(this)">'
 	for pic in os.listdir(path=f"./json/{file}"):
 		if (not pic.startswith("icon")):
-			r += _get_picture(pic, file, name)
+			content += "`" + _get_picture(pic, file, name) + "`,\n"
+
+	f = open("dist/pictures.js", "a", encoding="utf-8")
+	f.write(f"{file}: [\n" + content[:-2] + "\n],\n")
+	f.close
 	r += '</div><div class="info__text">'
 	return r
 
 def get_title(name, mayor, type):
 	if type == "city":
 		return f'<div class="title"><h2>{name}</h2><p>Мэр: <b>{mayor}</b></p></div>'
-	if type == "hub":
+	elif type == "hub":
 		return f'<div class="title"><h2>{name}</h2><p><b>{mayor}</b></p></div>'
-	else:
+	elif type == "base":
+		return f'<div class="title"><h2>{name} {mayor}</h2></div>'
+	elif mayor != "":
 		return f'<div class="title"><h2>{name}</h2><p>Владелец <b>{mayor}</b></p></div>'
+	else:
+		return f'<div class="title"><h2>{name}</h2></div>'
 
 def get_description(text):
 	return f'<p class="description">{text}</p>'

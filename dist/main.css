@@ -88,7 +88,7 @@ button {
 	position: relative;
 }
 .dot {
-	--size: 3rem;
+	--size: 2rem;
 	display: block;
 	padding: 0;
 	width: var(--size);
@@ -114,18 +114,6 @@ button {
 	text-align: center;
 	overflow: hidden;
 }
-.dot:before {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 1;
-	width: calc(var(--size) - 2rem);
-	height: calc(var(--size) - 2rem);
-	background-color: var(--bg-color);
-	border-radius: 50%;
-	transition: all 0.25s;
-}
 .dot:hover {
 	transform: scale(1.1);
 }
@@ -142,39 +130,28 @@ button {
 .dot.selected {
 	transform: scale(1.5);
 }
-.dot--icon.selected {
-	background-color: transparent;
-}
-.dot__icon {
-	max-width: 100%;
-}
-#hub.selected {
+.dot--hub.selected {
 	transform: scale(1.1);
 }
-#hub:before {
+.dot--hub:before {
 	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	width: calc(var(--size) - 2rem);
+	height: calc(var(--size) - 2rem);
+	background-color: var(--bg-color);
+	border-radius: 50%;
+	transition: all 0.25s;
 }
-#hub {
+.dot--hub {
 	--size: 6rem;
 	color: var(--text-color);
 }
-.dot--end {
-	--size: 2rem;
-
-	box-shadow: none;
-	background-color: #88C35A;
-}
-.dot--base {
-	--size: 2rem;
-}
-.dot--end:before {
-	content: '';
-	width: 0.4rem;
-	height: 1rem;
-	background-color: #1B2B10;
-}
-.dot--end.selected:before {
-	background-color: #000;
+.dot--city {
+	--size: 3rem;
 }
 .dot--icon {
 	background-color: transparent;
@@ -189,12 +166,12 @@ button {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	max-width: 100%;
-}
-
-.dot--bar, .dot--game, .dot--cafe {
-	--size: 2rem;
 	overflow: visible;
 }
+.dot--end .dot__icon {
+	width: 100%;
+}
+
 .info {
 	position: fixed;
 	padding: var(--info-padding);
@@ -244,7 +221,21 @@ html.dark .info {
 	overflow: hidden;
 	border-radius: var(--info-padding);
 	z-index: -1;
+	background-color: rgb(120,120,120);
+	animation: skeleton	0.8s ease infinite;
 }
+@keyframes skeleton {
+	0% {
+		background-color: rgb(120,120,120);
+	}
+	30% {
+		background-color: rgb(136,136,136);
+	}
+	100% {
+		background-color: rgb(120,120,120);
+	}
+}
+
 .info__image picture {
 	opacity: 0;
 	transition: 0.5s opacity linear;
@@ -342,6 +333,7 @@ html.dark .info {
 	z-index: 1;
 }
 .arrow {
+	display: block;
 	position: absolute;
 	top: var(--info-padding);
 	z-index: 10;
@@ -354,7 +346,6 @@ html.dark .info {
 .arrow--right {
 	display: block;
 	color: inherit;
-	transform: translate(-50%, 50%);
 }
 .info_block.b .arrow {
 	display: block;
@@ -501,12 +492,13 @@ html.dark .info {
 	transform: translate(-50%, -50%) rotate(90deg);
 }
 .road {
-	--size: 1rem;
+	--size: 0.5rem;
 	position: absolute;
 	border-radius: 0.5rem;
 	top: 50%;
 	left: 50%;
 	z-index: -1;
+	opacity: 0.75;
 }
 .road--red {
 	background-color: var(--red);
@@ -528,9 +520,9 @@ html.dark .info {
 	width: var(--size);
 	margin-left: calc(var(--size) / -2);
 }
-.road--end, .road--base {
-	--size: 0.5rem;
-	opacity: 0.75;
+.road--city {
+	--size: 1rem;
+	opacity: 1;
 }
 .branch--x {
 	background: linear-gradient(90deg, var(--green) 50%, var(--blue) 50%);
@@ -610,11 +602,6 @@ html.dark #themeBtn .moon {
 	width: 60px;
 	height: 60px;
 }
-@media (min-width: 768px) {
-	#courtBtn {
-		left: calc(var(--info-padding) + 5vw);
-	}
-}
 #scaleRange {
 	position: fixed;
 	top: calc(var(--info-padding) + 25px);
@@ -632,7 +619,7 @@ html.dark #themeBtn .moon {
 	transition: transform 0.25s;
 }
 .background img {
-	width: 100%;
+	height: 100%;
 }
 .description {
 	margin-top: 40px;

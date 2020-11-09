@@ -7,6 +7,11 @@ dots_info = ""
 dots_block = ""
 
 files = os.listdir(path="./json/")
+
+f = open("dist/pictures.js", "w")
+f.write("images = {\n")
+f.close()
+
 for file in files:
 	if not file.endswith(".json"): continue
 
@@ -38,6 +43,13 @@ for file in files:
 			type = "game"
 		elif "cafe" in data["name"].lower() or "кафе" in data["name"].lower():
 			type = "cafe"
+		elif "school" in data["name"].lower() or "школа" in data["name"].lower():
+			type = "school"
+		elif "hospital" in data["name"].lower() or "больница" in data["name"].lower():
+			type = "hospital"
+		elif "shop" in data["name"].lower() or "магазин" in data["name"].lower():
+			type = "shop"
+
 	id = file.replace(".json", "")
 
 	# Dot & roads to dot
@@ -54,7 +66,7 @@ for file in files:
 		dots_block += get_road(data["subbranch"], data["nether"]["x"], data["nether"]["z"], type)
 
 	# Information about dot
-	dots_info +=  f'<div class="dot__info"' + (' style="opacity:1; z-index: 1" id="hubInfo"' if type == "hub" else "") + '>'
+	dots_info +=  f'<div class="dot__info" data-id="{id}"' + (' style="opacity:1; z-index: 1" id="hubInfo"' if type == "hub" else "") + '>'
 
 
 	# Pictures
@@ -88,6 +100,11 @@ for file in files:
 with open("src.html", "r", encoding='utf-8') as f:
 	src = f.read()
 	f.close()
+
+f = open("dist/pictures.js", "a")
+f.write("}")
+f.close()
+
 with open("./dist/index.html", "w", encoding='utf-8') as f:
 	f.write(src.replace("<dots_info>", dots_info).replace("<dots_block>", dots_block))
 	f.close()
