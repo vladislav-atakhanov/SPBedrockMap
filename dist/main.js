@@ -5,7 +5,9 @@ const
 		wrapper: document.getElementById('mapWrapper'),
 		scale: 0.5,
 		x: 0,
-		z: 0
+		z: 0,
+		savedX: 0,
+		savedZ: 0 
 	},
 	info =
 	{
@@ -26,7 +28,7 @@ dotInfos = document.getElementsByClassName('dot__info')
 dots = {}
 for (let i = 0; i < dotEls.length; i++)	
 {
-	dots[dotEls[i].id] =
+	dots[dotEls[i].getAttribute("href").slice(1)] =
 	{
 		title: dotEls[i].title,
 		el: dotEls[i],
@@ -49,10 +51,12 @@ function switchTheme()
 	else {localStorage.setItem("darkTheme", "true")}
 }
 
+map.el.style.transformOrigin = `calc(50% - ${map.x}px) calc(50% - ${map.z}px)`
+map.el.style.transform = `translate(${map.x}px, ${map.z}px) scale(${map.scale})`
 let selectedDot = 0;
 for (let i = 0; i < dotInfos.length; i++)
 {
-	if (dotInfos[i] == document.getElementById("hubInfo")) {selectedDot = i}
+	if (dotInfos[i] == document.getElementById("hub")) {selectedDot = i}
 }
 for (let i = 0; i < dotEls.length; i++)
 {
@@ -73,13 +77,12 @@ for (let i = 0; i < dotEls.length; i++)
 
 		if (selectedDot == i) {updateInfo(1, "+")}
 		if (selectedDot != i) {updateInfo(1, "=")}
-		showImage(dotEls[i].id, 0)
+		showImage(dotEls[i].getAttribute("href").slice(1), 0)
 		selectedDot = i
-	}, {passive: true})
+	})
 }
 function showImage(id, i)
 {
-
 	function isLoaded(image)
 	{
 		for (let i = 0; i < dots[id].loadedImages.length; i++)
@@ -112,14 +115,14 @@ function hideImage(id, i)
 }
 for (let i = 0; i < branches.length; i++)
 {
-	branches[i].style.width = `calc(${branches[i].dataset.w / 20 + 10}rem + 50%)`
+	branches[i].setAttribute("style", `--size: ${branches[i].dataset.w / 20 + 10}rem`)
 }
 
 for (let i = 0; i < roads.length; i++)
 {
 	if (roads[i].classList.contains("road--red") || roads[i].classList.contains("road--yellow"))
 	{
-		roads[i].style.width = `${Math.abs(roads[i].dataset.x) / 20}rem`
+		roads[i].style.height = `${Math.abs(roads[i].dataset.x) / 20}rem`
 		roads[i].style.top = `calc(${roads[i].dataset.z / 20}rem + 50%)`
 		if (roads[i].dataset.x < 0)
 		{
@@ -128,7 +131,7 @@ for (let i = 0; i < roads.length; i++)
 	}
 	else if (roads[i].classList.contains("road--green") || roads[i].classList.contains("road--blue"))
 	{
-		roads[i].style.height = `${Math.abs(roads[i].dataset.z) / 20}rem`
+		roads[i].style.width = `${Math.abs(roads[i].dataset.z) / 20}rem`
 		roads[i].style.left = `calc(${roads[i].dataset.x / 20}rem + 50%)`
 		if (roads[i].dataset.z < 0)
 		{
@@ -142,9 +145,8 @@ scaleRange.value = map.scale
 function changeScale(e)
 {
 	map.scale = parseFloat(scaleRange.value)
-	updateMap()
+	scaleMap()
 }
-updateMap()
 
 // Input handler
 let fingers = []
@@ -170,6 +172,7 @@ map.wrapper.addEventListener("pointerdown", function(e)
 		{
 			map.x = e.pageX - shiftX
 			map.z = e.pageY - shiftY
+			moveMap()
 		}
 		// Zoom
 		else if (fingers.length == 2)
@@ -183,8 +186,8 @@ map.wrapper.addEventListener("pointerdown", function(e)
 				map.scale += (curDiff - prevDiff) / 100
 			}
 			prevDiff = curDiff;
+			scaleMap()
 		}
-		updateMap()
 	}, {passive: true})
 	map.wrapper.addEventListener("pointerup", pointerUp, {passive: true})
 	map.wrapper.addEventListener("pointerenter", pointerUp, {passive: true})
@@ -210,17 +213,17 @@ map.wrapper.addEventListener("mousewheel", function(e)
 	map.el.style.transition = "none"
 	let delta = e.deltaY || e.detail || e.wheelDelta
 	map.scale += (delta < 0) ? 0.05 : -0.05
-	updateMap()
+	scaleMap()
 }, {passive: true})
 
 // toDefault
 function toDefault(e)
 {
-	map.scale = (window.innerWidth >= 768) ? 1 : 0.5
+	map.scale = 0.5
 	map.x = 0
 	map.z = 0
 	map.el.style.transition = "transform 0.25s linear"
-	updateMap()
+	moveMap()
 	setTimeout(function() {map.el.style.transition = "transform 0s linear"}, 250)
 }
 
@@ -243,36 +246,21 @@ function updateInfo(n, mode="=")
 	info.openBtn.classList.add(classes[info.currentState])
 }
 
-function updateMap()
-{
+function scaleMap() {
 	if (map.scale > 2) {map.scale = 2}
 	if (map.scale < 0.1) {map.scale = 0.1}
-
-	const 
-		k = 1 / map.scale,
-		x = map.x * k,
-		y = map.z * k 
-	map.el.style.transformOrigin = `calc(50% - ${x}px) calc(50% - ${y}px)`
-	map.el.style.transform = `translate(${x}px, ${y}px) scale(${map.scale})`
+	map.el.style.transform = `translate(${map.savedX}px, ${map.savedZ}px) scale(${map.scale})`
 	scaleRange.value = map.scale
+	map.x = map.scale * map.savedX
+	map.z = map.scale * map.savedZ
+}
+function moveMap() {
+	map.savedX = map.x / map.scale
+	map.savedZ = map.z / map.scale
+	map.el.style.transformOrigin = `calc(50% - ${map.savedX}px) calc(50% - ${map.savedZ}px)`
+	map.el.style.transform = `translate(${map.savedX}px, ${map.savedZ}px) scale(${map.scale})`
 }
 
-
-// Keyboard events
-document.addEventListener("keydown", function(e)
-{
-	if (e.keyCode == 65 || e.keyCode == 37) {map.x += 20}
-	if (e.keyCode == 87 || e.keyCode == 38) {map.z += 20}
-	if (e.keyCode == 68 || e.keyCode == 39) {map.x -= 20}
-	if (e.keyCode == 83 || e.keyCode == 40) {map.z -= 20}
-
-	if (e.keyCode == 107 || e.keyCode == 187) {map.scale += 0.1}
-	if (e.keyCode == 109 || e.keyCode == 189) {map.scale -= 0.1}
-
-	map.el.style.transition = "all 0.25s linear"
-	updateMap()
-	setTimeout(function() {map.el.style.transition = "all 0s linear"}, 250)
-}, {passive: true})
 
 info.el.addEventListener("click", function(e) {updateInfo(1, "+")}, {passive: true})
 const court = "testers"
@@ -285,14 +273,16 @@ function showDot(id)
 		map.z = -dots[id].el.dataset.z * 1.4
 		map.scale = 1.75
 		map.el.style.transition = "all 0.25s linear"
-		updateMap()
+
+		moveMap()
+
 		setTimeout(function() {map.el.style.transition = "all 0s linear"}, 250)
 	}
 }
 
 function next(el)
 {
-	const id = el.parentNode.dataset.id
+	const id = el.parentNode.id
 	const ch = el.children
 
 	hideImage(id, dots[id].selectedImage)
@@ -303,4 +293,10 @@ function openInfo()
 {
 	showImage("hub", dots.hub.selectedImage)
 	updateInfo(1)
+}
+
+const hash = document.location.hash.slice(1)
+if (hash && dots[hash]) {
+	showDot(hash)
+	dots[hash].el.click()
 }

@@ -36,37 +36,27 @@ for file in files:
 	elif type == "base":
 		data["name"] = "База"
 
-	if type == "other":
-		if "bar" in data["name"].lower() or "бар" in data["name"].lower():
-			type = "bar"
-		elif "game" in data["name"].lower() or "игра" in data["name"].lower():
-			type = "game"
-		elif "cafe" in data["name"].lower() or "кафе" in data["name"].lower():
-			type = "cafe"
-		elif "school" in data["name"].lower() or "школа" in data["name"].lower():
-			type = "school"
-		elif "hospital" in data["name"].lower() or "больница" in data["name"].lower():
-			type = "hospital"
-		elif "shop" in data["name"].lower() or "магазин" in data["name"].lower():
-			type = "shop"
-
 	id = file.replace(".json", "")
 
-	# Dot & roads to dot
+	# Dot
 	if "icon" in data:
 		if f'icon.{data["icon"]}' not in os.listdir(path=f"./dist/pictures/{id}/"):
 			print(f'    +icon.{data["icon"]}')
 			copyfile(f'./json/{id}/icon.{data["icon"]}', f'./dist/pictures/{id}/icon.{data["icon"]}')
 		dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, data["icon"])
+	elif "marks" in data:
+		dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, "", data["marks"][0])
 	else:
 		dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id)
+	
+	# Road to dot
 	if type != "hub":
 		dots_block += get_road(data["branch"], data["nether"]["x"], data["nether"]["z"], type)
 	if "subbranch" in data:
 		dots_block += get_road(data["subbranch"], data["nether"]["x"], data["nether"]["z"], type)
 
 	# Information about dot
-	dots_info +=  f'<div class="dot__info" data-id="{id}"' + (' style="opacity:1; z-index: 1" id="hubInfo"' if type == "hub" else "") + '>'
+	dots_info +=  f'<div class="dot__info" id="{id}"' + (' style="opacity:1; z-index: 1"' if type == "hub" else "") + '>'
 
 
 	# Pictures
@@ -75,6 +65,10 @@ for file in files:
 
 	# Title
 	dots_info += get_title(data["name"], data["mayor"], type=type)
+
+	# Marks
+	if "marks" in data:
+		dots_info += get_marks(data["marks"][:3])
 
 	# Coords
 	dots_info += f'<div class="coords"><h3>Координаты</h3>'

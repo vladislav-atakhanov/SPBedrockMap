@@ -67,6 +67,12 @@ fieldset {
 	transition: border-color 0.25s ease;
 	margin-bottom: 10px;
 }
+div > fieldset {
+	margin-top: 20px;
+}
+div > fieldset:first-child {
+	margin-top: 0;
+}
 .optional, .optional * {
 	border-color: #8c8!important;
 }

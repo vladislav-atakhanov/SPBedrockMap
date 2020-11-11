@@ -1,6 +1,16 @@
 import os, shutil
 from optimizer import optimize
 
+marks_list = {
+	"кафе": "cafe",
+	"бар": "bar",
+	"игра": "game",
+	"больница": "hospital",
+	"церковь": "church",
+	"студия": "studio",
+	"магазин": "shop"
+}
+
 def is_image_optimized(img, file, sizes):
 	img = img.split('.')[0]
 	if file not in os.listdir(path="./dist/pictures/"):
@@ -17,29 +27,25 @@ def is_image_optimized(img, file, sizes):
 
 	return True
 
-def get_city(name, branch, x, z, type, id, icon=""):
-	r = f'<button id="{id}" class="dot '
+def get_city(name, branch, x, z, type, id, icon="", mark=""):
+	r = f'<a href="#{id}" class="dot '
 	r += "dot--" + type
 	if type != "hub":
 		r += " dot--" + branch
-	if type != "hub" and type != "city" and type != "base":
-		icon = type
 
-	if icon != "":
+	if icon != "" or mark != "":
 		r += " dot--icon"
+
 	r += f'" title="{name}" data-x="{x}" data-z="{z}" tabindex="-1">'
 	if icon != "" and type == "city":
-		r += f'<img class="dot__icon" src="pictures/{id}/icon.{icon}" alt="name">'
+		r += f'<img class="dot__icon" src="pictures/{id}/icon.{icon}" alt="{name}">'
+	elif mark != "" and mark in marks_list:
+		r += f'<img class="dot__icon" src="icons/{marks_list[mark]}.svg" alt="{name}">'
 	elif type == "city":
 		r += name[0].upper()
 	elif type != "base" and type != "hub":
-		r += f'<img class="dot__icon" src="pictures/{type}.'
-		if type == "end":
-			r += f'png" alt="{name}">'
-		else:
-			r += f'svg" alt="{name}">'
-
-	r += '</button>'
+		r += f'<img class="dot__icon" src="icons/{type}.svg" alt="{name}">'
+	r += '</a>'
 	return r
 
 def get_road(branch, x, z, type):
@@ -87,6 +93,13 @@ def get_title(name, mayor, type):
 
 def get_description(text):
 	return f'<p class="description">{text}</p>'
+
+def get_marks(marks):
+	r = '<ul class="marks">'
+	for mark in marks:
+		r += f'<li class="marks__item">{mark}</li>'
+	r += "</ul>"
+	return r
 
 def get_residents(residents):
 	r = '<div class="residents"><h3>Жители</h3><ul>'

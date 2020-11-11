@@ -1,11 +1,20 @@
+@font-face {
+    font-family: 'Minecraft';
+    src: url('Minecraft.woff2') format('woff2'),
+		 url('Minecraft.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 html {
 	font-size: 16px;
 	--bg-color: #fff;
-	--text-color: #000;
-	--red: #f00;
-	--green: #0f0;
-	--blue: #00f;
-	--yellow: #ee0;
+	--text-color: #222;
+	--red: #ef161e;
+	--green: #2dbe2c;
+	--blue: #0078be;
+	--yellow: #ffd702;
 
 	--info-padding: 10px;
 }
@@ -19,10 +28,6 @@ html.theme-in-transition *:after {
 html.dark {
 	--bg-color: #000;
 	--text-color: #ddd;
-	--red: #f00;
-	--green: #0f0;
-	--blue: #00f;
-	--yellow: #ee0;
 }
 html.dark body {
 	/*font-size: 18px;*/
@@ -98,7 +103,6 @@ button {
 
 	margin-left: calc(var(--size) / -2);
 	margin-top: calc(var(--size) / -2);
-	border-radius: 50%;
 	border: none;
 
 	outline: none;
@@ -106,13 +110,14 @@ button {
 	transition: all 0.5s ease;
 	z-index: 2;
 
-	background-color: currentColor;
-	color: var(--bg-color);
 	font-weight: bold;
 	font-size: 2rem;
 	line-height: 3rem;
 	text-align: center;
 	overflow: hidden;
+	border-radius: calc(var(--size) / 2);
+	color: var(--bg-color);
+	text-decoration: none;
 }
 .dot:hover {
 	transform: scale(1.1);
@@ -130,43 +135,43 @@ button {
 .dot.selected {
 	transform: scale(1.5);
 }
-.dot--hub.selected {
-	transform: scale(1.1);
+.dot--hub {
+	--size: 6rem;
+	background-color: var(--text-color);
 }
 .dot--hub:before {
-	content: '';
+	content: "";
+	width: 4rem;
+	height: 4rem;
+	border-radius: 2rem;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	z-index: 1;
-	width: calc(var(--size) - 2rem);
-	height: calc(var(--size) - 2rem);
 	background-color: var(--bg-color);
-	border-radius: 50%;
-	transition: all 0.25s;
 }
-.dot--hub {
-	--size: 6rem;
-	color: var(--text-color);
+.dot--hub.selected {
+	transform: scale(1.1);
+}
+.dot--icon {
+	border-radius: 0;
+	background-color: transparent;
 }
 .dot--city {
 	--size: 3rem;
-}
-.dot--icon {
-	background-color: transparent;
-	border-radius: 0;
-}
-.dot--icon.selected {
-	background-color: transparent;
 }
 .dot__icon {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	max-width: 100%;
-	overflow: visible;
+	width: 100%;
+	user-drag: none; 
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 .dot--end .dot__icon {
 	width: 100%;
@@ -248,6 +253,20 @@ html.dark .info {
 }
 .info.c .info__text {
 	margin-top: 65%;
+}
+.marks {
+	list-style: none;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	padding-left: 0;
+}
+.marks__item {
+	color: var(--blue);
+	background-color: rgba(0, 120, 190, 0.25);
+	padding: 2px 4px;
+	margin-left: 2px;
+	border-radius: 4px;
 }
 .info h3, .coords p {
 	margin: 5px 0;
@@ -480,16 +499,35 @@ html.dark .info {
 }
 .branch {
 	position: absolute;
-	height: 1rem;
 	z-index: 1;
 	border-radius: 0.5rem;
 	left: 50%;
 	top: 50%;
-	transform: translate(-50%, -50%);
+	background-position: 50% 50%;
 }
 .branch--z {
-	background: linear-gradient(90deg, var(--yellow) 50%, var(--red) 50%);
-	transform: translate(-50%, -50%) rotate(90deg);
+	height: var(--size);
+	width: 1rem;
+}
+.branch--x {
+	width: var(--size);
+	height: 1rem;
+}
+.branch--green {
+	background-color: var(--green);
+	transform: translate(-100%, -50%);
+}
+.branch--blue {
+	background-color: var(--blue);
+	transform: translate(0, -50%);
+}
+.branch--yellow {
+	background-color: var(--yellow);
+	transform: translate(-50%, -100%);
+}
+.branch--red {
+	background-color: var(--red);
+	transform: translate(-50%, 0);
 }
 .road {
 	--size: 0.5rem;
@@ -498,35 +536,29 @@ html.dark .info {
 	top: 50%;
 	left: 50%;
 	z-index: -1;
-	opacity: 0.75;
 }
-.road--red {
-	background-color: var(--red);
-	height: var(--size);
-	margin-top: calc(var(--size) / -2);
-}
-.road--yellow {
-	background-color: var(--yellow);
-	height: var(--size);
-	margin-top: calc(var(--size) / -2);
-}
-.road--blue {
-	background-color: var(--blue);
+.road--red, .road--yellow {
 	width: var(--size);
-	margin-left: calc(var(--size) / -2);
+	transform-origin: 0 0;
+	margin-top: calc(var(--size) / 2);
+	transform: rotate(-90deg);
 }
-.road--green {
-	background-color: var(--green);
-	width: var(--size);
+.road--green, .road--blue {
+	height: var(--size);
+	transform-origin: 0 100%;
+	transform: rotate(90deg);
 	margin-left: calc(var(--size) / -2);
+	margin-top: calc(var(--size) * -1);
 }
+.road--red {background-color: var(--red)}
+.road--yellow {background-color: var(--yellow)}
+.road--blue {background-color: var(--blue)}
+.road--green {background-color: var(--green)}
+
 .road--city {
 	--size: 1rem;
-	opacity: 1;
 }
-.branch--x {
-	background: linear-gradient(90deg, var(--green) 50%, var(--blue) 50%);
-}
+
 span {
 	font-weight: bold;
 	padding: 3px;

@@ -19,7 +19,7 @@ gromorog: [
 `<picture class="background"><source srcset="pictures/gromorog/6/400.webp 400w, pictures/gromorog/6/800.webp 800w, pictures/gromorog/6/1200.webp 1200w" type="image/webp"><img src="pictures/gromorog/6/400.jpg" alt="Громорог" srcset="pictures/gromorog/6/400.jpg 400w, pictures/gromorog/6/800.jpg 800w, pictures/gromorog/6/1200.jpg 1200w" data-src="pictures/gromorog/6/400.jpg"> </picture>`
 ],
 hub: [
-`<picture class="background"><source srcset="pictures/hub/1/400.webp 400w, pictures/hub/1/800.webp 800w, pictures/hub/1/1200.webp 1200w" type="image/webp"><img src="pictures/hub/1/400.jpg" alt="Хаб" srcset="pictures/hub/1/400.jpg 400w, pictures/hub/1/800.jpg 800w, pictures/hub/1/1200.jpg 1200w" data-src="pictures/hub/1/400.jpg"> </picture>`
+`<picture class="background"><source srcset="pictures/hub/0/400.webp 400w, pictures/hub/0/800.webp 800w, pictures/hub/0/1200.webp 1200w" type="image/webp"><img src="pictures/hub/0/400.jpg" alt="Хаб" srcset="pictures/hub/0/400.jpg 400w, pictures/hub/0/800.jpg 800w, pictures/hub/0/1200.jpg 1200w" data-src="pictures/hub/0/400.jpg"> </picture>`
 ],
 infernia: [
 `<picture class="background"><source srcset="pictures/infernia/0/400.webp 400w, pictures/infernia/0/800.webp 800w, pictures/infernia/0/1200.webp 1200w" type="image/webp"><img src="pictures/infernia/0/400.jpg" alt="Инферния" srcset="pictures/infernia/0/400.jpg 400w, pictures/infernia/0/800.jpg 800w, pictures/infernia/0/1200.jpg 1200w" data-src="pictures/infernia/0/400.jpg"> </picture>`,
@@ -47,6 +47,11 @@ putinburg: [
 ],
 selement: [
 `<picture class="background"><source srcset="pictures/selement/0/400.webp 400w, pictures/selement/0/800.webp 800w, pictures/selement/0/1200.webp 1200w" type="image/webp"><img src="pictures/selement/0/400.jpg" alt="Селемент" srcset="pictures/selement/0/400.jpg 400w, pictures/selement/0/800.jpg 800w, pictures/selement/0/1200.jpg 1200w" data-src="pictures/selement/0/400.jpg"> </picture>`
+],
+starkiller: [
+`<picture class="background"><source srcset="pictures/starkiller/0/400.webp 400w, pictures/starkiller/0/800.webp 800w, pictures/starkiller/0/1200.webp 1200w" type="image/webp"><img src="pictures/starkiller/0/400.jpg" alt="StarKiller" srcset="pictures/starkiller/0/400.jpg 400w, pictures/starkiller/0/800.jpg 800w, pictures/starkiller/0/1200.jpg 1200w" data-src="pictures/starkiller/0/400.jpg"> </picture>`,
+`<picture class="background"><source srcset="pictures/starkiller/1/400.webp 400w, pictures/starkiller/1/800.webp 800w, pictures/starkiller/1/1200.webp 1200w" type="image/webp"><img src="pictures/starkiller/1/400.jpg" alt="StarKiller" srcset="pictures/starkiller/1/400.jpg 400w, pictures/starkiller/1/800.jpg 800w, pictures/starkiller/1/1200.jpg 1200w" data-src="pictures/starkiller/1/400.jpg"> </picture>`,
+`<picture class="background"><source srcset="pictures/starkiller/2/400.webp 400w, pictures/starkiller/2/800.webp 800w, pictures/starkiller/2/1200.webp 1200w" type="image/webp"><img src="pictures/starkiller/2/400.jpg" alt="StarKiller" srcset="pictures/starkiller/2/400.jpg 400w, pictures/starkiller/2/800.jpg 800w, pictures/starkiller/2/1200.jpg 1200w" data-src="pictures/starkiller/2/400.jpg"> </picture>`
 ],
 tavern: [
 `<picture class="background"><source srcset="pictures/tavern/0/400.webp 400w, pictures/tavern/0/800.webp 800w, pictures/tavern/0/1200.webp 1200w" type="image/webp"><img src="pictures/tavern/0/400.jpg" alt="Tavern" srcset="pictures/tavern/0/400.jpg 400w, pictures/tavern/0/800.jpg 800w, pictures/tavern/0/1200.jpg 1200w" data-src="pictures/tavern/0/400.jpg"> </picture>`,

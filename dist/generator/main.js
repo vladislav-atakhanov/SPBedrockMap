@@ -31,6 +31,7 @@ function copy()
 		overworldZ: document.getElementById("overworldZ"),
 
 		description: document.getElementById("description"),
+		marks: document.getElementById("marks"),
 		residents: document.getElementById("residents"),
 		pictures: document.getElementById("pictures")
 	}
@@ -42,7 +43,7 @@ function copy()
 		const el = inputs[prop]
 		if (
 			(el != inputs.description && el != inputs.residents &&
-			el != inputs.overworldX && el != inputs.overworldY && el != inputs.overworldZ && el != inputs.subbranch) &&
+			el != inputs.overworldX && el != inputs.overworldY && el != inputs.overworldZ && el != inputs.subbranch && el != inputs.marks) &&
 			!(inputs.type.value == "end" && (el == inputs.mayor || el == inputs.name)) &&
 			!(inputs.type.value == "base" && (el == inputs.name))
 		)
@@ -56,8 +57,12 @@ function copy()
 		let result = "{\n"
 
 		if (inputs.type.value != "city") {result += `    "type": "${inputs.type.value}",\n`}
-		if (inputs.type.value != "end" && inputs.type.value != "base" && inputs.name.value != "") {result += `    "name": "${inputs.name.value.replace(/"([^"]*)"/g, '«$1»')}",\n`}
-		if (inputs.mayor.value != "") {result += `    "mayor": "${inputs.mayor.value.replace(/"([^"]*)"/g, '«$1»')}",\n`}
+		if (inputs.type.value != "end" && inputs.type.value != "base" && inputs.name.value != "") {
+			result += `    "name": "${inputs.name.value.replace(/"([^"]*)"/g, '«$1»').replace(/(^\s*)|(\s*)$/g, '')}",\n`
+		}
+		if (inputs.mayor.value != "") {
+			result += `    "mayor": "${inputs.mayor.value.replace(/"([^"]*)"/g, '«$1»').replace(/(^\s*)|(\s*)$/g, '')}",\n`
+		}
 
 		result += `    "branch": "${inputs.branch.value}",\n`
 		if (inputs.subbranch.checked)
@@ -95,7 +100,7 @@ function copy()
 
 		if (inputs.description.value != "")
 		{
-			result += `    "description": "${inputs.description.value.replace(/\n/g, "<br>").replace(/"([^"]*)"/g, '«$1»')}",\n`
+			result += `    "description": "${inputs.description.value.replace(/\n/g, "<br>").replace(/"([^"]*)"/g, '«$1»').replace(/(^\s*)|(\s*)$/g, '')}",\n`
 		}
 		if (inputs.residents.value != "")
 		{
@@ -104,7 +109,19 @@ function copy()
 			for (var i = 0; i < res.length; i++)
 			{
 				if (res[i] == "") {continue}
-				result += `"${res[i].replace(/"([^"]*)"/g, '«$1»')}"`
+				result += `"${res[i].replace(/"([^"]*)"/g, '«$1»').replace(/(^\s*)|(\s*)$/g, '')}"`
+				if (i < res.length - 1) {result += ", "}
+			}
+			result += "],\n"
+		}
+		if (inputs.marks.value != "")
+		{
+			result += '    "marks": ['
+			res = inputs.marks.value.split(",")
+			for (var i = 0; i < res.length; i++)
+			{
+				if (res[i] == "") {continue}
+				result += `"${res[i].toLowerCase().replace(/"([^"]*)"/g, '«$1»').replace(/(^\s*)|(\s*)$/g, '')}"`
 				if (i < res.length - 1) {result += ", "}
 			}
 			result += "],\n"
@@ -156,6 +173,13 @@ function changeType(txt)
 		else {
 			document.getElementById("title").classList.remove("optional")
 		}
+	}
+
+	if (txt == "city" || txt == "base") {
+		document.getElementsByClassName("marks")[0].style.display = "block"
+	}
+	else {
+		document.getElementsByClassName("marks")[0].style.display = "none"
 	}
 }
 
