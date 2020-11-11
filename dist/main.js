@@ -87,10 +87,7 @@ function showImage(id, i)
 	{
 		for (let i = 0; i < dots[id].loadedImages.length; i++)
 		{
-			if (image == i)
-			{
-				return true
-			}
+			if (image == i) {return true}
 		}
 		return false
 	}
@@ -213,7 +210,9 @@ map.wrapper.addEventListener("mousewheel", function(e)
 	map.el.style.transition = "none"
 	let delta = e.deltaY || e.detail || e.wheelDelta
 	map.scale += (delta < 0) ? 0.05 : -0.05
+	map.el.style.transition = "transform 0.1s linear"
 	scaleMap()
+	setTimeout(function() {map.el.style.transition = "transform 0s linear"}, 250)
 }, {passive: true})
 
 // toDefault
@@ -246,7 +245,8 @@ function updateInfo(n, mode="=")
 	info.openBtn.classList.add(classes[info.currentState])
 }
 
-function scaleMap() {
+function scaleMap()
+{
 	if (map.scale > 2) {map.scale = 2}
 	if (map.scale < 0.1) {map.scale = 0.1}
 	map.el.style.transform = `translate(${map.savedX}px, ${map.savedZ}px) scale(${map.scale})`
@@ -254,7 +254,8 @@ function scaleMap() {
 	map.x = map.scale * map.savedX
 	map.z = map.scale * map.savedZ
 }
-function moveMap() {
+function moveMap()
+{
 	map.savedX = map.x / map.scale
 	map.savedZ = map.z / map.scale
 	map.el.style.transformOrigin = `calc(50% - ${map.savedX}px) calc(50% - ${map.savedZ}px)`
@@ -263,7 +264,7 @@ function moveMap() {
 
 
 info.el.addEventListener("click", function(e) {updateInfo(1, "+")}, {passive: true})
-const court = "testers"
+const court = ""
 function showDot(id)
 {
 	if (id != "")
@@ -296,7 +297,8 @@ function openInfo()
 }
 
 const hash = document.location.hash.slice(1)
-if (hash && dots[hash]) {
+if (hash && dots[hash])
+{
 	showDot(hash)
 	dots[hash].el.click()
 }

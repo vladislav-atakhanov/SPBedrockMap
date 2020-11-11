@@ -7,6 +7,12 @@
 		"x": "-200",
 		"z": "-20"
 	},
+	"overworld": {
+		"x": "-1500",
+		"y": "57",
+		"z": "-350"
+	},
 	"description": "Подземные ячейки, представляющие из себя единое связанное пространство. После перестройки это уже не тот тупой лабиринт, который вы знали",
+	"residents": ["Flovar1", "Gos Tayna", "Jakewh1tewolff", "RemyFatRat", "SvetlayaHaru", "Legendarioys", "typz2862", "Waleerider", "Ramlak46", "SockSide", "MihaiLoLC", "Mr bab1781", "JustAdamFox", "Artukasas", "Qvickss", "GreenMoks", "naritira", "Stranot8930", "Smeraldo", "Sandw1ch", "Volgar77", "CKALKA GAY"],
 	"pictures": "true"
 }

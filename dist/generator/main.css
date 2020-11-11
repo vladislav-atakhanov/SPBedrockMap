@@ -67,14 +67,11 @@ fieldset {
 	transition: border-color 0.25s ease;
 	margin-bottom: 10px;
 }
-div > fieldset {
-	margin-top: 20px;
-}
-div > fieldset:first-child {
-	margin-top: 0;
+fieldset + fieldset {
+	margin-top: 30px;
 }
 .optional, .optional * {
-	border-color: #8c8!important;
+	border-color: #8c8;
 }
 input[type="text"]:focus,
 input[type="number"]:focus,
@@ -281,10 +278,10 @@ input:checked + .checkbox:after {
 	transform: scale(1.5);
 	border-radius: 3px;
 }
-.radio--red {background-color: #f00}
-.radio--green {background-color: #0f0}
-.radio--blue {background-color: #00f}
-.radio--yellow {background-color: #ee0}
+.radio--red {background-color: #ef161e}
+.radio--green {background-color: #2dbe2c}
+.radio--blue {background-color: #0078be}
+.radio--yellow {background-color: #ffd702}
 
 
 span.gray {
@@ -296,7 +293,7 @@ span.gray {
 span.redText {
 	font-weight: bold;
 	border-radius: 3px;
-	color: #f00;
+	color: #ef161e;
 }
 .help {
 	padding: 20px 0;
@@ -375,4 +372,20 @@ html.dark #themeBtn .moon {
 }
 .help__span--error {
 	background-color: #c44;
+}
+.marks ul {
+	padding-top: 0;
+	margin-top: 0;
+	list-style: none;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	padding-left: 0;
+}
+.marks li {
+	color: #0078be;
+	background-color: rgba(0, 120, 190, 0.25);
+	padding: 2px 4px;
+	margin-left: 2px;
+	border-radius: 4px;
 }

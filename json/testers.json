@@ -12,6 +12,6 @@
         "z": "819"
     },
     "description": "Набор <span class='red'>открыт</span>",
-    "residents": ["<span class='blue'><a href='https://vk.com/eloh1mz'>eloh1mZ</a></span>", "<span class='red' style='background-color: var(--text-color); color: var(--bg-color)'>Teotechnic</span>"],
+    "residents": ["<span class='blue'><a href='https://vk.com/eloh1mz'>eloh1mZ</a></span>", "<span class='red' style='background-color: var(--text-color); color: var(--bg-color)'>Teotechnic</span>", "Binskiy", "Тагирка", "LerikDV"],
     "icon": "svg"
 }
