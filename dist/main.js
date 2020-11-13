@@ -313,7 +313,7 @@ if (hash && dots[hash]){showDot(hash, false)}
 const searchList = document.querySelector(".search__list")
 function search(el)
 {
-	const results = [], value = el.value
+	const results = [], value = el.value.toLowerCase()
 	while (searchList.firstChild) {searchList.removeChild(searchList.firstChild)}
 	if (value == "") {return}
 	for (const key in dots)
