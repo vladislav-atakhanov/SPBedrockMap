@@ -26,13 +26,23 @@ dots =
 }
 for (let i = 0; i < dotEls.length; i++)	
 {
-	dots[dotEls[i].getAttribute("href").slice(1)] =
+	const id = dotEls[i].getAttribute("href").slice(1)
+	dots[id] =
 	{
 		title: dotEls[i].title,
-		el: dotEls[i],
+		el: dotEls[i], 
 		loadedImages: [],
 		selectedImage: 0
 	}
+	let branch = ""
+	if (dotEls[i].classList.contains("dot--red")) {branch = "red"}
+	if (dotEls[i].classList.contains("dot--green")) {branch = "green"}
+	if (dotEls[i].classList.contains("dot--blue")) {branch = "blue"}
+	if (dotEls[i].classList.contains("dot--yellow")) {branch = "yellow"}
+	dots[id].branch = branch
+
+	dots[id].x = dotEls[i].style.left.replace(/calc\(/g, '').replace(/rem \+ 50%\)/g, '') * 20
+	dots[id].z = dotEls[i].style.top.replace(/calc\(/g, '').replace(/rem \+ 50%\)/g, '') * 20
 }
 
 let darkTheme = localStorage.getItem("darkTheme")
@@ -241,22 +251,17 @@ info.el.addEventListener("click", function(e)
 	{updateInfo(1, "+")},
 {passive: true})
 const court = ""
-function showDot(id)
+function showDot(id, trs=true)
 {
 	if (id != "")
 	{
 		dots[id].el.click()
-		if (!dots[id].x)
-			{dots[id].x = dots[id].el.style.left.replace(/calc\(/g, '').replace(/rem \+ 50%\)/g, '') * 28}
-		if (!dots[id].z)
-			{dots[id].z = dots[id].el.style.top.replace(/calc\(/g, '').replace(/rem \+ 50%\)/g, '') * 28}
-		map.x = -dots[id].x
-		map.z = -dots[id].z
+		map.x = -dots[id].x * 1.4
+		map.z = -dots[id].z * 1.4
 		map.scale = 1.75
-		map.el.style.transition = "all 0.25s linear"
+		if (trs) {map.el.style.transition = "all 0.25s linear"}
 		moveMap()
-		setTimeout(function()
-			{map.el.style.transition = "all 0s linear"}, 250)
+		if (trs) {setTimeout(function() {map.el.style.transition = "all 0s linear"}, 250)}
 	}
 }
 
@@ -302,13 +307,13 @@ function hideInfo(id)
 }
 
 const hash = document.location.hash.slice(1)
-if (hash && dots[hash]){showDot(hash)}
+if (hash && dots[hash]){showDot(hash, false)}
 
 
 const searchList = document.querySelector(".search__list")
-function search(value)
+function search(el)
 {
-	const results = []
+	const results = [], value = el.value
 	while (searchList.firstChild) {searchList.removeChild(searchList.firstChild)}
 	if (value == "") {return}
 	for (const key in dots)
@@ -328,16 +333,44 @@ function search(value)
 		const item = document.createElement("li")
 		item.classList.add("search__item")
 
-		let color = ""
-		if (dots[results[i]].el.classList.contains("dot--red")) {color = "red"}
-		if (dots[results[i]].el.classList.contains("dot--green")) {color = "green"}
-		if (dots[results[i]].el.classList.contains("dot--blue")) {color = "blue"}
-		if (dots[results[i]].el.classList.contains("dot--yellow")) {color = "yellow"}
-
-		item.innerHTML = `<a href="#${results[i]}" class="search__link search__link--${color}" onclick="showDot('${results[i]}'); unfocusSearch()">${dots[results[i]].title}</a>`
+		item.innerHTML = `<a href="#${results[i]}" class="search__link search__link--${dots[results[i]].branch}" onclick="showDot('${results[i]}'); unfocusSearch()">${dots[results[i]].title}</a>`
 		searchList.appendChild(item)
 	}
 }
 function unfocusSearch() {
 	while (searchList.firstChild) {searchList.removeChild(searchList.firstChild)}
+	document.querySelector(".search__input").value = ""
 }
+
+function dist(id1, id2) {
+	dist = 0
+	if (id1 != id2) {
+		if (
+			(
+				(dots[id1].branch == "yellow" && dots[id2].branch == "red") || 
+				(dots[id2].branch == "yellow" && dots[id1].branch == "red")
+			) ||
+			(
+				(dots[id1].branch == "blue" && dots[id2].branch == "green") || 
+				(dots[id2].branch == "blue" && dots[id1].branch == "green")
+			) ||
+				(dots[id1].branch == dots[id2].branch)
+		) {
+			if (dots[id1].branch == "yellow" || dots[id1].branch == "red") {
+				dist = abs(dots[id1].z - dots[id2].z) + abs(dots[id1].x) + abs(dots[id2].x)
+			}
+			else {
+				dist = abs(dots[id1].x - dots[id2].x) + abs(dots[id1].z) + abs(dots[id2].z)
+			}
+		}
+		else {
+			dist = abs(dots[id1].x) + abs(dots[id2].x) + abs(dots[id1].z) + abs(dots[id2].z)
+		}
+	}
+	return dist
+}
+function abs(n) {
+	return (n > 0) ? n : -n
+}
+
+console.log(dist("pollux", "putinburg"))

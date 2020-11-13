@@ -20,9 +20,17 @@ def minify(css):
 	for item in list:
 		css = css.replace(item, "")
 
-	list = [":", "{", "}", "(", ")", ";"]
+	list = ["+", "*", "-", "/"]
+	for item in list:
+		css = css.replace(f"){item}", f") {item}")
+		css = css.replace(f"{item}(", f"{item} (")
+	for i in range(3):
+		css = css.replace("  ", " ")
+
+	list = [":", "{", "}", ";"]
 	for item in list:
 		css = css.replace(f" {item}", item).replace(f"{item} ", item).replace(f" {item} ", item)
+
 	return css
 
 def meadias_concatinate(css):

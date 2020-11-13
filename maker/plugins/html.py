@@ -65,7 +65,7 @@ def get_city(name, branch, x, z, type, id, mayor, icon="", mark=""):
 	if type != "hub":
 		r += " dot--" + branch
 
-	if icon != "" or mark != "":
+	if icon != "" or mark != "" or type == "end":
 		r += " dot--icon"
 	r += f'" title="{name}{mayor if type == "base" else ""}" aria-label="{name}{mayor if type == "base" else ""}" style="top: calc({z/20}rem + 50%); left: calc({x/20}rem + 50%)"  tabindex="-1">'
 	if icon != "" and type == "city":

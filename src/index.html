@@ -22,7 +22,7 @@
 		<img src="icons/court.svg" alt="Суд">
 	</button>
 	<div class="search">
-		<input type="text" id="search" class="input--text search__input" oninput="search(this.value.toLowerCase())">
+		<input type="text" id="search" class="input--text search__input" autocomplete="off" oninput="search(this)">
 		<button type="button" class="search__btn" onclick="unfocusSearch()">&times;</button>
 		<ul class="search__list"></ul>
 	</div>
