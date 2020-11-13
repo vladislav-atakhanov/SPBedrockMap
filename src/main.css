@@ -1,0 +1,21 @@
+@import url("style/page.css");
+@import url("style/background.css");
+
+@import url("style/map.css");
+@import url("style/dot.css");
+@import url("style/branch.css");
+@import url("style/road.css");
+
+@import url("style/info.css");
+@import url("style/residents.css");
+@import url("style/marks.css");
+@import url("style/coords.css");
+
+@import url("style/btn.css");
+@import url("style/input.css");
+@import url("style/arrow.css");
+
+@import url("style/search.css");
+
+@import url("style/info_block.css");
+@import url("style/span.css");

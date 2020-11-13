@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" class="page">
+<head>
+	<title>Карта СПБедрок</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="main.min.css">
+	<link rel="icon" href="./icons/favicon.png">
+</head>
+<body class="page__body">
+	<div id="mapWrapper">
+		<div id="map" style="transform-origin: 50% 50%; transform: translate(0, 0) scale(0.5)">
+			<div class="branch branch--x branch--green"  style="--size: 260rem"></div>
+			<div class="branch branch--x branch--blue" style="--size: 260rem"></div>
+			<div class="branch branch--z branch--red" style="--size: 135rem"></div>
+			<div class="branch branch--z branch--yellow" style="--size: 135rem"></div>
+			<dots_block>
+		</div>
+	</div>
+	<button type="button" id="courtBtn" class="btn btn--court" onclick="showDot(court)" area-label="Показать город, в котором суд">
+		<img src="icons/court.svg" alt="Суд">
+	</button>
+	<div class="search">
+		<input type="text" id="search" class="input--text search__input" oninput="search(this.value.toLowerCase())">
+		<button type="button" class="search__btn" onclick="unfocusSearch()">&times;</button>
+		<ul class="search__list"></ul>
+	</div>
+	<input type="range" id="scaleRange" value="0.5" min="0.1" max="2" oninput="changeScale()" step="0.05">
+	<button type="button" id="defaultBtn" class="btn btn--default" onclick="toDefault()" area-label="Вернуть в исходное положение">
+		<svg viewBox="0 0 512 512" fill="currentColor"><path d="M409 143c-41-41-95-64-153-64h-32l51-51-28-28-99 99 98 100 28-28-50-52h32A176 176 0 1180 296v-20H40v20a215 215 0 00216 216 215 215 0 00216-216c0-58-22-112-63-153z"/></svg>
+	</button>
+	<button type="button" id="themeBtn" class="btn btn--theme" onclick="switchTheme()" area-label="Сменить цветовую тему">
+		<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g class="moon"><circle cx="256" cy="256" r="175"/><circle cx="322" cy="192" r="175" fill="#fff"/></g><g class="sun" fill="#fff"><circle cx="256" cy="256" r="125"/><path d="M92 439c-11 3-21-7-18-19l14-54c3-11 17-15 26-7l39 40c9 8 5 22-6 25l-55 15zM439 420c3 12-7 22-19 19l-54-15c-11-3-15-17-7-25l40-40c8-8 22-4 25 7l15 54zM243 29c5-10 20-10 25 0l29 48c5 10-2 23-13 23h-57c-11 0-18-13-13-23l29-48zM484 243c10 5 10 20 0 25l-49 29c-10 5-23-2-23-13v-57c0-11 13-18 23-13l49 29zM268 484c-5 10-20 10-25 0l-29-49c-5-10 2-23 13-23h57c11 0 18 13 13 23l-29 49zM29 268c-10-5-10-20 0-25l48-29c10-5 23 2 23 13v57c0 11-13 18-23 13l-48-29zM74 92c-3-11 7-21 18-18l55 14c11 3 15 17 6 26l-39 39c-9 9-23 5-26-6L74 92zM420 74c12-3 22 7 19 18l-15 55c-3 11-17 15-25 6l-40-39c-8-9-4-23 7-26l54-14z"/></g></svg>
+	</button>
+	<a href="generator/" class="btn btn--add-city" id="addCity">+</a>
+	<div class="info info_block" id="info">
+		<dots_info>
+		<div class="arrow"></div>
+	</div>
+	<footer class="footer">
+		<a href="https://github.com/eloh1mZ">eloh1mZ</a>
+	</footer>
+	<button type="button" id="infoOpenBtn" onclick="openInfo()" class="info_block btn--info-open" area-label="Открыть информацию"><span class="arrow arrow--right"></span></button>
+	<button type="button" id="infoCloseBtn" onclick="updateInfo(0); document.location.hash=''" class="info_block btn--info-close" area-label="Закрыть информацию">&times;</button>
+	<script src="pictures.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>

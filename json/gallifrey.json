@@ -1,10 +1,10 @@
 {
-	"name": "Gallifrey",
-	"mayor": "Neizbejnost",
+    "name": "Gallifrey",
+    "mayor": "Neizbejnost",
 
-	"branch": "green",
-	"nether": {
-		"x": "-555",
-		"z": "-230"
-	}
+    "branch": "green",
+    "nether": {
+        "x": -555,
+        "z": -230
+    }
 }

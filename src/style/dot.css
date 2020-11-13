@@ -1,0 +1,122 @@
+/* Dot */
+.dot {
+	--size: 2rem;
+	display: block;
+	padding: 0;
+	width: var(--size);
+	height: var(--size);
+
+	position: absolute;
+
+	margin-left: calc(var(--size) / -2);
+	margin-top: calc(var(--size) / -2);
+	border: none;
+
+	outline: none;
+	cursor: pointer;
+	transition: all 0.5s ease;
+	z-index: 2;
+
+	font-weight: bold;
+	font-size: 2rem;
+	line-height: 3rem;
+	text-align: center;
+	overflow: hidden;
+	border-radius: calc(var(--size) / 2);
+	color: var(--bg-color);
+	text-decoration: none;
+}
+.dot:hover {transform: scale(1.1)}
+.dot:active {transform: scale(0.9)}
+.dot.selected {transform: scale(1.5)}
+
+/* City */
+.dot--city {
+	--size: 3rem;
+}
+
+.dot--court {
+	--size: 4rem;
+}
+/* Colors */
+.dot--red {background-color: var(--red)}
+.dot--green {background-color: var(--green); color: #000}
+.dot--yellow {background-color: var(--yellow); color: #000}
+.dot--blue {background-color: var(--blue)}
+
+/* Hub */
+.dot--hub {
+	--size: 6rem;
+	background-color: var(--text-color);
+}
+.dot--hub:before {
+	content: "";
+	width: 4rem;
+	height: 4rem;
+	border-radius: 2rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: var(--bg-color);
+}
+.dot--hub.selected {
+	transform: scale(1.1);
+}
+
+/* Icon */
+.dot--icon {
+	border-radius: 0;
+	background-color: transparent;
+}
+.dot__icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	user-drag: none; 
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+/* Info */
+.dot__info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	height: 100%;
+	width: 100%;
+	padding: inherit;
+	overflow-y: hidden;
+}
+.dot__info::-webkit-scrollbar {
+	width: 0;
+}
+
+/* Heading */
+.dot__title_heading {
+	margin: 0;
+}
+
+/* Paragraph */
+.dot__paragraph {
+	padding: 0;
+	margin-top: 0.5em;
+	margin-bottom: 0;
+}
+
+/* Description */
+.dot__description {
+	margin-top: 40px;
+}
+
+/* Coords */
+.dot__coords {
+	margin-top: 2em;
+}

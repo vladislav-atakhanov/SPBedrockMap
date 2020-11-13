@@ -1,0 +1,14 @@
+span {
+	font-weight: bold;
+	padding: 3px;
+	border-radius: 3px;
+	color: #fff;
+}
+span.red {background-color: var(--red);}
+span.green {background-color: var(--green); color: #000}
+span.blue {background-color: var(--blue);}
+span.yellow {background-color: var(--yellow); color: #000}
+span.gray {
+	background-color: #eee;
+	color: #000;
+}

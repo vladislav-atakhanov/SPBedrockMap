@@ -4,8 +4,8 @@
     "mayor": "OneDarkGame",
     "branch": "yellow",
     "nether": {
-        "x": "-14",
-        "z": "-89"
+        "x": -14,
+        "z": -89
     },
     "marks": ["бар"]
 }

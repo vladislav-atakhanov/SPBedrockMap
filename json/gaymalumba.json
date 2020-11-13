@@ -1,15 +1,15 @@
 {
-	"name": "Геймалумба",
-	"mayor": "EcHooZz",
+    "name": "Геймалумба",
+    "mayor": "EcHooZz",
 
-	"branch": "green",
-	"nether": {
-		"x": "-410",
-		"z": "-100"
-	},
-	"overworld": {
-		"x": "-3303",
-		"y": "70",
-		"z": "-774"
-	}
+    "branch": "green",
+    "nether": {
+        "x": -410,
+        "z": -100
+    },
+    "overworld": {
+        "x": -3303,
+        "y": 70,
+        "z": -774
+    }
 }

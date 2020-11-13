@@ -1,11 +1,11 @@
 {
-	"name": "Путинбург",
-	"mayor": "Lalon12",
+    "name": "Путинбург",
+    "mayor": "Lalon12",
 
-	"branch": "blue",
-	"nether": {
-		"x": "160",
-		"z": "60"
-	},
-	"pictures": "true"
+    "branch": "blue",
+    "nether": {
+        "x": 160,
+        "z": 60
+    },
+    "pictures": "true"
 }

@@ -1,0 +1,30 @@
+/* Road */
+.road {
+	--size: 0.5rem;
+	position: absolute;
+	border-radius: 0.5rem;
+	top: 50%;
+	left: 50%;
+	z-index: -1;
+}
+.road--red, .road--yellow {
+	width: var(--size);
+	transform-origin: 0 0;
+	margin-top: calc(var(--size) / 2);
+	transform: rotate(-90deg);
+}
+.road--green, .road--blue {
+	height: var(--size);
+	transform-origin: 0 100%;
+	transform: rotate(90deg);
+	margin-left: calc(var(--size) / -2);
+	margin-top: calc(var(--size) * -1);
+}
+.road--red {background-color: var(--red)}
+.road--yellow {background-color: var(--yellow)}
+.road--blue {background-color: var(--blue)}
+.road--green {background-color: var(--green)}
+
+.road--city {
+	--size: 1rem;
+}

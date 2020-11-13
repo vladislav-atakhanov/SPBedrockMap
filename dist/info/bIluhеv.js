@@ -1,0 +1,1 @@
+(document.querySelector("#bIluhеv .info__text") || document.getElementById("bIluhеv")).innerHTML = `<div class="dot__title"><h2 class="dot__title_heading">База Iluhеv</h2></div><div class="coords dot__coords"><h3 class="coords__header">Координаты</h3><p class="coords__paragraph">Ад - <span class="green">-788 50</span></p></div>`

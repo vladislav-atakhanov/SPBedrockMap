@@ -1,0 +1,3 @@
+
+if (document.querySelector("#4 .info__text")) {document.querySelector("#4 .info__text").innerHTML = `<div class="title"><h2>Портал в энд</h2><p>Владелец <b>YrExIs</b></p></div><div class="coords"><h3>Координаты</h3><p>Ад - <span class="yellow">129 -699</span></p><p>Обычный мир - <span class="gray">1019 27 -5614</span></p></div><p class="description">Муха ТВ</p>`}
+else {document.getElementById("4").innerHTML = `<div class="title"><h2>Портал в энд</h2><p>Владелец <b>YrExIs</b></p></div><div class="coords"><h3>Координаты</h3><p>Ад - <span class="yellow">129 -699</span></p><p>Обычный мир - <span class="gray">1019 27 -5614</span></p></div><p class="description">Муха ТВ</p>`}

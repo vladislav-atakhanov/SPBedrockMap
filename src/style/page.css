@@ -1,0 +1,85 @@
+/* Page */
+.page {
+	font-size: 16px;
+	--bg-color: #fff;
+	--text-color: #222;
+	--red: #ef161e;
+	--green: #2dbe2c;
+	--blue: #0078be;
+	--yellow: #ffd702;
+
+	--info-padding: 10px;
+}
+@media (min-width: 768px) {
+	.page {
+		--info-padding: 20px;
+	}
+}
+@media (min-width: 992px) {
+	.page {
+		--info-padding: 25px;
+	}
+}
+@media (min-width: 1024px) {
+	.page {
+		--info-padding: 30px;
+	}
+}
+
+/* Dark theme */
+.page.dark {
+	--bg-color: #000;
+	--text-color: #ddd;
+}
+.page.dark .btn {
+	opacity: 0.75;
+}
+.page.dark .btn:hover {
+	opacity: 1;
+}
+
+/* Transition */
+.page.theme-in-transition,
+.page.theme-in-transition *,
+.page.theme-in-transition *:before,
+.page.theme-in-transition *:after {
+    transition: all 0.5s  linear!important;
+    transition-delay: 0 linear!important;
+}
+
+/* Body */
+.page__body {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-family: 'Roboto Mono', monospace;
+	line-height: 1.5;
+	color: var(--text-color)
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+/* Default styles */
+a {
+	color: inherit;
+}
+img {
+	display: block;
+}
+button {
+	cursor: pointer;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	right: var(--info-padding);
+	color: #808080;
+}

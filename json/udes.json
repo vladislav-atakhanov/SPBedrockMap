@@ -1,0 +1,13 @@
+{
+    "type": "other",
+    "name": "Удес",
+    "mayor": "Alienmisha",
+    "branch": "green",
+    "nether": {
+        "x": -307,
+        "y": 66,
+        "z": 7
+    },
+    "marks": ["ресторан"],
+    "pictures": "true"
+}

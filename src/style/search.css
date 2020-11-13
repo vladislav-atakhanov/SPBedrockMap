@@ -1,0 +1,117 @@
+/* Search */
+.search {
+	position: fixed;
+	top: var(--info-padding);
+	left: var(--info-padding);
+	background-color: var(--text-color);
+	border-radius: 20px;
+	overflow: hidden;
+}
+/* Icon */
+.search:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 40px;
+	background-image: url(icons/search--white.svg);
+	background-size: 40% auto;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: -1;
+}
+.page.dark .search:before {
+	background-image: url(icons/search--black.svg);
+}
+
+
+/* Input */
+.search__input {
+	font-weight: bold;
+	color: var(--text-color);
+	background-color: transparent;
+	border: 2px solid var(--text-color);
+	width: 3em;
+	border-radius: inherit;
+	height: 3em;
+	transition: all 0.25s;
+}
+.search__input:focus {
+	width: 250px;
+	color: var(--bg-color);
+	background-color: var(--text-color);
+}
+
+/* Button */
+.search__btn {
+	position: absolute;
+	top: 0;
+	left: 210px;
+	height: 40px;
+	width: 40px;
+	color: var(--bg-color);
+	background-color: transparent;
+	line-height: 40px;
+	border-radius: 50%;
+	border: none;
+	padding: 0;
+	margin: 0;
+	outline: none;
+	text-align: center;
+	z-index: 1;
+	font-size: 2em;
+	opacity: 1;
+}
+
+/* Item */
+.search__list {
+	padding: 0;
+	margin: 0;
+	max-height: calc(100vh - 4*var(--info-padding));
+	overflow-y: scroll;
+	list-style: none;
+	background-color: var(--bg-color);
+}
+.search__list::-webkit-scrollbar {
+	width: 0;
+}
+
+/* Item */
+.search__item {
+	min-height: 3em;
+	padding: 0;
+	margin: 0;
+	width: 250px;
+}
+
+/* Link */
+.search__link {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	padding: 1em;
+	font-size: 16px;
+	text-decoration: none;
+	font-weight: bold;
+}
+.search__link:before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background-color: var(--text-color);
+	opacity: 0.5;
+	transition: opacity 0.25s;
+}
+.search__link:hover:before {
+	opacity: 0.25;
+}
+.search__link--red:before {background-color: var(--red);}
+.search__link--blue:before {background-color: var(--blue);}
+.search__link--green:before {background-color: var(--green);}
+.search__link--yellow:before {background-color: var(--yellow);}

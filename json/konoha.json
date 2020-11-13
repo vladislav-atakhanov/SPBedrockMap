@@ -1,16 +1,16 @@
 {
-	"name": "Коноха",
-	"mayor": "Naruto Minecrafter",
+    "name": "Коноха",
+    "mayor": "Naruto Minecrafter",
 
-	"branch": "blue",
-	"nether": {
-		"x": "800",
-		"z": "75"
-	},
-	"overworld": {
-		"x": "6500",
-		"y": "70",
-		"z": "600"
-	},
-	"pictures": "true"
+    "branch": "blue",
+    "nether": {
+        "x": 800,
+        "z": 75
+    },
+    "overworld": {
+        "x": 6500,
+        "y": 70,
+        "z": 600
+    },
+    "pictures": "true"
 }

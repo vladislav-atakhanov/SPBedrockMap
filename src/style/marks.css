@@ -1,0 +1,14 @@
+.marks {
+	list-style: none;
+	width: 100%;
+	padding-left: 0;
+}
+.marks__item {
+	display: inline-block;
+	color: var(--blue);
+	background-color: rgba(0, 120, 190, 0.25);
+	padding: 2px 4px;
+	margin-left: 2px;
+	margin-top: 2px;
+	border-radius: 4px;
+}

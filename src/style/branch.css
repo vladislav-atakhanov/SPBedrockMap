@@ -1,0 +1,33 @@
+/* Branch */
+.branch {
+	position: absolute;
+	z-index: 1;
+	border-radius: 0.5rem;
+	left: 50%;
+	top: 50%;
+	background-position: 50% 50%;
+}
+.branch--z {
+	height: var(--size);
+	width: 1rem;
+}
+.branch--x {
+	width: var(--size);
+	height: 1rem;
+}
+.branch--green {
+	background-color: var(--green);
+	transform: translate(-100%, -50%);
+}
+.branch--blue {
+	background-color: var(--blue);
+	transform: translate(0, -50%);
+}
+.branch--yellow {
+	background-color: var(--yellow);
+	transform: translate(-50%, -100%);
+}
+.branch--red {
+	background-color: var(--red);
+	transform: translate(-50%, 0);
+}

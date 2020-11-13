@@ -1,0 +1,14 @@
+#scaleRange {
+	position: fixed;
+	top: calc(var(--info-padding) + 25px);
+	right: calc(var(--info-padding) + 60px + 5vw);
+	transform: translateY(-50%);
+}
+
+.input--text {
+	padding: 0.5em 1em;
+	border-radius: 1em;
+	outline: none;
+	line-height: 1;
+	font-family: inherit;
+}
