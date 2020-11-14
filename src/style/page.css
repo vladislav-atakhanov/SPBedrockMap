@@ -76,10 +76,14 @@ img {
 button {
 	cursor: pointer;
 }
-
 .footer {
 	position: fixed;
 	bottom: 0;
 	right: var(--info-padding);
 	color: #808080;
+}
+
+/* Focus-visible */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
 }

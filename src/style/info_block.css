@@ -1,3 +1,6 @@
+.info_block {
+	z-index: 2;
+}
 .info_block.b {
 	transform: translateY(45vh)!important;
 }

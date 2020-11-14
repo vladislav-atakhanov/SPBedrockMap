@@ -22,7 +22,7 @@
 		<img src="icons/court.svg" alt="Суд">
 	</button>
 	<div class="search">
-		<input type="text" id="search" class="input--text search__input" oninput="search(this.value.toLowerCase())">
+		<input type="text" id="search" class="input--text search__input" autocomplete="off" oninput="search(this)">
 		<button type="button" class="search__btn" onclick="unfocusSearch()">&times;</button>
 		<ul class="search__list"></ul>
 	</div>
@@ -34,6 +34,23 @@
 		<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g class="moon"><circle cx="256" cy="256" r="175"/><circle cx="322" cy="192" r="175" fill="#fff"/></g><g class="sun" fill="#fff"><circle cx="256" cy="256" r="125"/><path d="M92 439c-11 3-21-7-18-19l14-54c3-11 17-15 26-7l39 40c9 8 5 22-6 25l-55 15zM439 420c3 12-7 22-19 19l-54-15c-11-3-15-17-7-25l40-40c8-8 22-4 25 7l15 54zM243 29c5-10 20-10 25 0l29 48c5 10-2 23-13 23h-57c-11 0-18-13-13-23l29-48zM484 243c10 5 10 20 0 25l-49 29c-10 5-23-2-23-13v-57c0-11 13-18 23-13l49 29zM268 484c-5 10-20 10-25 0l-29-49c-5-10 2-23 13-23h57c11 0 18 13 13 23l-29 49zM29 268c-10-5-10-20 0-25l48-29c10-5 23 2 23 13v57c0 11-13 18-23 13l-48-29zM74 92c-3-11 7-21 18-18l55 14c11 3 15 17 6 26l-39 39c-9 9-23 5-26-6L74 92zM420 74c12-3 22 7 19 18l-15 55c-3 11-17 15-25 6l-40-39c-8-9-4-23 7-26l54-14z"/></g></svg>
 	</button>
 	<a href="generator/" class="btn btn--add-city" id="addCity">+</a>
+	<button type="button" class="btn btn--calc" onclick="showCalculator()">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 425.3 425.3" fill="currentColor"><path d="M94 319a15 15 0 00-10 25 14 14 0 0019 0 15 15 0 00-9-25z"/><path d="M317 0l-22 21 58 58a7 7 0 010 11c-2 2-4 3-6 2-2 1-4 0-5-2l-58-57-30 29 38 37c3 3 3 9 0 12l-5 2-6-2-38-38-29 29 58 58c3 3 3 8 0 11s-8 3-11 0l-58-58-29 30 38 37c3 3 3 8 0 11a8 8 0 01-12 0l-37-37-29 29 57 58a7 7 0 010 11l-6 2-5-2-58-58-29 30 38 37c3 3 3 8 0 11-2 2-4 2-6 2s-4 0-5-2l-38-37-82 82 108 108 317-317L317 0zM115 355a30 30 0 11-43-43 30 30 0 0143 43z"/></svg>
+	</button>
+	<div id="calculator" class="calculator">
+		<button class="btn calculator__closeBtn" onclick="hideCalculator()">&times;</button>
+		<div class="calculator__title">
+			<h2 class="calculator__heading">Расстояние между двумя точками</h2>
+			<input type="text" class="input--text calculator__input">
+			<input type="text" class="input--text calculator__input">
+			<button class="calculator__btn" onclick="calcDist()">Расчитать</button>
+		</div>
+		<div class="calculator__result">
+			<p class="calculator__result_dots"></p>
+			<p class="calculator__result_dist"></p>
+			<p class="calculator__result_time"></p>
+		</div>
+	</div>
 	<div class="info info_block" id="info">
 		<dots_info>
 		<div class="arrow"></div>
