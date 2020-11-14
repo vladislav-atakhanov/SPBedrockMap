@@ -82,3 +82,8 @@ button {
 	right: var(--info-padding);
 	color: #808080;
 }
+
+/* Focus-visible */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}

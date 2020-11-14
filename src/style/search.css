@@ -6,6 +6,7 @@
 	background-color: var(--text-color);
 	border-radius: 20px;
 	overflow: hidden;
+	z-index: 1;
 }
 /* Icon */
 .search:before {
@@ -28,14 +29,11 @@
 
 /* Input */
 .search__input {
-	font-weight: bold;
-	color: var(--text-color);
-	background-color: transparent;
-	border: 2px solid var(--text-color);
 	width: 3em;
-	border-radius: inherit;
 	height: 3em;
+	border-radius: inherit;
 	transition: all 0.25s;
+	border: 2px solid var(--text-color);
 }
 .search__input:focus {
 	width: 250px;
@@ -83,6 +81,16 @@
 	padding: 0;
 	margin: 0;
 	width: 250px;
+}
+
+/* Title */
+.search__item_title {
+	margin: 0;
+	font-size: 18px;
+}
+.search__item_id {
+	margin: 0;
+	font-size: 14px;
 }
 
 /* Link */

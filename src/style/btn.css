@@ -13,9 +13,11 @@
 	transition: 0.25s all ease;
 	cursor: pointer;
 }
-.btn:hover {
+.btn:hover,
+.btn:focus {
 	transform: scale(1.1);
 	opacity: 1;
+	outline: none;
 }
 
 /* info open & close */
@@ -81,7 +83,7 @@
 }
 .btn--info-close.b, .btn--info-close.c {
 	opacity: 0.75;
-	z-index: 1;
+	z-index: 3;
 }
 @media (min-width: 768px) {
 	.btn--info-close {
@@ -132,8 +134,13 @@
 
 /* Court */
 .btn--court {
-	left: calc(var(--info-padding)/2);
-	top: calc(var(--info-padding)+6em);
+	left: calc(var(--info-padding) / 2);
+	top: calc(var(--info-padding) + 6em);
 	width: 60px;
 	height: 60px;
+}
+
+/* Distance */
+.btn--calc {
+	top: calc(var(--info-padding) + 180px)
 }

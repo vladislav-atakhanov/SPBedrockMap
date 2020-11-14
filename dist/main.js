@@ -319,13 +319,10 @@ function search(el)
 	for (const key in dots)
 	{
 		dot = dots[key]
+		if (results.length > 10) {break}
 		if (dot.title)
 		{
-			if (dot.title.toLowerCase() != "портал в энд" && dot.title.toLowerCase().search(value) > -1 && results.length < 10)
-			{
-				results.push(key)
-				console.log(dot.title)
-			}
+			if (dot.title.toLowerCase() != "портал в энд" && dot.title.toLowerCase().search(value) > -1) {results.push(key)}
 		}
 	}
 	for (let i = 0; i < results.length; i++)
@@ -333,7 +330,7 @@ function search(el)
 		const item = document.createElement("li")
 		item.classList.add("search__item")
 
-		item.innerHTML = `<a href="#${results[i]}" class="search__link search__link--${dots[results[i]].branch}" onclick="showDot('${results[i]}'); unfocusSearch()">${dots[results[i]].title}</a>`
+		item.innerHTML = `<a href="#${results[i]}" class="search__link search__link--${dots[results[i]].branch}" onclick="showDot('${results[i]}'); unfocusSearch()"><h3 class="search__item_title">${dots[results[i]].title}</h3><p class="search__item_id">${results[i]}</p></a>`
 		searchList.appendChild(item)
 	}
 }
@@ -341,8 +338,7 @@ function unfocusSearch() {
 	while (searchList.firstChild) {searchList.removeChild(searchList.firstChild)}
 	document.querySelector(".search__input").value = ""
 }
-
-function dist(id1, id2) {
+function getDist(id1, id2) {
 	dist = 0
 	if (id1 != id2) {
 		if (
@@ -357,20 +353,59 @@ function dist(id1, id2) {
 				(dots[id1].branch == dots[id2].branch)
 		) {
 			if (dots[id1].branch == "yellow" || dots[id1].branch == "red") {
-				dist = abs(dots[id1].z - dots[id2].z) + abs(dots[id1].x) + abs(dots[id2].x)
+				dist = Math.abs(dots[id1].z - dots[id2].z) + Math.abs(dots[id1].x) + Math.abs(dots[id2].x)
 			}
 			else {
-				dist = abs(dots[id1].x - dots[id2].x) + abs(dots[id1].z) + abs(dots[id2].z)
+				dist = Math.abs(dots[id1].x - dots[id2].x) + Math.abs(dots[id1].z) + Math.abs(dots[id2].z)
 			}
 		}
 		else {
-			dist = abs(dots[id1].x) + abs(dots[id2].x) + abs(dots[id1].z) + abs(dots[id2].z)
+			dist = Math.abs(dots[id1].x) + Math.abs(dots[id2].x) + Math.abs(dots[id1].z) + Math.abs(dots[id2].z)
 		}
 	}
 	return dist
 }
-function abs(n) {
-	return (n > 0) ? n : -n
+
+const calculator = document.getElementById("calculator")
+function showCalculator() {
+	calculator.classList.add("calculator--opened")
+}
+function hideCalculator() {
+	calculator.classList.remove("calculator--opened")
+	document.querySelector(".calculator__result_dots").innerHTML = ""
+	document.querySelector(".calculator__result_dist").innerHTML = ""
+	document.querySelector(".calculator__result_time").innerHTML = ""
 }
 
-console.log(dist("pollux", "putinburg"))
+const calcInputs = document.getElementsByClassName("calculator__input")
+function calcDist() {
+	const 
+		first = calcInputs[0].value.toLowerCase(),
+		second = calcInputs[1].value.toLowerCase()
+
+	if (first == "" || second == "")
+	{
+		document.querySelector(".calculator__result_dots").innerHTML = ""
+		document.querySelector(".calculator__result_dist").innerHTML = ""
+		document.querySelector(".calculator__result_time").innerHTML = ""
+		return
+	}
+
+	const results = []
+	for (const key in dots)
+	{
+		dot = dots[key]
+		if (results.length > 2) {break}
+		if (dot.title)
+		{
+			if (dot.title.toLowerCase() != "портал в энд" && dot.title.toLowerCase().search(first) > -1) {results.push(key)}
+			if (dot.title.toLowerCase() != "портал в энд" && dot.title.toLowerCase().search(second) > -1) {results.push(key)}
+		}
+	}
+	if (dots[results[0]] && dots[results[1]]) {
+		document.querySelector(".calculator__result_dots").innerHTML = `<a class="calculator__result_link" onclick="showDot('${results[0]}')">${dots[results[0]].title}</a> — <a class="calculator__result_link" onclick="showDot('${results[1]}')">${dots[results[1]].title}</a>`
+		const dist = getDist(results[0], results[1])
+		document.querySelector(".calculator__result_dist").innerHTML = `${dist} блоков`
+		document.querySelector(".calculator__result_time").innerHTML = `${Math.round(dist / 35)} секунд`
+	}
+}

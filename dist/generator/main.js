@@ -175,7 +175,7 @@ function changeType(txt)
 		}
 	}
 
-	if (txt == "city" || txt == "base") {
+	if (txt != "end") {
 		document.getElementsByClassName("marks")[0].style.display = "block"
 	}
 	else {
