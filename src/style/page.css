@@ -1,8 +1,8 @@
 /* Page */
 .page {
 	font-size: 16px;
-	--bg-color: #fff;
-	--text-color: #222;
+	--bg: #fff;
+	--text: #222;
 	--red: #ef161e;
 	--green: #2dbe2c;
 	--blue: #0078be;
@@ -28,8 +28,8 @@
 
 /* Dark theme */
 .page.dark {
-	--bg-color: #000;
-	--text-color: #ddd;
+	--bg: #000;
+	--text: #ddd;
 }
 .page.dark .btn {
 	opacity: 0.75;
@@ -57,7 +57,7 @@
 	font-size: 16px;
 	font-family: 'Roboto Mono', monospace;
 	line-height: 1.5;
-	color: var(--text-color)
+	color: var(--text)
 }
 
 *,
@@ -83,7 +83,13 @@ button {
 	color: #808080;
 }
 
-/* Focus-visible */
-.js-focus-visible :focus:not(.focus-visible) {
-  outline: none;
+.visually-hidden {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	padding:0 !important;
+	border:0 !important;
+	height: 1px !important; 
+	width: 1px !important; 
+	overflow: hidden;
 }

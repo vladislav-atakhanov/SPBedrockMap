@@ -6,7 +6,7 @@
 	height: 50px;
 	top: var(--info-padding);
 	right: var(--info-padding);
-	color: var(--text-color);
+	color: var(--text);
 	background-color: transparent;
 	border: none;
 	opacity: 0.5;
@@ -23,7 +23,7 @@
 /* info open & close */
 .btn--info-close, .btn--info-open {
 	position: fixed;
-	color: var(--text-color);
+	color: var(--text);
 	transition: all 0.5s ease;
 	padding: 0;
 	margin: 0;
@@ -36,7 +36,7 @@
 
 /* info open */
 .btn--info-open {
-	border: 3px solid var(--text-color);
+	border: 3px solid var(--text);
 	background-color: transparent;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
@@ -70,7 +70,7 @@
 	transform: translateY(90vh);
 	right: var(--info-padding);
 	top: calc(var(--info-padding) / 2);
-	background-color: var(--bg-color);
+	background-color: var(--bg);
 	font-size: 36px;
 	width: 1.2em;
 	height: 1.2em;
@@ -143,4 +143,25 @@
 /* Distance */
 .btn--calc {
 	top: calc(var(--info-padding) + 180px)
+}
+
+/* Favorites */
+.btn--favorite {
+	top: calc(var(--info-padding) + 180px);
+	left: calc(var(--info-padding) / 2);
+}
+.btn--favoriteStatus {
+	z-index: 2;
+	position: absolute;
+	top: calc(var(--info-padding) / 2 + 40px);
+	right: calc(var(--info-padding) / 2);
+	opacity: 1;
+}
+.btn--favoriteStatus svg {
+	transition: all 0.25s;
+	stroke: #ffc107;
+	fill: transparent;
+}
+.btn--favoriteStatus.isFavorite svg {
+	fill: #ffc107;
 }

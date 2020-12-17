@@ -2,14 +2,14 @@ from PIL import Image
 import os, shutil, json, re
 
 marks_list = {
-	"кафе": "cafe",
-	"бар": "bar",
-	"игра": "game",
-	"больница": "hospital",
-	"церковь": "church",
-	"студия": "studio",
-	"магазин": "shop",
-	"ресторан": "restaurant"
+	"cafe": "кафе",
+	"bar": "бар",
+	"game": "игра",
+	"hospital": "больница",
+	"church": "церковь",
+	"studio": "студия",
+	"shop": "магазин",
+	"restaurant": "ресторан"
 }
 
 def minify(html):
@@ -71,7 +71,7 @@ def get_city(name, branch, x, z, type, id, mayor, icon="", mark=""):
 	if icon != "" and type == "city":
 		r += f'<img class="dot__icon" src="pictures/{id}/icon.{icon}" alt="{name}">'
 	elif mark != "" and mark in marks_list:
-		r += f'<img class="dot__icon" src="icons/{marks_list[mark]}.svg" alt="{name}">'
+		r += f'<img class="dot__icon" src="icons/{mark}.svg" alt="{name}">'
 	elif type == "city":
 		r += name[0].upper()
 	elif type != "base" and type != "hub":
@@ -145,7 +145,7 @@ def get_description(text):
 def get_marks(marks):
 	r = '<ul class="marks dot__marks">'
 	for mark in marks:
-		r += f'<li class="marks__item">{mark}</li>'
+		r += f'<li class="marks__item">{marks_list[mark]}</li>'
 	r += "</ul>"
 	return r
 
@@ -212,6 +212,7 @@ def build(html, dist, p):
 		# Information about dot
 		info =  ""
 		dots_info += f'<div class="dot__info" id="{id}">'
+		info += f'<button type="button" class="btn btn--favoriteStatus" onclick="changeFavoriteStatus(this, \'{id}\')" data-id="{id}" area-label="Добавить в избранное"><svg viewBox="0 0 100 100"><use xlink:href="#star" /></svg></button>'
 
 		# Pictures
 		if "pictures" in data:

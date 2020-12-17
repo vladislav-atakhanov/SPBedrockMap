@@ -18,12 +18,10 @@ const
 	},
 	html = document.documentElement;
 
+let favorite = (localStorage.getItem("favorite") || "").split("}{")
+let dotEls = document.getElementsByClassName('dot')
+let dots = {loadedInfo: []}
 
-dotEls = document.getElementsByClassName('dot')
-dots =
-{
-	loadedInfo: []
-}
 for (let i = 0; i < dotEls.length; i++)	
 {
 	const id = dotEls[i].getAttribute("href").slice(1)
@@ -290,6 +288,12 @@ function showInfo(id)
 		document.body.appendChild(el)
 		dots[id].info = document.getElementById(id)
 		dots[id].imageBlock = dots[id].info.getElementsByClassName("info__image")[0]
+
+		el.onload = () => {
+			if(!favorite) { favorite = localStorage.getItem("favorite").split("}{") || [] }
+			if (favorite.includes(id)) { document.querySelector(`#${id} .btn--favoriteStatus`).classList.add("isFavorite") }
+		}
+
 	}
 	if (dots[id].info)
 	{
@@ -328,9 +332,10 @@ function search(el)
 	for (let i = 0; i < results.length; i++)
 	{
 		const item = document.createElement("li")
+		item.classList.add("dot__item")
 		item.classList.add("search__item")
 
-		item.innerHTML = `<a href="#${results[i]}" class="search__link search__link--${dots[results[i]].branch}" onclick="showDot('${results[i]}'); unfocusSearch()"><h3 class="search__item_title">${dots[results[i]].title}</h3><p class="search__item_id">${results[i]}</p></a>`
+		item.innerHTML = `<a href="#${results[i]}" class="dot__link dot__link--${dots[results[i]].branch}" onclick="showDot('${results[i]}'); unfocusSearch()"><h3 class="dot__item_title">${dots[results[i]].title}</h3><p class="dot__item_id">${results[i]}</p></a>`
 		searchList.appendChild(item)
 	}
 }
@@ -408,4 +413,45 @@ function calcDist() {
 		document.querySelector(".calculator__result_dist").innerHTML = `${dist} блоков`
 		document.querySelector(".calculator__result_time").innerHTML = `${Math.round(dist / 35)} секунд`
 	}
+}
+
+let favoriteEl = document.querySelector(".favorite")
+let favoriteList = document.querySelector(".favorite__list")
+
+for (let i = 0; i < favorite.length; i++)
+{
+	if (dots[favorite[i]]) {
+		const item = document.createElement("li")
+		item.classList.add("dot__item")
+		item.classList.add("favorite__item")
+
+		item.innerHTML = `<a href="#${favorite[i]}" class="dot__link dot__link--${dots[favorite[i]].branch} favorite__link" onclick="showDot('${favorite[i]}'); unfocusSearch()"><h3 class="dot__item_title">${dots[favorite[i]].title}</h3><p class="dot__item_id">${favorite[i]}</p></a>`
+
+		favoriteList.appendChild(item)
+	}
+}
+
+function showFavorite() {	favoriteEl.classList.add("favorite--opened") }
+function hideFavorite() {	favoriteEl.classList.remove("favorite--opened") }
+
+function changeFavoriteStatus(el, id) {
+	const index = favorite.findIndex(f => f === id)
+	if (index !== -1) {
+		favorite.splice(index, 1)
+		let link = document.querySelector(`.favorite__link[href="#${id}"]`)
+		if (link) {
+			link.parentNode.remove()
+		}
+		el.classList.remove("isFavorite")
+	} 
+	else {
+		el.classList.add("isFavorite") 
+		favorite.push(id)
+
+		const item = document.createElement("li")
+		item.classList.add("dot__item")
+		item.innerHTML = `<a href="#${id}" class="dot__link dot__link--${dots[id].branch} favorite__link" onclick="showDot('${id}'); unfocusSearch()"><h3 class="dot__item_title">${dots[id].title}</h3><p class="dot__item_id">${id}</p></a>`
+		if (document.querySelector(".favorite__list")) document.querySelector(".favorite__list").appendChild(item)
+	}
+	localStorage.setItem("favorite", favorite.join("}{"))
 }

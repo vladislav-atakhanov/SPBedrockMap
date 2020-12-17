@@ -1,7 +1,7 @@
 {
 	"type": "end",
     "branch": "yellow",
-    "mayor": "YrExIs",
+    "mayor": "Kalarkson",
     "nether": {
         "x": 129,
         "z": -699
@@ -10,6 +10,5 @@
         "x": 1019,
         "y": 27,
         "z": -5614
-    },
-    "description": "Муха ТВ"
+    }
 }

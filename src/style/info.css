@@ -2,7 +2,7 @@
 .info {
 	position: fixed;
 	padding: var(--info-padding);
-	background-color: var(--bg-color);
+	background-color: var(--bg);
 	border-radius: var(--info-padding);
 
 	bottom: 0;

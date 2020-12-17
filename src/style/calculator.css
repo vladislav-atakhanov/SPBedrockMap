@@ -8,18 +8,18 @@
 	right: 0;
 	transform: translateX(100%);
 
-	background-color: var(--bg-color);
+	background-color: var(--bg);
 	padding: var(--info-padding);
 	transition: all 0.5s;
 
-	border-top: 2px solid var(--text-color);
+	border-top: 2px solid var(--text);
 }
 .calculator--opened {
 	transform: translateX(0);
 }
 @media (min-width: 350px) {
 	.calculator {
-		border-left: 2px solid var(--text-color);
+		border-left: 2px solid var(--text);
 	}
 }
 
@@ -60,7 +60,7 @@
 	transition: all 0.25s;
 }
 .calculator__btn:hover {
-	color: var(--bg-color);
+	color: var(--bg);
 	background-color: var(--blue);
 }
 .calculator__btn:active {

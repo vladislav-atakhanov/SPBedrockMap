@@ -1,0 +1,12 @@
+{
+    "type": "other",
+    "name": "FAK-U",
+    "mayor": "AkulaFrench",
+    "branch": "yellow",
+    "nether": {
+        "x": -14,
+        "z": -115
+    },
+    "description": "Кафе с тематической кухней,<br>Место для весёлых посиделок и отдыха.",
+    "marks": ["cafe"]
+}
