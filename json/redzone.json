@@ -1,0 +1,12 @@
+{
+    "type": "other",
+    "name": "Красная зона",
+    "mayor": "Kalarkson",
+    "branch": "red",
+    "nether": {
+        "x": 0,
+        "z": 150
+    },
+    "description": "Кафе где можно купить поесть, перекусить и отменить днюху",
+    "marks": ["restaurant"]
+}

@@ -10,24 +10,33 @@
 .branch--z {
 	height: var(--size);
 	width: 1rem;
+
+	background-repeat: repeat-y;
 }
 .branch--x {
 	width: var(--size);
 	height: 1rem;
+
+	background-repeat: repeat-x;
 }
 .branch--green {
-	background-color: var(--green);
+	/*background-color: var(--green);*/
+	background-image: url(./xmas/green.svg);
+
 	transform: translate(-100%, -50%);
 }
 .branch--blue {
-	background-color: var(--blue);
+	/*background-color: var(--blue);*/
+	background-image: url(./xmas/blue.svg);
 	transform: translate(0, -50%);
 }
 .branch--yellow {
-	background-color: var(--yellow);
+	/*background-color: var(--yellow);*/
+	background-image: url(./xmas/yellow.svg);
 	transform: translate(-50%, -100%);
 }
 .branch--red {
-	background-color: var(--red);
+	/*background-color: var(--red);*/
+	background-image: url(./xmas/red.svg);
 	transform: translate(-50%, 0);
 }

@@ -1,0 +1,14 @@
+{
+    "name": "ТрифсТэд",
+    "mayor": "Iam 4pock",
+    "branch": "green",
+    "nether": {
+        "x": -500,
+        "z": -450
+    },
+    "overworld": {
+        "x": -3962,
+        "y": 68,
+        "z": -3581
+    }
+}

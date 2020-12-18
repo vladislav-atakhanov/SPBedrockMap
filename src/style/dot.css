@@ -21,7 +21,7 @@
 	font-size: 2rem;
 	line-height: 3rem;
 	text-align: center;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	border-radius: calc(var(--size) / 2);
 	color: var(--bg);
 	text-decoration: none;
@@ -47,9 +47,13 @@
 /* Hub */
 .dot--hub {
 	--size: 6rem;
-	background-color: var(--text);
+	/*background-color: var(--text);*/
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(./xmas/tree.svg);
 }
-.dot--hub:before {
+/*.dot--hub:before {
 	content: "";
 	width: 4rem;
 	height: 4rem;
@@ -59,15 +63,34 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: var(--bg);
-}
+}*/
 .dot--hub.selected {
 	transform: scale(1.1);
+}
+
+/* XMAS */
+.dot:after {
+	content: "";
+	width: 75%;
+	height: 75%;
+	position: absolute;
+	right: -25%;
+	top: -25%;
+	background-image: url(./xmas/hat.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	transform: rotate(45deg);
+	z-index: 2;
+}
+.dot--base {
+	background-image: url(./xmas/toy.svg);
 }
 
 /* Icon */
 .dot--icon {
 	border-radius: 0;
-	background-color: transparent;
+	background: none
 }
 .dot__icon {
 	position: absolute;
