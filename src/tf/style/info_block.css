@@ -1,0 +1,34 @@
+.info_block {
+	z-index: 2;
+}
+.info_block.b {
+	transform: translateY(45vh)!important;
+}
+.info_block.c {
+	transform: translateY(0)!important;
+}
+@media (min-width: 768px) {
+	.info_block.b, .info_block.c {
+		transform: translateX(0vw)!important;
+	}
+}
+@media (min-width: 992px) {
+	.info_block.b, .info_block.c {
+		transform: translateX(0vw)!important;
+	}
+}
+
+.info_block.b .arrow {
+	display: block;
+}
+@media (min-width: 768px) {
+	.info_block.b .arrow {
+		display: none;
+	}
+}
+
+@media (min-width: 768px) {
+	.info_block.b .dot__info {
+		overflow-y: scroll;
+	}
+}

@@ -1,0 +1,115 @@
+/* Dot */
+.dot {
+	--size: 3rem;
+	display: block;
+	padding: 0;
+	width: var(--size);
+	height: var(--size);
+
+	position: absolute;
+
+	margin-left: calc(var(--size) / -2);
+	margin-top: calc(var(--size) / -2);
+	border: none;
+
+	outline: none;
+	cursor: pointer;
+	transition: all 0.5s ease;
+	z-index: 2;
+
+	font-weight: bold;
+	font-size: 2rem;
+	line-height: 3rem;
+	text-align: center;
+	/*overflow: hidden;*/
+	border-radius: calc(var(--size) / 2);
+	color: var(--bg);
+	text-decoration: none;
+}
+.dot:hover {transform: scale(1.1)}
+.dot:active {transform: scale(0.9)}
+.dot.selected {transform: scale(1.5); z-index: 3}
+
+.dot--center {
+	--size: 6rem;
+}
+
+/* Colors */
+.dot--red {background-color: var(--red)}
+.dot--blue {background-color: var(--blue)}
+.dot--purple {background-color: var(--purple)}
+.dot--tint {background-color: var(--tint); color: #000}
+.dot--green {background-color: var(--green); color: #000}
+.dot--yellow {background-color: var(--yellow); color: #000}
+.dot--gray {background-color: #888}
+
+/* XMAS */
+.dot:after {
+	content: "";
+	width: 75%;
+	height: 75%;
+	position: absolute;
+	right: -25%;
+	top: -25%;
+	background-image: url(./xmas/hat.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	transform: rotate(45deg);
+	z-index: 2;
+}
+
+/* Icon */
+.dot--icon {
+	border-radius: 0;
+	background: none
+}
+.dot__icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	user-drag: none; 
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+/* Info */
+.dot__info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	height: 100%;
+	width: 100%;
+	padding: inherit;
+	overflow-y: hidden;
+}
+.dot__info::-webkit-scrollbar {
+	width: 0;
+}
+
+/* Heading */
+.dot__title_heading {
+	margin: 0;
+}
+.dot__title_paragraph {
+	margin-top: 0;
+}
+
+/* Paragraph */
+.dot__paragraph {
+	padding: 0;
+	margin-top: 0.5em;
+	margin-bottom: 0;
+}
+
+/* Description */
+.dot__description {
+	margin-top: 40px;
+}

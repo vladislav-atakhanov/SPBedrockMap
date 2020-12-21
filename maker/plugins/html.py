@@ -12,6 +12,42 @@ marks_list = {
 	"restaurant": "ресторан"
 }
 
+tf_coords = [
+	{"x": 1064, "z": 8},
+	{"x": 1122, "z": 16},
+	{"x": 1119, "z": 26},
+	{"x": 1116, "z": 36},
+	{"x": 1109, "z": 45},
+	{"x": 1101, "z": 53},
+	{"x": 1092, "z": 60},
+	{"x": 1082, "z": 63},
+	{"x": 1072, "z": 66},
+	{"x": 1056, "z": 66},
+	{"x": 1046, "z": 63},
+	{"x": 1036, "z": 60},
+	{"x": 1027, "z": 54},
+	{"x": 1018, "z": 45},
+	{"x": 1012, "z": 36},
+	{"x": 1009, "z": 26},
+	{"x": 1006, "z": 16},
+	{"x": 1006, "z": 0},
+	{"x": 1009, "z": -10},
+	{"x": 1012, "z": -20},
+	{"x": 1018, "z": -29},
+	{"x": 1027, "z": - 38},
+	{"x": 1036, "z": -44},
+	{"x": 1046, "z": -47},
+	{"x": 1056, "z": -50},
+	{"x": 1072, "z": -50},
+	{"x": 1082, "z": -47},
+	{"x": 1092, "z": -44},
+	{"x": 1101, "z": -38},
+	{"x": 1110, "z": -29},
+	{"x": 1116, "z": -20},
+	{"x": 1119, "z": -10},
+	{"x": 1122, "z": 0}
+]
+
 def minify(html):
 	list = ["\n", "\t"] +  re.findall(r'<!--.*?-->', html)
 	for item in list:
@@ -59,22 +95,26 @@ def is_image_optimized(img, file, sizes):
 
 	return True
 
-def get_city(name, branch, x, z, type, id, mayor, icon="", mark=""):
+def get_dot(name, branch, x, z, type, id, mayor, icon="", mark=""):
 	r = f'<a href="#{id}" class="dot '
-	r += "dot--" + type
+	if type != "tf":
+		r += "dot--" + type
+
 	if type != "hub":
 		r += " dot--" + branch
 
 	if icon != "" or mark != "" or type == "end":
 		r += " dot--icon"
 	r += f'" title="{name}{mayor if type == "base" else ""}" aria-label="{name}{mayor if type == "base" else ""}" style="top: calc({z/20}rem + 50%); left: calc({x/20}rem + 50%)"  tabindex="-1">'
-	if icon != "" and type == "city":
+	if icon != "":
 		r += f'<img class="dot__icon" src="pictures/{id}/icon.{icon}" alt="{name}">'
 	elif mark != "" and mark in marks_list:
 		r += f'<img class="dot__icon" src="icons/{mark}.svg" alt="{name}">'
 	elif type == "city":
 		r += name[0].upper()
-	elif type != "base" and type != "hub":
+	elif type == "tf":
+		r += name
+	elif type != "base" and type != "hub" and type != "tf":
 		r += f'<img class="dot__icon" src="icons/{type}.svg" alt="{name}">'
 	r += '</a>'
 	return r
@@ -127,13 +167,15 @@ def get_pictures(file, name):
 	r += '</div><div class="info__text"></div>'
 	return r
 
-def get_title(name, mayor, type):
+def get_title(name, mayor, type="city"):
 	if type == "city":
 		return f'<div class="dot__title"><h2 class="dot__title_heading">{name}</h2><p class="dot__title_paragraph">Мэр: <b>{mayor}</b></p></div>'
 	elif type == "hub":
 		return f'<div class="dot__title"><h2 class="dot__title_heading">{name}</h2><p class="dot__title_paragraph"><b>{mayor}</b></p></div>'
 	elif type == "base":
 		return f'<div class="dot__title"><h2 class="dot__title_heading">{name} {mayor}</h2></div>'
+	elif type == "tf":
+		return f'<div class="dot__title"><h2 class="dot__title_heading">{mayor}</h2><p class="dot__title_paragraph">{"Палатка" if mayor!="Вход" else ""} {name}<b></b></p></div>'
 	elif mayor != "":
 		return f'<div class="dot__title"><h2 class="dot__title_heading">{name}</h2><p class="dot__title_paragraph">Владелец <b>{mayor}</b></p></div>'
 	else:
@@ -184,6 +226,10 @@ def build(html, dist, p):
 		if type == "end":
 			if "mayor" not in data:
 				data["mayor"] = ""
+
+			if "description" not in data:
+				data["description"] = '<b style="font-size: 1.1em"><a href="tf">Войти в энд</a></b>'
+
 			data["name"] = "Портал в энд"
 		elif type == "base":
 			data["name"] = "База"
@@ -195,11 +241,11 @@ def build(html, dist, p):
 			if f'icon.{data["icon"]}' not in os.listdir(path=f"./{dist}/pictures/{id}/"):
 				print(f'    +icon.{data["icon"]}')
 				shutil.copyfile(f'./json/{id}/icon.{data["icon"]}', f'./{dist}/pictures/{id}/icon.{data["icon"]}')
-			dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, (" " + data["mayor"] if "mayor" in data else ""), data["icon"])
+			dots_block += get_dot(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, (" " + data["mayor"] if "mayor" in data else ""), data["icon"])
 		elif "marks" in data:
-			dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, (" " + data["mayor"] if "mayor" in data else ""), "", data["marks"][0])
+			dots_block += get_dot(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, (" " + data["mayor"] if "mayor" in data else ""), "", data["marks"][0])
 		else:
-			dots_block += get_city(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, (" " + data["mayor"] if "mayor" in data else ""))
+			dots_block += get_dot(data["name"], data["branch"], data["nether"]["x"], data["nether"]["z"], type, id, (" " + data["mayor"] if "mayor" in data else ""))
 		
 		# Road to dot
 		if type != "hub":
@@ -250,3 +296,78 @@ def build(html, dist, p):
 	f.close()
 
 	return html.replace("<dots_block>", dots_block).replace("<dots_info>", dots_info)
+
+
+def build_tf(html, dist, p):
+  dots_block = ""
+  dots_info = ""
+
+  files = os.listdir(path=p)
+
+  f = open(f"{dist}/pictures.js", "w")
+  f.write("images = {")
+  f.close()
+
+  for file in files:
+    if not file.endswith(".json"): continue
+    print(file)
+
+    data = ""
+    with open(p + file, "r", encoding='utf-8') as f:
+      data = json.load(f)
+      f.close()
+
+    type = "tf"
+    id = file.replace(".json", "")
+    if id == "t0":
+    	data["name"] = "Государственная собственность"
+    	data["mayor"] = "Вход"
+    else:
+    	data["name"] = id[1:]
+
+    if data["branch"] == "gray":
+    	data["mayor"] = "Не занято"
+
+    # Dot
+    x = (tf_coords[int(id[1:])]["x"] - tf_coords[0]["x"]) * 8
+    z = (tf_coords[int(id[1:])]["z"] - tf_coords[0]["z"]) * 8
+
+    if "icon" in data:
+      if f'icon.{data["icon"]}' not in os.listdir(path=f"./{dist}/pictures/{id}/"):
+        print(f'    +icon.{data["icon"]}')
+        shutil.copyfile(f'./tfjson/{id}/icon.{data["icon"]}', f'./{dist}/pictures/{id}/icon.{data["icon"]}')
+      dots_block += get_dot(data["name"], data["branch"], x, z, type, id, (" " + data["mayor"] if "mayor" in data else ""), data["icon"])
+
+    else:
+      dots_block += get_dot(data["name"], data["branch"], x, z, type, id, (" " + data["mayor"] if "mayor" in data else ""))
+
+    dots_block += "\n"
+
+    # Information about dot
+    info =  ""
+    dots_info += f'<div class="dot__info" id="{id}">'
+
+    # Pictures
+    if "pictures" in data:
+      dots_info += get_pictures(id, data["name"])
+    dots_info += "</div>"
+
+    # Title
+    info += get_title(data["name"], data["mayor"], type)
+
+    # Coords
+    info += f'<p class="coords__paragraph">Координаты <span class="{data["branch"]}">{tf_coords[int(id[1:])]["x"]} {tf_coords[int(id[1:])]["z"]}</span></p>'
+
+    # Description
+    if "description" in data:
+      info += get_description(data["description"])
+
+    with open(f"./{dist}/info/{id}.js", "w", encoding='utf-8') as f:
+      f.write(f"""(document.querySelector("#{id} .info__text") || document.getElementById("{id}")).innerHTML = `{info}`""")
+      f.close()
+
+  f = open(f"{dist}/pictures.js", "a")
+  f.write("}")
+  f.close()
+
+  return html.replace("<dots_block>", dots_block).replace("<dots_info>", dots_info)

@@ -1,0 +1,1 @@
+(document.querySelector("#t8 .info__text") || document.getElementById("t8")).innerHTML = `<div class="dot__title"><h2 class="dot__title_heading">Не занято</h2><p class="dot__title_paragraph">Палатка 8<b></b></p></div><p class="coords__paragraph">Координаты <span class="gray">1072 66</span></p>`
