@@ -10,27 +10,11 @@
   --purple: #a652bb;
   --tint: #00c09a;
 
-	--info-padding: 10px;
+	--info-padding: 1rem;
 }
-@media (min-width: 768px) {
-	.page {
-		--info-padding: 20px;
-	}
-}
-@media (min-width: 992px) {
-	.page {
-		--info-padding: 25px;
-	}
-}
-@media (min-width: 1024px) {
-	.page {
-		--info-padding: 30px;
-	}
-}
-
 /* Dark theme */
 .page.dark {
-	--bg: #000;
+	--bg: #2C2F33;
 	--text: #ddd;
 }
 .page.dark .btn {
@@ -45,7 +29,7 @@
 .page.theme-in-transition *,
 .page.theme-in-transition *:before,
 .page.theme-in-transition *:after {
-    transition: all 0.5s  linear!important;
+    transition: all 0.1s  linear!important;
     transition-delay: 0 linear!important;
 }
 

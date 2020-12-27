@@ -1,0 +1,99 @@
+.menu {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.menu__btn {
+  position: absolute;
+  top: 75px;
+  height: 50px;
+  width: 50px;
+  padding: calc(var(--padding) / 2);
+  background-color: transparent;
+  transform: translateX(-100%);
+  margin-left: calc(var(--padding) * -1);
+  border: none;
+  opacity: 0.5;
+  outline: none;
+}
+.menu__btn:hover {
+  opacity: 1;
+}
+
+.menu__list {
+  position: absolute;
+  width: 100vw;
+  max-width: 250px;
+
+  max-height: 96vh;
+  overflow-y: auto;
+  background-color: var(--bg);
+  transform: translateX(0);
+  transition: transform 0.5s;
+
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+.menu__list::-webkit-scrollbar { width: 0; }
+
+.menu__item:hover {
+  background-color: rgba(0,0,0,0.3);
+}
+.menu__item > * {
+  display: block;
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  color: var(--text);
+  font: inherit;
+  text-align-last: left;
+  padding: 1em;
+  margin: 0;
+  width: 100%;
+}
+.menu--opened .menu__list {
+  transform: translateX(calc(-100% - 1em));
+  box-shadow: 0px 5px 15px 10px rgba(0,0,0,0.3);
+}
+
+.menu__btn:before {
+  content: "";
+  width: calc(50px - var(--padding) * 1.5);
+  height: calc(50px - var(--padding) * 1.5);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: calc(var(--padding) / 2);
+  background: linear-gradient(to bottom, var(--text) 0%, var(--text) 14%, transparent 14%, transparent 43%, var(--text) 43%, var(--text) 57%, transparent 57%, transparent 86%, var(--text) 86%, var(--text) 100%);
+}
+
+.menu__background {
+  position: fixed;
+  display: none;
+  top: 0; left: 0; bottom: 0; right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-color: var(--bg);
+  transition: all 0.25s; 
+  cursor: pointer;
+}
+.menu--opened .menu__background {
+  display: block;
+  opacity: 0.8;
+}
+.layers {
+  padding-top: 1em;
+}
+.layers__title {
+  text-align: center;
+  display: block;
+}
+.layers__input > * {
+  padding: .5em 1em;
+}

@@ -8,27 +8,12 @@
 	--blue: #0078be;
 	--yellow: #ffd702;
 
-	--info-padding: 10px;
-}
-@media (min-width: 768px) {
-	.page {
-		--info-padding: 20px;
-	}
-}
-@media (min-width: 992px) {
-	.page {
-		--info-padding: 25px;
-	}
-}
-@media (min-width: 1024px) {
-	.page {
-		--info-padding: 30px;
-	}
+	--padding: 1rem;
 }
 
 /* Dark theme */
 .page.dark {
-	--bg: #000;
+	--bg: #2C2F33;
 	--text: #ddd;
 }
 .page.dark .btn {
@@ -43,7 +28,7 @@
 .page.theme-in-transition *,
 .page.theme-in-transition *:before,
 .page.theme-in-transition *:after {
-    transition: all 0.5s  linear!important;
+    transition: all 0.1s  linear!important;
     transition-delay: 0 linear!important;
 }
 
@@ -79,7 +64,7 @@ button {
 .footer {
 	position: fixed;
 	bottom: 0;
-	right: var(--info-padding);
+	right: var(--padding);
 	color: #808080;
 }
 
@@ -93,3 +78,11 @@ button {
 	width: 1px !important; 
 	overflow: hidden;
 }
+
+.list {
+	padding: 0;
+	list-style: none;
+}
+
+.menu .checkbox:before { content: " — "; }
+.line { border-top: 1px solid #888; }

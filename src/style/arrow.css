@@ -2,7 +2,7 @@
 .arrow {
 	display: block;
 	position: absolute;
-	top: var(--info-padding);
+	top: var(--padding);
 	z-index: 10;
 	left: 50%;
 	transform: translateX(-50%);

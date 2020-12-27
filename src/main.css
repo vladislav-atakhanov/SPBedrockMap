@@ -13,8 +13,14 @@
 
 @import url("style/btn.css");
 @import url("style/input.css");
-@import url("style/arrow.css");
 
+@import url("style/arrow.css");
+@import url("style/checkbox.css");
+
+@import url("style/popup.css");
+@import url("style/menu.css");
+@import url("style/events.css");
+@import url("style/settings.css");
 @import url("style/search.css");
 
 @import url("style/calculator.css");

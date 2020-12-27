@@ -1,0 +1,13 @@
+{
+    "type": "other",
+    "name": "Boat Cafè",
+    "mayor": "Qvickss",
+    "branch": "red",
+    "nether": {
+        "x": 6,
+        "z": 100
+    },
+    "description": "Закусочная на Красной ветке, где по достумным ценам можно поесть вкусных блюд не выходя из лодки!",
+    "marks": ["cafe"],
+    "pictures": "true"
+}

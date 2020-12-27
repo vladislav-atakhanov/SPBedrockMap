@@ -3,7 +3,7 @@ html.theme-in-transition,
 html.theme-in-transition *,
 html.theme-in-transition *:before,
 html.theme-in-transition *:after {
-    transition: all 0.5s  linear!important;
+    transition: all 0.1s  linear!important;
     transition-delay: 0 linear!important;
 }
 html {
@@ -17,7 +17,7 @@ html {
   --yellow: #ffd702
 }
 html.dark {
-	--bg: #000;
+	--bg: #2C2F33;
 	--text: #ddd;
 	--gray: #444;
 }

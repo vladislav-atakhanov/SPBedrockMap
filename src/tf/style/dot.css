@@ -38,26 +38,10 @@
 .dot--red {background-color: var(--red)}
 .dot--blue {background-color: var(--blue)}
 .dot--purple {background-color: var(--purple)}
-.dot--tint {background-color: var(--tint); color: #000}
-.dot--green {background-color: var(--green); color: #000}
-.dot--yellow {background-color: var(--yellow); color: #000}
+.dot--tint {background-color: var(--tint); color: #2C2F33}
+.dot--green {background-color: var(--green); color: #2C2F33}
+.dot--yellow {background-color: var(--yellow); color: #2C2F33}
 .dot--gray {background-color: #888}
-
-/* XMAS */
-.dot:after {
-	content: "";
-	width: 75%;
-	height: 75%;
-	position: absolute;
-	right: -25%;
-	top: -25%;
-	background-image: url(./xmas/hat.svg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	transform: rotate(45deg);
-	z-index: 2;
-}
 
 /* Icon */
 .dot--icon {
@@ -70,12 +54,6 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 100%;
-	user-drag: none; 
-	user-select: none;
-	-moz-user-select: none;
-	-webkit-user-drag: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
 }
 
 /* Info */
@@ -113,3 +91,55 @@
 .dot__description {
 	margin-top: 40px;
 }
+
+
+/* LINK TO DOT */
+/* Item */
+.dot__item {
+	min-height: 3em;
+	padding: 0;
+	margin: 0;
+}
+
+/* Title */
+.dot__item_title {
+	margin: 0;
+	font-size: 18px;
+}
+.dot__item_id {
+	margin: 0;
+	font-size: 14px;
+}
+
+/* Link */
+.dot__link {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	padding: 1em;
+	font-size: 16px;
+	text-decoration: none;
+	font-weight: bold;
+}
+.dot__link:before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background-color: var(--text);
+	opacity: 0.5;
+	transition: opacity 0.25s;
+}
+.dot__link:hover:before {
+	opacity: 0.25;
+}
+.dot__link--red:before {background-color: var(--red);}
+.dot__link--blue:before {background-color: var(--blue);}
+.dot__link--green:before {background-color: var(--green);}
+.dot__link--yellow:before {background-color: var(--yellow);}
+.dot__link--purple:before {background-color: var(--purple);}
+.dot__link--tint:before {background-color: var(--tint);}

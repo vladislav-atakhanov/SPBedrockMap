@@ -88,7 +88,7 @@
 @media (min-width: 768px) {
 	.btn--info-close {
 		transform: translateX(-35vw);
-		left: calc(40vw - 1.2em - var(--info-padding) / 2);
+		left: calc(35vw - 1.2em - var(--info-padding) / 2);
 	}
 }
 @media (min-width: 992px) {

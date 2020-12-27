@@ -9,5 +9,9 @@
     },
 
     "description": "Light Earth - это футуристический город, который нацелен на туризм. У нас есть большое количество различных строений, парков, арт-обьектов и прочего. Город находится на грибном острове и имеет большое количество ферм.",
-    "residents": ["xGlek - мэр", "Ululeshechka - зам. мэра", "LNColors", "Asshaiy", "Somedum", "Euphoria", "Nikoid2228", "GUSloh", "Edotl", "MatveySG", "Antikapusta", "pirogtopgg", "KRUSALOV", "XxX_CRAZYBOY_41", "justliltr1p"]
+    "residents": ["xGlek - мэр", "Ululeshechka - зам. мэра", "LNColors", "Asshaiy", "Somedum", "Euphoria", "Nikoid2228", "GUSloh", "Edotl", "MatveySG", "Antikapusta", "pirogtopgg", "KRUSALOV", "XxX_CRAZYBOY_41", "justliltr1p"],
+    "event": {
+      "title": "Турнир «Полетай»",
+      "date": "27 декабря, 17:00 МСК"
+    }
 }

@@ -1,0 +1,18 @@
+.settings__list {
+  margin-left: calc(var(--padding) * -1);
+  width: calc(100% + var(--padding) * 2);
+}
+.settings__item > * {
+  width: 100%;
+  display: block;
+  background-color: transparent;
+  color: inherit;
+  text-align: left;
+  padding: var(--padding);
+  border: none;
+  outline: 0;
+  font: inherit;
+}
+.settings__item:hover {
+  background-color: rgba(0,0,0,0.3);
+}

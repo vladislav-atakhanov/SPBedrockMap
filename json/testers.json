@@ -1,5 +1,5 @@
 {
-    "name": "<u>Город&nbsp;тестеров карты</u>",
+    "name": "<u>Тестеры карты</u>",
     "mayor": "eloh1mZ",
     "branch": "green",
     "nether": {
@@ -11,7 +11,9 @@
         "y": 65,
         "z": 819
     },
-    "description": "Набор <span class='red'>открыт</span>",
-    "residents": ["<span class='blue'><a href='https://vk.com/eloh1mz'>eloh1mZ</a></span>", "<span class='red' style='background-color: var(--text); color: var(--bg)'>Teotechnic</span>", "Binskiy", "Тагирка", "LerikDV"],
-    "icon": "svg"
+    "residents": ["<span class=\"blue\"><a href=\"../#c\">eloh1mZ</a></span>", "<span class='red' style='background-color: var(--text); color: var(--bg)'>Teotechnic</span>", "Binskiy", "Тагирка", "LerikDV", "Kalarkson", "Flovar", "AnooN3apbw", "DeniedChalk2249", "KyjoJotaro", "AnimalFour59238☃", "T1ma05", "Ramlak46", "Hilar"],
+    "icon": "svg",
+    "custom": {
+        "residents": "В их числе"
+    }
 }

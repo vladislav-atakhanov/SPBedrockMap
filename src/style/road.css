@@ -22,14 +22,10 @@
 	margin-top: calc(var(--size) * -1);
 	background-repeat: repeat-x;
 }
-/*.road--red {background-color: var(--red)}
+.road--red {background-color: var(--red)}
 .road--yellow {background-color: var(--yellow)}
 .road--blue {background-color: var(--blue)}
-.road--green {background-color: var(--green)}*/
-.road--red {background-image: url(./xmas/red.svg)}
-.road--yellow {background-image: url(./xmas/yellow.svg)}
-.road--blue {background-image: url(./xmas/blue.svg)}
-.road--green {background-image: url(./xmas/green.svg)}
+.road--green {background-color: var(--green)}
 
 .road--city {
 	--size: 1rem;

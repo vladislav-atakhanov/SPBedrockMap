@@ -4,22 +4,19 @@
 	<title>Карта СПБедрок</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="main.min.css">
-	<link rel="icon" href="./icons/favicon.png">
+	<link rel="icon" href="../icons/favicon.png">
 </head>
 <body class="page__body">
-	<svg class="visually-hidden">
-	  <defs>
-	    <g id="star">
-				<path d="M50 8l14 27 30 5-22 21 5 30-27-14-27 14 5-30L6 40l30-5L50 8z" stroke-width="10" stroke="#ffc107" stroke-linejoin="round"/>
-	    <g>
-	  </defs>
-	</svg>
 	<div id="mapWrapper">
 		<div id="map" style="transform-origin: 50% 50%; transform: translate(0, 0) scale(0.5)">
 			<dots_block>
 		</div>
+	</div>
+	<div class="search">
+		<input type="text" id="search" class="input--text search__input" autocomplete="off" oninput="search(this)">
+		<button type="button" class="search__btn" onclick="unfocusSearch()">&times;</button>
+		<ul class="search__list"></ul>
 	</div>
 	<input type="range" id="scaleRange" value="0.5" min="0.1" max="2" oninput="changeScale()" step="0.05">
 	<button type="button" id="defaultBtn" class="btn btn--default" onclick="toDefault()" area-label="Вернуть в исходное положение">
@@ -40,6 +37,7 @@
 	<button type="button" id="infoOpenBtn" onclick="openInfo()" class="info_block btn--info-open" area-label="Открыть информацию"><span class="arrow arrow--right"></span></button>
 	<button type="button" id="infoCloseBtn" onclick="updateInfo(0); document.location.hash=''" class="info_block btn--info-close" area-label="Закрыть информацию">&times;</button>
 	<script src="pictures.js"></script>
+	<script src="search.js"></script>
 	<script src="index.js"></script>
 </body>
 </html>

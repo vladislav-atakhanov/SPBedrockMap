@@ -1,0 +1,20 @@
+.event__title, .event__paragraph { margin: 0; }
+
+.events__list {
+  max-height: 500px;
+}
+.events__list::-webkit-scrollbar { width: 0; }
+
+.event__link {
+  text-decoration: none;
+  transition: all 0.5s;
+  display: block;
+  background-color: var(--bg);
+  padding: var(--padding);
+  margin-left: calc(-0.95 * var(--padding));
+  width: calc(100% + 1.9 * var(--padding));
+}
+.event__link:hover {
+  box-shadow: 0px 0px 1rem 0px var(--text);
+  transform: scale(1.1);
+}

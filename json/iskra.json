@@ -12,6 +12,6 @@
         "z": 10300
     },
     "description": "Город «Искра» город со стоит из кристаллов (стекло и бетон)<br>У каждого Кристала есть свои свойства Кристал полёта магнита и т.д.",
-    "residents": ["MrDragosSQ"],
+    "residents": ["MrDragosSQ", "Venerume"],
     "pictures": "true"
 }

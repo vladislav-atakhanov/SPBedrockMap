@@ -1,0 +1,15 @@
+{
+    "type": "base",
+    "mayor": "TR1M8061",
+    "branch": "green",
+    "nether": {
+        "x": -500,
+        "z": 86
+    },
+    "overworld": {
+        "x": -3996,
+        "y": 68,
+        "z": 684
+    },
+    "description": "Вход через портал Evolving'a (-555).<br>Связь через дс Trim#6145 (админ дс)."
+}

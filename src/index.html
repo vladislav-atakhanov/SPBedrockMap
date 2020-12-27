@@ -4,7 +4,6 @@
 	<title>Карта СПБедрок</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="main.min.css">
 	<link rel="icon" href="./icons/favicon.png">
 </head>
@@ -16,8 +15,8 @@
 	    <g>
 	  </defs>
 	</svg>
-	<div id="mapWrapper">
-		<div id="map" style="transform-origin: 50% 50%; transform: translate(0, 0) scale(0.5)">
+	<div id="mapWrapper" class="map__wrapper">
+		<div id="map" class="map" style="transform-origin: 50% 50%; transform: translate(0, 0) scale(0.5)">
 			<div class="branch branch--x branch--green"  style="--size: 260rem"></div>
 			<div class="branch branch--x branch--blue" style="--size: 260rem"></div>
 			<div class="branch branch--z branch--red" style="--size: 135rem"></div>
@@ -40,13 +39,33 @@
 	<button type="button" id="defaultBtn" class="btn btn--default" onclick="toDefault()" area-label="Вернуть в исходное положение">
 		<svg viewBox="0 0 512 512" fill="currentColor"><path d="M409 143c-41-41-95-64-153-64h-32l51-51-28-28-99 99 98 100 28-28-50-52h32A176 176 0 1180 296v-20H40v20a215 215 0 00216 216 215 215 0 00216-216c0-58-22-112-63-153z"/></svg>
 	</button>
-	<button type="button" id="themeBtn" class="btn btn--theme" onclick="switchTheme()" area-label="Сменить цветовую тему">
-		<svg viewBox="0 0 512 512"><g class="moon"><circle cx="256" cy="256" r="175"/><circle cx="322" cy="192" r="175" fill="#fff"/></g><g class="sun" fill="#fff"><circle cx="256" cy="256" r="125"/><path d="M92 439c-11 3-21-7-18-19l14-54c3-11 17-15 26-7l39 40c9 8 5 22-6 25l-55 15zM439 420c3 12-7 22-19 19l-54-15c-11-3-15-17-7-25l40-40c8-8 22-4 25 7l15 54zM243 29c5-10 20-10 25 0l29 48c5 10-2 23-13 23h-57c-11 0-18-13-13-23l29-48zM484 243c10 5 10 20 0 25l-49 29c-10 5-23-2-23-13v-57c0-11 13-18 23-13l49 29zM268 484c-5 10-20 10-25 0l-29-49c-5-10 2-23 13-23h57c11 0 18 13 13 23l-29 49zM29 268c-10-5-10-20 0-25l48-29c10-5 23 2 23 13v57c0 11-13 18-23 13l-48-29zM74 92c-3-11 7-21 18-18l55 14c11 3 15 17 6 26l-39 39c-9 9-23 5-26-6L74 92zM420 74c12-3 22 7 19 18l-15 55c-3 11-17 15-25 6l-40-39c-8-9-4-23 7-26l54-14z"/></g></svg>
-	</button>
-	<a href="generator/" class="btn btn--add-city" id="addCity">+</a>
-	<button type="button" class="btn btn--calc" onclick="showCalculator()">
-		<svg viewBox="0 0 425.3 425.3" fill="currentColor"><path d="M94 319a15 15 0 00-10 25 14 14 0 0019 0 15 15 0 00-9-25z"/><path d="M317 0l-22 21 58 58a7 7 0 010 11c-2 2-4 3-6 2-2 1-4 0-5-2l-58-57-30 29 38 37c3 3 3 9 0 12l-5 2-6-2-38-38-29 29 58 58c3 3 3 8 0 11s-8 3-11 0l-58-58-29 30 38 37c3 3 3 8 0 11a8 8 0 01-12 0l-37-37-29 29 57 58a7 7 0 010 11l-6 2-5-2-58-58-29 30 38 37c3 3 3 8 0 11-2 2-4 2-6 2s-4 0-5-2l-38-37-82 82 108 108 317-317L317 0zM115 355a30 30 0 11-43-43 30 30 0 0143 43z"/></svg>
-	</button>
+	<menu class="menu">
+		<button class="menu__btn" onclick="showMenu()"><span class="visually-hidden">Меню</span></button>
+		<ul class="menu__list">
+			<li class="menu__item"><button type="button" onclick="openPopup('events')">События</button></li>
+			<li class="menu__item"><button type="button" onclick="(() => {menu.classList.remove('menu--opened'); showCalculator()})()">Рассчитать расстояние</button></li>
+			<li class="menu__item"><button type="button" onclick="openPopup('settings')">Настройки</button></li>
+			<li class="menu__item line"><a href="tf/">Карта торговой федерации</a></li>
+			<li class="menu__item"><a href="generator/">Добавить точку</a></li>
+			<li class="layers line"><b class="layers__title">Слои</b><ul class="list">
+				<li class="menu__item layers__item">
+					<label class="checkbox">Города <input type="checkbox" class="checkbox__input visually-hidden" checked onchange="changeStyle(this.checked, 'city')"><span class="checkbox__body"></span></label>
+				</li>
+				<li class="menu__item layers__item">
+					<label class="checkbox">Базы <input type="checkbox" class="checkbox__input visually-hidden" checked onchange="changeStyle(this.checked, 'base')"><span class="checkbox__body"></span></label>
+				</li>
+				<li class="menu__item layers__item">
+					<label class="checkbox">Порталы <input type="checkbox" class="checkbox__input visually-hidden" checked onchange="changeStyle(this.checked, 'end')"><span class="checkbox__body"></span></label>
+				</li>
+				<li class="menu__item layers__item">
+					<label class="checkbox">Заведения <input type="checkbox" class="checkbox__input visually-hidden" checked onchange="changeStyle(this.checked, 'other')"><span class="checkbox__body"></span></label>
+				</li>
+			</ul></li>
+			<li class="menu__item line"><a target="blank" href="https://www.donationalerts.com/r/eloh1mz">Поблагодарить</a></li>
+		</ul>
+		<div class="menu__background" onclick="menu.classList.remove('menu--opened')"><span class="visually-hidden">Закрыть меню</span></div>
+	</menu>
+
 	<div id="calculator" class="calculator">
 		<button class="btn calculator__closeBtn" onclick="hideCalculator()">&times;</button>
 		<div class="calculator__title">
@@ -66,14 +85,40 @@
 		<div class="arrow"></div>
 	</div>
 
+	<div class="events popup">
+		<div class="popup__block">
+			<h2>События</h2>
+			<ul class="events__list list">
+				<events>
+			</ul>
+		</div>
+		<div class="popup__background" onclick="closePopup(this)"><span class="visually-hidden">Закрыть события</span></div>
+	</div>
+
+	<div class="settings popup">
+		<div class="popup__block">
+			<h2>Настройки</h2>
+			<ul class="list settings__list">
+				<li class="settings__item">
+					<label class="checkbox">Новогодние шапки<input type="checkbox" class="checkbox__input style__trigger-hat visually-hidden" onchange="changeXMAS(this.checked, 'hat')"><span class="checkbox__body"></span></label>
+				</li>
+				<li class="settings__item">
+					<label class="checkbox">Ветки — леденцы<input type="checkbox" class="checkbox__input style__trigger-lollipop visually-hidden" onchange="changeXMAS(this.checked, 'lollipop')"><span class="checkbox__body"></span></label>
+				</li>
+				<li class="settings__item"><button type="button" id="themeBtn" onclick="switchTheme()">Сменить тему</button></li>
+			</ul>
+		</div>
+		<div class="popup__background" onclick="closePopup(this)"><span class="visually-hidden">Закрыть настройки</span></div>
+	</div>
+
+	
 	<div class="favorite">
 		<button type="button" onclick="hideFavorite()" class="btn favorite__close" area-label="Скрыть избранное">×</button>
 		<ul class="favorite__list"></ul>
 	</div>
 
-	<footer class="footer">
-		<a href="../#c">eloh1mZ</a>
-	</footer>
+	<footer class="footer"><a href="../#c">eloh1mZ</a></footer>
+
 	<button type="button" id="infoOpenBtn" onclick="openInfo()" class="info_block btn--info-open" area-label="Открыть информацию"><span class="arrow arrow--right"></span></button>
 	<button type="button" id="infoCloseBtn" onclick="updateInfo(0); document.location.hash=''" class="info_block btn--info-close" area-label="Закрыть информацию">&times;</button>
 	<script src="pictures.js"></script>

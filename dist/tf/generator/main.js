@@ -106,3 +106,14 @@ function copy(text) {
   document.execCommand("copy")
   el.remove()
 }
+
+function loadStyle(id) {
+  let link = document.createElement("link")
+  link.rel = "stylesheet"
+  link.href = "../../style/" + id +".css" 
+  link.classList.add("style--" + id)
+  document.head.appendChild(link)
+}
+window.onload = function() {
+  loadStyle("font")
+}

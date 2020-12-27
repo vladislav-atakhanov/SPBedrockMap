@@ -16,8 +16,10 @@ def imports_concatinate(css, src, DEBUG=False):
 	return css
 
 def minify(css):
-	list = ["\n", "\t"] +  re.findall(r'\/\*.+?\*\/', css)
+	list = ["\n", "\t"]
 	for item in list:
+		css = css.replace(item, "")
+	for item in re.findall(r'\/\*.+?\*\/', css):
 		css = css.replace(item, "")
 
 	list = ["+", "*", "-", "/"]

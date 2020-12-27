@@ -11,7 +11,7 @@
   transition: 0.5s all;
   background-color: var(--bg);
   overflow: hidden;
-  border-top-right-radius: var(--info-padding);
+  border-top-right-radius: var(--padding);
 }
 .favorite--opened {
   left: 0;
@@ -28,10 +28,29 @@
   width: 0;
 }
 
+.favorite__item {
+  position: relative;
+}
 .favorite__close {
   z-index: 5;
   font-size: 2em;
   position: absolute;
   top: 0;
   right: 0;
+}
+.favorite__btn {
+  position: absolute;
+  right: 5rem;
+  padding: 0 0.5rem;
+  font-size: 2em;
+  background-color: transparent;
+  border: 0;
+  color: var(--text);
+  opacity: 0.5;
+
+  top: 50%;
+  transform: translateY(-50%);
+}
+.favorite__btn:hover {
+  opacity: 1;
 }

@@ -1,0 +1,25 @@
+.popup__block {
+  position: fixed;
+  left: 50vw; top: 50vh;
+  transform: translate(-50%, -50%);
+  width: calc(100% - var(--padding) * 2);
+  max-width: 400px;
+  background-color: var(--bg);
+  padding: var(--padding);
+  z-index: 2;
+  display: none;
+  box-shadow: 0px 0px 1rem 0px rgba(0,0,0,0.3);
+}
+.popup--opened .popup__block { display: block; }
+
+.popup__background {
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background-color: var(--bg);
+  opacity: 0.8;
+  display: none;
+  cursor: pointer;
+}
+.popup--opened .popup__background {
+  display: block;
+}

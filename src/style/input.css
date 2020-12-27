@@ -1,7 +1,7 @@
 #scaleRange {
 	position: fixed;
-	top: calc(var(--info-padding) + 25px);
-	right: calc(var(--info-padding) + 60px + 5vw);
+	top: calc(var(--padding) + 25px);
+	right: calc(var(--padding) + 60px + 5vw);
 	transform: translateY(-50%);
 }
 

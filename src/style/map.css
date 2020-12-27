@@ -1,12 +1,12 @@
 /* Map */
-#mapWrapper {
+.map__wrapper {
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
 	touch-action: none;
 	background-color: var(--bg);
 }
-#map {
+.map {
 	min-height: 100%;
 	min-width: 100%;
 	position: relative;

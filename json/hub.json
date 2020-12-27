@@ -1,12 +1,19 @@
 {
     "name": "Хаб",
     "mayor": "Государственная собственность",
-
     "branch": "gray",
     "nether": {
         "x": 0,
         "z": 0
     },
-
-    "pictures": "true"
+    "pictures": "true",
+    "residents": ["<p><span class='red'>Красная</span> — Ukikola</p>", "<p><span class='yellow'>Жёлтая</span> — TR1M8061</p>", "<p><span class='green'>Зелёная</span> — Flovar</p>", "<p><span class='blue'>Синяя</span> — Lalon12</p>"],
+    "custom": {
+      "residents": "Губернаторы веток"
+    },
+    "event": {
+      "title": "Конкурс скинов к Новому году",
+      "date": "26 декабря, 19:00 МСК"
+    },
+    "icon": "svg"
 }

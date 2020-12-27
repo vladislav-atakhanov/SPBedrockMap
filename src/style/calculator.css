@@ -9,7 +9,7 @@
 	transform: translateX(100%);
 
 	background-color: var(--bg);
-	padding: var(--info-padding);
+	padding: var(--padding);
 	transition: all 0.5s;
 
 	border-top: 2px solid var(--text);
